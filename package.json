@@ -1,5 +1,5 @@
 {
-  "name": "abc-apps-loyout",
+  "name": "abc-apps-react-layout",
   "version": "1.0.0",
   "description": "React Layout for ABS Apps panel without API",
   "main": "index.js",
