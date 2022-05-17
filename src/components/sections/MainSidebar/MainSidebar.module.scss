@@ -1,0 +1,66 @@
+.box {
+  overflow: hidden;
+
+  width: 258px;
+  border-right: 1px solid #F6F6F6;
+
+  transition: all .2s ease;
+}
+
+.section {
+  padding: 0 50px;
+}
+
+.header {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  height: 64px;
+
+  border-bottom: 1px solid #F6F6F6;
+}
+
+.logo {
+
+}
+
+.shrinkButton {
+  position: absolute;
+  right: 17px;
+  top: 50%;
+
+  width: 26px;
+  height: 26px;
+  margin-top: -13px;
+
+  padding: 0;
+  border: none;
+  background-color: transparent;
+
+  cursor: pointer;
+  color: #BDBDBD;;
+
+  transition: all .1s ease;
+
+  &:hover {
+    color: #0D062D;
+  }
+}
+
+.shrinkButtonIcon {
+  fill: currentColor;
+  transition: all .1s ease;
+}
+
+.menu {
+  padding-top: 44px;
+}
+
+.shrink {
+  width: 130px;
+
+  .shrinkButtonIcon {
+    transform: scaleX(-1);
+  }
+}

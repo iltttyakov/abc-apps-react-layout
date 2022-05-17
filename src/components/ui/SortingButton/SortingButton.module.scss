@@ -1,0 +1,52 @@
+.box {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+
+  background-color: transparent;
+  border: none;
+
+  fill: #0D062D;
+
+  transition: all .1s ease;
+  cursor: pointer;
+
+  &:hover {
+    opacity: .7;
+  }
+
+  &:active {
+    opacity: .5;
+  }
+
+  &.asc {
+    color: #5030E5;
+
+    .iconAsc {
+      fill: #5030E5;
+    }
+  }
+
+  &.desc {
+    color: #5030E5;
+
+    .iconDesc {
+      fill: #5030E5;
+    }
+  }
+}
+
+.label {
+
+}
+
+.icon {
+  margin-left: 6px;
+
+  fill: inherit;
+}

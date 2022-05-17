@@ -1,0 +1,30 @@
+.box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 21px;
+  padding: 0 10px;
+
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+
+  border: 1px solid transparent;
+  border-radius: 5px;
+
+  &.publish {
+    color: #78BD7E;
+    border-color: #78BD7E;
+  }
+
+  &.moderation {
+    color: #ED7470;
+    border-color: #ED7470;
+  }
+
+  &.ban {
+    color: #F8D465;
+    border-color: #F8D465;
+  }
+}

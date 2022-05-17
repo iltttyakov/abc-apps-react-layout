@@ -1,0 +1,17 @@
+.box {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  background: #F9EEE3;
+}
+
+.initials {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+  color: #D58D49;
+}

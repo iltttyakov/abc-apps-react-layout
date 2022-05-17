@@ -1,0 +1,110 @@
+.container {
+
+}
+
+.boxLabel {
+  display: block;
+  margin: 0;
+  margin-bottom: 4px;
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.box {
+  position: relative;
+}
+
+.head {
+  height: 40px;
+  padding: 0 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: transparent;
+  border: 1px solid #BDBDBD;
+  border-radius: 8px;
+
+  transition: all .0s;
+  cursor: pointer;
+}
+
+.currentValue {
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.placeholder {
+  color: #BDBDBD;
+}
+
+.icon {
+  flex-shrink: 0;
+  margin-left: 10px;
+
+  transition: all .1s ease;
+}
+
+.body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100%);
+}
+
+.list {
+  overflow: hidden;
+
+  margin: 0;
+  margin-bottom: 1px;
+  padding: 0;
+
+  list-style: none;
+  background: #FFFFFF;
+  border: 1px solid #BDBDBD;
+  border-top: none;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.field {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden;
+}
+
+.label {
+  display: block;
+  padding: 1px 9px;
+
+  font-size: 13px;
+  line-height: 24px;
+
+  cursor: pointer;
+}
+
+.field:checked + .label {
+  color: #FFFFFF;
+
+  background-color: #5030E5;
+}
+
+.open {
+  .icon {
+    transform: rotate(-90deg);
+  }
+
+  .head {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-color: transparent;
+  }
+}

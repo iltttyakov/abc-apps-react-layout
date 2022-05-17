@@ -1,0 +1,82 @@
+.box {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+}
+
+.preLabel {
+  font-weight: 400;
+}
+
+.postLabel {
+  font-weight: 400;
+}
+
+.dropdown {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.head {
+  min-width: 60px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 11px;
+  padding-right: 5px;
+
+  background-color: #FFFFFF;
+  border: 1px solid #B0BAC9;
+  border-radius: 5px;
+}
+
+.icon {
+  margin-left: 4px;
+}
+
+.currentValue {
+  font-weight: 400;
+  letter-spacing: 0.25px;
+  color: #0D062D;
+}
+
+.body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(-100% + 10px);
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+
+  background: #FFFFFF;
+  border: 1px solid #BDBDBD;
+  border-radius: 8px;
+
+  list-style: none;
+}
+
+.item {
+
+}
+
+.field {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden;
+}
+
+.label {
+  padding: 1px 10px;
+
+  cursor: pointer;
+}

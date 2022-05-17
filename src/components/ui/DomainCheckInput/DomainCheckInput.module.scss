@@ -1,0 +1,16 @@
+.box {
+  display: flex;
+  align-items: flex-end;
+}
+
+.field {
+  margin-right: 15px;
+  max-width: 250px;
+}
+
+.button {
+  padding-left: 10px;
+  padding-right: 10px;
+
+  white-space: nowrap;
+}

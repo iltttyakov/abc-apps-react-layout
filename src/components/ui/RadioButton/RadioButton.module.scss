@@ -1,0 +1,49 @@
+.box {
+  display: flex;
+}
+
+.field {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden;
+}
+
+.label {
+  position: relative;
+
+  padding-left: 30px;
+
+  white-space: nowrap;
+  font-size: 14px;
+  line-height: 24px;
+
+  cursor: pointer;
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    left: 0;
+    top: 50%;
+
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+
+    border: 1px solid #5030E5;
+    border-radius: 50%;
+
+    transition: all .1s ease;
+  }
+}
+
+.field:checked + .label {
+  &::before {
+    border-width: 5px;
+  }
+}

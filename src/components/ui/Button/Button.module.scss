@@ -1,0 +1,49 @@
+.box {
+  padding: 10px 21px;
+  height: 40px;
+
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #FFFFFF;
+
+  border-radius: 8px;
+  border: 1px solid transparent;
+
+  cursor: pointer;
+
+  &:active {
+    box-shadow: none;
+  }
+
+  &.shadow {
+    box-shadow: 0 10px 10px rgba(80, 48, 229, 0.1);
+  }
+
+  // SIZES //
+  &.small {
+
+  }
+
+  // END SIZES //
+
+
+  // COLORS //
+  &.fill {
+    background-color: #5030E5;
+
+    &:hover {
+      background-color: #3418B7;
+    }
+  }
+
+  &.stroke {
+    color: #5030E5;
+
+    background-color: #FFFFFF;
+    border-color: #5030E5;
+  }
+
+  // END COLORS //
+}

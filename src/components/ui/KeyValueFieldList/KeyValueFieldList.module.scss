@@ -1,0 +1,31 @@
+.box {
+
+}
+
+.button {
+  margin-bottom: 30px;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  margin-bottom: 20px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.key {
+  margin-right: 20px;
+}
+
+.value {
+
+}

@@ -1,0 +1,46 @@
+.box {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.fieldset {
+  padding: 19px;
+  padding-bottom: 14px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: calc(50% - 10px);
+
+  border: 1px solid #EFEFEF;
+  border-radius: 10px;
+}
+
+.section {
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: calc(50% - 10px);
+
+
+  .fieldset {
+    max-width: 100%;
+  }
+}
+
+.column {
+  margin-right: 20px;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
+
+.row {
+  display: flex;
+}
+
+.item {
+  margin-bottom: 15px;
+  margin-right: 20px;
+  width: 100%;
+}
