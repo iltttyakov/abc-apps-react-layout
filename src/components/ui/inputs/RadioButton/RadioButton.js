@@ -1,6 +1,6 @@
 import React from 'react';
 import cls from './RadioButton.module.scss'
-import makeId from "../../../helpers/makeid";
+import makeId from "../../../../helpers/makeid";
 
 const RadioButton = (
     {

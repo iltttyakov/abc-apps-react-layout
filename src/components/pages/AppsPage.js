@@ -1,8 +1,8 @@
 import React from 'react';
 import Layout from "../wrappers/Layout/Layout";
 import Page from "../ui/Page/Page";
-import Button from "../ui/Button/Button";
-import Apps from "../containers/Apps";
+import Button, {ButtonTypes} from "../ui/Button/Button";
+import Apps from "../containers/Apps/Apps";
 
 const AppsPage = () => {
     return (
@@ -12,7 +12,11 @@ const AppsPage = () => {
 
                     <Page.Title>Приложения</Page.Title>
                     <Page.Actions>
-                        <Button>Добавить новое приложение</Button>
+                        <Button
+                            type={ButtonTypes.FILL}
+                        >
+                            Добавить новое приложение
+                        </Button>
                     </Page.Actions>
 
                 </Page.Header>

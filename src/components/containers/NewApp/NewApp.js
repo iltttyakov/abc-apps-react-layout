@@ -2,19 +2,21 @@ import React from 'react';
 import Form from "../../ui/Form/Form";
 import TextInput from "../../ui/TextInput/TextInput";
 import {useForm} from "react-hook-form";
-import DropDown from "../../ui/DropDown/DropDown";
-import RadioGroup from "../../ui/RadioGroup/RadioGroup";
-import DateInput from "../../ui/DateInput/DateInput";
+import DropDown from "../../ui/inputs/DropDown/DropDown";
+import RadioGroup from "../../ui/inputs/RadioGroup/RadioGroup";
+import DateInput from "../../ui/inputs/DateInput/DateInput";
 import DomainCheckInput from "../../ui/DomainCheckInput/DomainCheckInput";
 import KeyValueFieldList from "../../ui/KeyValueFieldList/KeyValueFieldList";
-import ImageInput from "../../ui/ImageInput/ImageInput";
+import ImageInput from "../../ui/inputs/ImageInput/ImageInput";
 
 
 import appIcon from './app-icon.png'
+import TableSortingButton from "../../ui/Table/TableSortingButton/TableSortingButton";
+import TableSelect from "../../ui/Table/TableSelect/TableSelect";
 
 
 const NewApp = () => {
-    const {register, handleSubmit, formState: {errors}, setValue} = useForm()
+    const {register, handleSubmit, formState: {errors}, setValue, getValues} = useForm()
     const onSubmit = data => console.log(data)
 
     return (
@@ -102,6 +104,7 @@ const NewApp = () => {
                 </Form.Row>
             </Form.Fieldset>
 
+            {/** }
             <Form.Fieldset>
                 <Form.Item>
                     <DateInput
@@ -406,9 +409,22 @@ const NewApp = () => {
                     </Form.Item>
                 </Form.Column>
             </Form.Fieldset>
+             **/ }
 
             <KeyValueFieldList
                 register={register}
+            />
+
+            <TableSelect
+                register={register}
+                name={'test'}
+                multiple={true}
+                options={[
+                    {label: 'Пунк 1', value: 'item-1'},
+                    {label: 'Пунк 2', value: 'item-2'},
+                    {label: 'Пунк 3', value: 'item-3'},
+                ]}
+                label={'Тип'}
             />
 
             <div style={{width: '100%', marginTop: '50px'}}>

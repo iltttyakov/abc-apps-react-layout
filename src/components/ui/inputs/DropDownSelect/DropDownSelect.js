@@ -1,7 +1,7 @@
 import React from 'react';
 import cls from './DropDownSelect.module.scss'
-import makeId from "../../../helpers/makeid";
-import ToggleElement from "../ToggleElement/ToggleElement";
+import makeId from "../../../../helpers/makeid";
+import ToggleElement from "../../ToggleElement/ToggleElement";
 
 const list = [
     {

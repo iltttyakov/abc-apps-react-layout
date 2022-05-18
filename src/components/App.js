@@ -10,6 +10,7 @@ import '../styles/normalize.scss'
 import BoardPage from "./pages/BoardPage";
 import AppsPage from "./pages/AppsPage";
 import NewAppPage from "./pages/NewAppPage";
+import AccountsPage from "./pages/AccountsPage";
 
 
 function App() {
@@ -17,7 +18,8 @@ function App() {
         <Switch>
             {/*<Route exact path={'/'} component={BoardPage}/>*/}
             {/*<Route exact path={'/'} component={AppsPage}/>*/}
-            <Route exact path={'/'} component={NewAppPage}/>
+            {/*<Route exact path={'/'} component={NewAppPage}/>*/}
+            <Route exact path={'/'} component={AccountsPage}/>
         </Switch>
     )
 }

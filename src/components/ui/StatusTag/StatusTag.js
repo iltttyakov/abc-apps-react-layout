@@ -1,24 +1,28 @@
 import React from 'react';
 import cls from './StatusTag.module.scss'
 
-const StatusTag = (
-    {
-        status
-    }
-) => {
+
+export const StatusTypes = {
+    PUBLISH: 'publish',
+    MODERATION: 'moderation',
+    BAN: 'ban'
+}
+
+
+const StatusTag = ({status}) => {
     const boxCls = [cls.box]
     let label = ''
 
     switch (status) {
-        case 'publish':
+        case StatusTypes.PUBLISH:
             boxCls.push(cls.publish)
             label = 'опубликовано'
             break
-        case 'moderation':
+        case StatusTypes.MODERATION:
             boxCls.push(cls.moderation)
             label = 'на модерации'
             break
-        case 'ban':
+        case StatusTypes.BAN:
             boxCls.push(cls.ban)
             label = 'забанено'
             break

@@ -1,4 +1,4 @@
-.box {
+.button {
   margin: 0;
   padding: 0;
   display: flex;
@@ -15,30 +15,6 @@
 
   transition: all .1s ease;
   cursor: pointer;
-
-  &:hover {
-    opacity: .7;
-  }
-
-  &:active {
-    opacity: .5;
-  }
-
-  &.asc {
-    color: #5030E5;
-
-    .iconAsc {
-      fill: #5030E5;
-    }
-  }
-
-  &.desc {
-    color: #5030E5;
-
-    .iconDesc {
-      fill: #5030E5;
-    }
-  }
 }
 
 .label {
@@ -49,4 +25,31 @@
   margin-left: 6px;
 
   fill: inherit;
+}
+
+.field {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden;
+
+  &.asc:checked ~ .button {
+    color: #5030E5;
+
+    .iconAsc {
+      fill: #5030E5;
+    }
+  }
+
+  &.desc:checked ~ .button {
+    color: #5030E5;
+
+    .iconDesc {
+      fill: #5030E5;
+    }
+  }
 }

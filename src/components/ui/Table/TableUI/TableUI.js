@@ -1,5 +1,5 @@
 import React from 'react';
-import cls from './Table.module.scss'
+import cls from './TableUI.module.scss'
 
 
 export default {
@@ -14,11 +14,14 @@ export default {
 
     Body: ({children}) => <tbody className={cls.body}>{children}</tbody>,
 
-    Cell: ({children, width = null, align = 'left'}) =>
-        <td className={[cls.cell, align === 'left' ? cls.left : cls.right].join(' ')}
-            style={width ? {width: `${width}%`} : null}>
-            {children}
-        </td>,
+    Cell: ({children, width = null, align = 'left'}) => {
+        return (
+            <td className={[cls.cell, align === 'left' ? cls.left : cls.right].join(' ')}
+                style={width ? {width: `${width}%`} : null}>
+                {children}
+            </td>
+        )
+    },
 
     CellRow: ({children}) =>
         <div className={cls.cellRow}>
