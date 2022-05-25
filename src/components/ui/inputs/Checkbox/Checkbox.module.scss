@@ -1,0 +1,70 @@
+.field {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden;
+}
+
+.text {
+  padding-left: 5px;
+}
+
+.label {
+  position: relative;
+
+  padding-left: 20px;
+
+  cursor: pointer;
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    left: 0;
+    top: 50%;
+
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+
+    border: 1px solid #BDBDBD;
+    border-radius: 2px;
+
+    transition: all .1s ease;
+  }
+
+  &.reverse {
+    padding-left: 0;
+    padding-right: 20px;
+
+    &::before {
+      left: unset;
+      right: 0;
+    }
+
+    .text {
+      padding-left: 0;
+      padding-right: 5px;
+    }
+  }
+}
+
+.field:checked + .label {
+  &::before {
+    border-width: 6px;
+    border-color: #5030E5;
+  }
+}
+
+.field:disabled + .label {
+  color: #BDBDBD;
+  cursor: default;
+
+  &::before {
+    border-color: #BDBDBD;
+  }
+}

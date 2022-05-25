@@ -1,18 +1,26 @@
 import React from 'react';
-import cls from './RadioGroup.module.scss'
+import cls from './RadioButtonList.module.scss'
 import RadioButton from "../RadioButton/RadioButton";
 
 
-const RadioGroup = (
+export const RadioButtonListLabelPosition = {
+    TOP: 'top', LEFT: 'left'
+}
+
+
+const RadioButtonList = (
     {
         options,
         name,
         register,
         label = null,
+        labelPosition = RadioButtonListLabelPosition.TOP
     }
 ) => {
     return (
-        <div className={cls.box}>
+        <div
+            className={[cls.box, labelPosition === RadioButtonListLabelPosition.LEFT ? cls.row : null].join(' ')}
+        >
 
             {
                 label
@@ -41,4 +49,4 @@ const RadioGroup = (
     );
 };
 
-export default RadioGroup;
+export default RadioButtonList;

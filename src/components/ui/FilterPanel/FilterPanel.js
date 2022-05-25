@@ -7,10 +7,14 @@ const FilterPanel = (
         name,
         options,
         register,
+        align = 'left'
     }
 ) => {
+    const listCLs = [cls.list]
+    if (align === 'right') listCLs.push(cls.alignRight)
+
     return (
-        <ul className={cls.list}>
+        <ul className={listCLs.join(' ')}>
             {
                 options.map((option, i) => {
                     const id = makeId(5)

@@ -1,0 +1,109 @@
+.container {
+  overflow-y: scroll;
+
+  position: fixed;
+  z-index: -1;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.inner {
+  width: 100%;
+  padding-top: 100px;
+  padding-bottom: 100px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.overlay {
+  opacity: 0;
+
+  position: fixed;
+  z-index: -1;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: rgba(13, 6, 45, .6);
+}
+
+.box {
+  max-width: 90%;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 20px;
+
+  background: #FFFFFF;
+  border-radius: 20px;
+
+  transform: scale(0);
+
+  &.big {
+    width: 1145px;
+    padding-bottom: 50px;
+  }
+
+  &.small {
+    width: 680px;
+    padding-bottom: 40px;
+
+    .top {
+      margin-bottom: 30px;
+    }
+  }
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 21px;
+}
+
+.title {
+  margin: 0;
+
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  color: #0D062D;
+}
+
+.closeButton {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+.closeButtonIcon {
+  stroke: #0D062D;
+}
+
+.body {
+
+}
+
+.open {
+  z-index: 100;
+
+  .overlay {
+    opacity: 1;
+  }
+
+  .box {
+    transition: all .25s ease;
+    transform: scale(1);
+  }
+}

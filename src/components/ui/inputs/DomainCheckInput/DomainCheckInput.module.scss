@@ -1,6 +1,5 @@
 .box {
   display: flex;
-  align-items: flex-end;
 }
 
 .field {
@@ -11,6 +10,7 @@
 .button {
   padding-left: 10px;
   padding-right: 10px;
+  margin-top: 28px;;
 
   white-space: nowrap;
 }

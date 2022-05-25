@@ -4,6 +4,8 @@ import DropDownSelect from "../inputs/DropDownSelect/DropDownSelect";
 import Pagination from "../Pagination/Pagination";
 import TableSortingButton from "./TableSortingButton/TableSortingButton";
 import TableSelect from "./TableSelect/TableSelect";
+import Checkbox from "../inputs/Checkbox/Checkbox";
+import makeId from "../../../helpers/makeid";
 
 
 const createSortingHeader = (
@@ -50,6 +52,17 @@ const createFilteringHeader = (
 }
 
 
+const createCheckHeader = ({register}) => {
+    const name = makeId(5)
+    return (
+        <Checkbox
+            name={name}
+            register={register}
+        />
+    )
+}
+
+
 const Table = (
     {
         columns,
@@ -70,6 +83,8 @@ const Table = (
                                         content = createSortingHeader({...column['sorting']})
                                     } else if (column['filterable']) {
                                         content = createFilteringHeader({...column['filter']})
+                                    } else if (column['checkable']) {
+                                        content = createCheckHeader({...column['check']})
                                     } else if (column['header']) {
                                         content = column['header']
                                     }

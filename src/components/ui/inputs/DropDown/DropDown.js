@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import cls from './DropDown.module.scss'
 import makeId from "../../../../helpers/makeid";
 import ToggleElement from "../../ToggleElement/ToggleElement";
@@ -13,11 +13,28 @@ const DropDown = (
         placeholder = null,
     }
 ) => {
-    let [bodyIsOpen, setBodyIsOpen] = useState(false)
-    let [currentLabel, setCurrentLabel] = useState('')
+    const [bodyIsOpen, setBodyIsOpen] = useState(false)
+    const [currentLabel, setCurrentLabel] = useState('')
+    const ref = useRef()
+
+
+    const handleClickOutside = (event) => {
+        if (ref.current && !ref.current.contains(event.target)) {
+            setBodyIsOpen(false)
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener('click', handleClickOutside)
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside)
+        }
+    }, [ref])
+
 
     return (
-        <div className={cls.container}>
+        <div className={cls.container} ref={ref}>
 
             {
                 label
@@ -27,7 +44,9 @@ const DropDown = (
 
             <div className={[cls.box, bodyIsOpen ? cls.open : null].join(' ')}>
 
-                <button className={cls.head} type={'button'} onClick={() => setBodyIsOpen(!bodyIsOpen)}>
+                <button className={cls.head} type={'button'} onClick={() => {
+                    setBodyIsOpen(!bodyIsOpen)
+                }}>
                     <span className={cls.currentValue}>
                         {
                             currentLabel

@@ -1,22 +1,33 @@
 import React from 'react';
 import cls from './Button.module.scss'
+import {NavLink} from "react-router-dom";
 
 export const ButtonTypes = {
     FILL: 'fill',
     STROKE: 'stroke'
 }
 
+export const ButtonSizes = {
+    NORMAL: 'noraml', SMALL: 'small', BIG: 'big'
+}
+
 const Button = (
     {
         children,
-        onClick,
-        type = ButtonTypes.fill,
+        onClick = null,
+        to = null,
+        type = ButtonTypes.FILL,
+        size = ButtonSizes.NORMAL,
         className = null,
         shadow = false,
         buttonType = 'button'
     }
 ) => {
-    const boxCls = [cls.box, className, shadow ? cls.shadow : null]
+    const boxCls = [
+        cls.box,
+        className,
+        shadow ? cls.shadow : null,
+    ]
 
     switch (type) {
         case (ButtonTypes.FILL):
@@ -27,6 +38,27 @@ const Button = (
             break
     }
 
+    switch (size) {
+        case (ButtonSizes.SMALL):
+            boxCls.push(cls.small)
+            break
+        case (ButtonSizes.BIG):
+            boxCls.push(cls.big)
+            break
+    }
+
+
+    if (to) {
+        return (
+            <NavLink
+                className={boxCls.join(' ')}
+                to={to}
+            >
+                {children}
+            </NavLink>
+        )
+    }
+
     return (
         <button
             onClick={onClick}
@@ -35,7 +67,7 @@ const Button = (
         >
             {children}
         </button>
-    );
+    )
 };
 
 export default Button;

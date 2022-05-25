@@ -2,13 +2,22 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
   height: 64px;
   padding-right: 50px;
 
   border-bottom: 1px solid #F6F6F6;
+
+  &.fluid {
+    padding-right: 0;
+  }
+}
+
+.container {
+  display: flex;
+  align-items: center;
 }
 
 .themeSwitch {
   margin-right: 80px;
+  margin-left: auto;
 }

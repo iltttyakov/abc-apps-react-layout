@@ -1,7 +1,7 @@
 import React from 'react';
 import cls from './DomainCheckInput.module.scss'
 import TextInput from "../TextInput/TextInput";
-import Button, {ButtonTypes} from "../Button/Button";
+import Button, {ButtonTypes} from "../../Button/Button";
 
 const DomainCheckInput = (
     {

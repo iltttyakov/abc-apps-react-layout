@@ -15,6 +15,7 @@ const AccountsPage = () => {
                     <Page.Actions>
                         <Button
                             type={ButtonTypes.FILL}
+                            shadow={true}
                         >
                             Добавить новый аккаунт
                         </Button>

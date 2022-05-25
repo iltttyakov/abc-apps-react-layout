@@ -1,5 +1,5 @@
 .box {
-  padding: 10px 21px;
+  padding: 10px 19px;
   height: 40px;
 
   font-weight: 500;
@@ -23,7 +23,14 @@
 
   // SIZES //
   &.small {
+    padding: 6px 10px;
+  }
 
+  &.big {
+    height: 48px;
+    padding: 0 45px;
+
+    font-size: 16px;
   }
 
   // END SIZES //
@@ -39,10 +46,15 @@
   }
 
   &.stroke {
-    color: #5030E5;
+    color: #0D062D;
 
     background-color: #FFFFFF;
     border-color: #5030E5;
+
+    &:hover {
+      color: #FFFFFF;
+      background-color: #5030E5;
+    }
   }
 
   // END COLORS //

@@ -1,30 +1,30 @@
 import React from 'react';
 import Page from "../ui/Page/Page";
-import Button from "../ui/Button/Button";
-import Layout from "../wrappers/Layout/Layout";
+import Button, {ButtonTypes} from "../ui/Button/Button";
 import NewApp from "../containers/NewApp/NewApp";
+import LayoutFluid from "../wrappers/Layout/LayoutFluid";
 
 const NewAppPage = () => {
     return (
-        <Layout fluid={true}>
+        <LayoutFluid>
             <Page.Box>
-                <Page.Header>
 
+                <Page.Header padding={false}>
                     <Page.Title>Добавить новое приложение</Page.Title>
                     <Page.Actions>
-                        <Button>Все приложения</Button>
+                        <Button
+                            type={ButtonTypes.STROKE}
+                            to={'/apps'}
+                        >
+                            Все приложения
+                        </Button>
                     </Page.Actions>
-
                 </Page.Header>
 
-                <Page.Content padding={'fluid'}>
-
-                    <NewApp/>
-
-                </Page.Content>
+                <NewApp/>
 
             </Page.Box>
-        </Layout>
+        </LayoutFluid>
     );
 };
 

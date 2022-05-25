@@ -1,0 +1,33 @@
+.field {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  padding: 2px 9px;
+
+  font-size: 14px;
+  line-height: 24px;
+  color: #A798F2;
+
+  border: 1px solid #A798F2;
+  border-radius: 5px;
+
+  cursor: pointer;
+}
+
+.field:checked + .label {
+  background-color: #5030E5;
+  border-color: #5030E5;
+  color: #FFFFFF;
+}

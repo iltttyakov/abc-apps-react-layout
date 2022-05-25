@@ -4,10 +4,18 @@
 .header {
   display: flex;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
   padding: 20px;
+  padding-top: 20px;
   padding-bottom: 0;
   padding-right: 50px;
+
+  &.noPadding {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 15px;
+    margin-bottom: 50px;
+  }
 }
 
 .title {
@@ -23,6 +31,8 @@
 }
 
 .content {
+  padding-bottom: 50px;
+
   &.paddingDefault {
     padding: 20px;
     padding-top: 0;
@@ -40,5 +50,6 @@
 
 .top {
   padding: 0 20px;
+  padding-right: 50px;
   margin-bottom: 50px;
 }

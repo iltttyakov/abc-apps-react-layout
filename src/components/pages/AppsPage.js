@@ -14,6 +14,8 @@ const AppsPage = () => {
                     <Page.Actions>
                         <Button
                             type={ButtonTypes.FILL}
+                            shadow={true}
+                            to={'/apps/new'}
                         >
                             Добавить новое приложение
                         </Button>

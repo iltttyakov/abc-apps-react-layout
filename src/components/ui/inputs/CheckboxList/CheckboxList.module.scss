@@ -1,0 +1,37 @@
+.label {
+  margin: 0;
+  margin-bottom: 10px;
+
+  letter-spacing: -0.011em;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #0D062D;
+
+  &.small {
+    font-size: 14px;
+  }
+}
+
+.item {
+  margin-right: 8px;
+  margin-bottom: 10px;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+
+  list-style: none;
+
+  &.column {
+    flex-direction: column;
+
+    .item {
+      margin-right: 0;
+      margin-bottom: 8px;
+    }
+  }
+}

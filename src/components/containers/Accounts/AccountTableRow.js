@@ -34,7 +34,7 @@ const AccountTableRow = (
             <TableUI.Cell>{domain}</TableUI.Cell>
             <TableUI.Cell>{login2}</TableUI.Cell>
             <TableUI.Cell>{password2}</TableUI.Cell>
-            <TableUI.Cell><MoreButton/></TableUI.Cell>
+            <TableUI.Cell align={'right'}><MoreButton/></TableUI.Cell>
 
         </TableUI.Row>
     );

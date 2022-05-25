@@ -34,11 +34,13 @@ const appWhiteList = [
             {
                 appName: 'App Name',
                 type: 'white',
+                date: '30.03.2022',
                 backgroundColor: 'green'
             },
             {
                 appName: 'App Name',
                 type: 'white',
+                date: '30.03.2022',
                 backgroundColor: 'green'
             },
         ]
@@ -51,11 +53,13 @@ const appWhiteList = [
             {
                 appName: 'App Name',
                 type: 'white',
+                date: '30.03.2022',
                 backgroundColor: 'red'
             },
             {
                 appName: 'App Name',
                 type: 'white',
+                date: '30.03.2022',
                 backgroundColor: 'red'
             },
         ]

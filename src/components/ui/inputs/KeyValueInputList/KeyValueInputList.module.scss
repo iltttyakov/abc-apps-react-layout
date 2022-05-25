@@ -1,5 +1,6 @@
 .box {
-
+  width: 100%;
+  padding-top: 30px;
 }
 
 .button {
@@ -22,10 +23,13 @@
   }
 }
 
-.key {
-  margin-right: 20px;
-}
+.field {
+  width: 350px;
 
-.value {
+  &.key {
+    margin-right: 20px;
+  }
 
+  &.value {
+  }
 }

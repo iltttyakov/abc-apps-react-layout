@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import cls from './TextInput.module.scss'
-import makeId from "../../../helpers/makeid";
-import Icons from "../Icons/Icons";
+import makeId from "../../../../helpers/makeid";
+import Icons from "../../Icons/Icons";
 
 const TextInput = (
     {
@@ -17,9 +17,16 @@ const TextInput = (
     }
 ) => {
     const id = makeId(5)
+    const [onFocus, setOnFocus] = useState(false)
 
     return (
-        <div className={[cls.box, className].join(' ')}>
+        <div
+            className={[
+                cls.box, className,
+                onFocus ? cls.focus : null,
+                errors ? cls.errors : null
+            ].join(' ')}
+        >
 
             {
                 label
@@ -29,11 +36,17 @@ const TextInput = (
             <div className={cls.fieldContainer}>
                 <input
                     {...register(name, {required})}
-                    className={[cls.field, errors ? cls.error : null].join(' ')}
+                    className={cls.field}
                     type={inputType}
                     id={id}
                     placeholder={placeholder}
                     name={name}
+                    onFocus={() => {
+                        setOnFocus(true)
+                    }}
+                    onBlur={() => {
+                        setOnFocus(false)
+                    }}
                 />
                 {
                     iconName

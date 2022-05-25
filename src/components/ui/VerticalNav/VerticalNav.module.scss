@@ -39,21 +39,33 @@
   &:active {
     opacity: .7;
   }
-
-  &.active {
-    color: #0D062D;
-    cursor: default;
-
-    .label {
-      font-weight: 600;
-    }
-  }
 }
 
 .icon {
   margin-right: 10px;
   flex-shrink: 0;
   fill: currentColor;
+
+  &.stroke {
+    fill: none;
+    stroke: currentColor;
+  }
+}
+
+.active:last-of-type ~ .label {
+  font-weight: 600;
+
+  color: #0D062D;
+  cursor: default;
+}
+
+.active:last-of-type ~ .icon {
+  fill: #0D062D;
+
+  &.stroke {
+    fill: transparent;
+    stroke: #0D062D;
+  }
 }
 
 .link {

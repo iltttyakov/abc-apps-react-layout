@@ -6,13 +6,15 @@
   width: 100%;
 
   border-collapse: separate;
-  margin-bottom: 30px;
+  margin-bottom: 27px;
 }
 
 .headCell {
   padding: 10px 0;
 
   text-align: left;
+  white-space: nowrap;
+  font-weight: 500;
 
   border-bottom: 1px solid #F6F6F6;
 }
@@ -66,7 +68,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 25px;
+  padding-left: 19px;
   padding-right: 50px;
 }
 

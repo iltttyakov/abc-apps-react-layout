@@ -8,19 +8,14 @@ const BoardPage = () => {
     return (
         <Layout>
             <Page.Box>
+
                 <Page.Header>
                     <Page.Title>
                         Доска
                     </Page.Title>
                 </Page.Header>
 
-
-                <Page.Content>
-
-                    <Board/>
-
-                </Page.Content>
-
+                <Board/>
 
             </Page.Box>
         </Layout>

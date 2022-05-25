@@ -1,18 +1,17 @@
 import React from 'react';
-import Form from "../../ui/Form/Form";
-import TextInput from "../../ui/TextInput/TextInput";
+import Form, {FieldWidth} from "../../ui/Form/Form";
+import TextInput from "../../ui/inputs/TextInput/TextInput";
 import {useForm} from "react-hook-form";
 import DropDown from "../../ui/inputs/DropDown/DropDown";
-import RadioGroup from "../../ui/inputs/RadioGroup/RadioGroup";
-import DateInput from "../../ui/inputs/DateInput/DateInput";
-import DomainCheckInput from "../../ui/DomainCheckInput/DomainCheckInput";
-import KeyValueFieldList from "../../ui/KeyValueFieldList/KeyValueFieldList";
+import RadioButtonList from "../../ui/inputs/RadioButtonList/RadioButtonList";
+import KeyValueInputList from "../../ui/inputs/KeyValueInputList/KeyValueInputList";
 import ImageInput from "../../ui/inputs/ImageInput/ImageInput";
+import DateInput from "../../ui/inputs/DateInput/DateInput";
+import DomainCheckInput from "../../ui/inputs/DomainCheckInput/DomainCheckInput";
 
 
 import appIcon from './app-icon.png'
-import TableSortingButton from "../../ui/Table/TableSortingButton/TableSortingButton";
-import TableSelect from "../../ui/Table/TableSelect/TableSelect";
+import Button, {ButtonSizes, ButtonTypes} from "../../ui/Button/Button";
 
 
 const NewApp = () => {
@@ -20,64 +19,52 @@ const NewApp = () => {
     const onSubmit = data => console.log(data)
 
     return (
-
         <Form.Box onSubmit={handleSubmit(onSubmit)}>
 
-            <Form.Fieldset>
-                <Form.Row>
 
-                    <Form.Column width={250}>
-                        <Form.Item>
-                            <TextInput
-                                register={register}
-                                errors={errors['id']}
-                                name={'id'}
-                                label={'ID'}
-                                placeholder={'ID приложения (автоматически)'}
-                            />
-                        </Form.Item>
-                        <Form.Item>
-                            <TextInput
-                                register={register}
-                                errors={errors['name']}
-                                name={'name'}
-                                label={'Название'}
-                                placeholder={'Название приложения'}
-                            />
-                        </Form.Item>
-                        <Form.Item>
-                            <TextInput
-                                register={register}
-                                errors={errors['package']}
-                                name={'package'}
-                                label={'Пакет'}
-                                placeholder={'com.example.app'}
-                            />
-                        </Form.Item>
-                        <Form.Item>
-                            <DropDown
-                                label={'Аккаунт'}
-                                register={register}
-                                name={'account'}
-                                options={[
-                                    {label: 'a320user', value: 'a320user'},
-                                    {label: 'a321user', value: 'a321user'},
-                                    {label: 'a322user', value: 'a322user'},
-                                ]}
-                            />
-                        </Form.Item>
-                    </Form.Column>
+            <Form.Row>
 
-                    <Form.Column>
-                        <Form.Item style={{marginBottom: 15}}>
+                <Form.Column>
+                    <Form.Fieldset>
+                        <Form.FieldList>
+                            <div>
+                                <Form.Field>
+                                    <TextInput
+                                        register={register}
+                                        errors={errors['id']}
+                                        name={'id'}
+                                        label={'ID'}
+                                        placeholder={'ID приложения (автоматически)'}
+                                    />
+                                </Form.Field>
+                                <Form.Field>
+                                    <TextInput
+                                        register={register}
+                                        errors={errors['name']}
+                                        name={'name'}
+                                        label={'Название'}
+                                        placeholder={'Название приложения'}
+                                    />
+                                </Form.Field>
+                            </div>
                             <ImageInput
                                 name={'image'}
                                 label={'Изображение'}
                                 currentImage={appIcon}
                             />
-                        </Form.Item>
-                        <Form.Item style={{marginBottom: 23}}>
-                            <RadioGroup
+                        </Form.FieldList>
+
+                        <Form.FieldList>
+                            <Form.Field>
+                                <TextInput
+                                    register={register}
+                                    errors={errors['package']}
+                                    name={'package'}
+                                    label={'Пакет'}
+                                    placeholder={'com.example.app'}
+                                />
+                            </Form.Field>
+                            <RadioButtonList
                                 name={'app-type'}
                                 register={register}
                                 label={'Тип'}
@@ -86,9 +73,22 @@ const NewApp = () => {
                                     {label: 'Серое', value: 'grey'},
                                 ]}
                             />
-                        </Form.Item>
-                        <Form.Item style={{marginBottom: 23}}>
-                            <RadioGroup
+                        </Form.FieldList>
+
+                        <Form.Row>
+                            <Form.Field>
+                                <DropDown
+                                    label={'Аккаунт'}
+                                    register={register}
+                                    name={'account'}
+                                    options={[
+                                        {label: 'a320user', value: 'a320user'},
+                                        {label: 'a321user', value: 'a321user'},
+                                        {label: 'a322user', value: 'a322user'},
+                                    ]}
+                                />
+                            </Form.Field>
+                            <RadioButtonList
                                 name={'store'}
                                 register={register}
                                 label={'Магазин'}
@@ -98,135 +98,126 @@ const NewApp = () => {
                                     {label: 'Huawei', value: 'h'},
                                 ]}
                             />
-                        </Form.Item>
-                    </Form.Column>
+                        </Form.Row>
 
-                </Form.Row>
-            </Form.Fieldset>
+                    </Form.Fieldset>
+                </Form.Column>
 
-            {/** }
-            <Form.Fieldset>
-                <Form.Item>
-                    <DateInput
-                        setValue={setValue}
-                        name={'publish-date'}
-                        register={register}
-                        errors={errors['publish-date']}
-                        label={'Дата залива'}
-                        required={false}
-                    />
-                </Form.Item>
-                <Form.Item>
-                    <DateInput
-                        setValue={setValue}
-                        name={'approve-date'}
-                        register={register}
-                        errors={errors['approve-date']}
-                        label={'Дата апрува'}
-                        required={false}
-                    />
-                </Form.Item>
-                <Form.Item>
-                    <DateInput
-                        setValue={setValue}
-                        name={'ban-date'}
-                        register={register}
-                        errors={errors['ban-date']}
-                        label={'Дата бана'}
-                        required={false}
-                    />
-                </Form.Item>
-            </Form.Fieldset>
-
-            <Form.Fieldset>
-
-                <Form.Item>
-                    <DomainCheckInput
-                        register={register}
-                        name={'domain'}
-                        label={'Домен'}
-                        errors={errors['domain']}
-                    />
-                </Form.Item>
-
-                <Form.Item>
-                    <Form.Row>
-                        <Form.Column width={250}>
-                            <DropDown
+                <Form.Column>
+                    <Form.Fieldset>
+                        <Form.Field width={FieldWidth.FULL}>
+                            <DateInput
+                                setValue={setValue}
+                                name={'publish-date'}
                                 register={register}
-                                name={'customer'}
-                                label={'Покупатель'}
-                                options={[
-                                    {label: 'Покуптель 1', value: 'customer-1'},
-                                    {label: 'Покуптель 2', value: 'customer-2'},
-                                    {label: 'Покуптель 3', value: 'customer-3'},
-                                ]}
+                                errors={errors['publish-date']}
+                                label={'Дата залива'}
+                                required={false}
                             />
-                        </Form.Column>
-                        <Form.Column width={250}>
+                        </Form.Field>
+                        <Form.Field width={FieldWidth.FULL}>
+                            <DateInput
+                                setValue={setValue}
+                                name={'approve-date'}
+                                register={register}
+                                errors={errors['approve-date']}
+                                label={'Дата апрува'}
+                                required={false}
+                            />
+                        </Form.Field>
+                        <Form.Field width={FieldWidth.FULL} style={{marginBottom: '98px'}}>
+                            <DateInput
+                                setValue={setValue}
+                                name={'ban-date'}
+                                register={register}
+                                errors={errors['ban-date']}
+                                label={'Дата бана'}
+                                required={false}
+                            />
+                        </Form.Field>
+                    </Form.Fieldset>
+                </Form.Column>
+
+            </Form.Row>
+
+
+            <Form.Row>
+
+                <Form.Column>
+                    <Form.Fieldset>
+                        <Form.Field width={FieldWidth.FULL}>
+                            <DomainCheckInput
+                                register={register}
+                                name={'domain'}
+                                label={'Домен'}
+                                errors={errors['domain']}
+                            />
+                        </Form.Field>
+                        <Form.FieldList>
+                            <Form.Field style={{marginRight: '15px'}}>
+                                <DropDown
+                                    register={register}
+                                    name={'customer'}
+                                    label={'Покупатель'}
+                                    options={[
+                                        {label: 'Покуптель 1', value: 'customer-1'},
+                                        {label: 'Покуптель 2', value: 'customer-2'},
+                                        {label: 'Покуптель 3', value: 'customer-3'},
+                                    ]}
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <TextInput
+                                    name={'tenants'}
+                                    register={register}
+                                    errors={errors['tenants']}
+                                    label={'Арендаторы'}
+                                />
+                            </Form.Field>
+                        </Form.FieldList>
+                        <Form.Field width={FieldWidth.w515}>
                             <TextInput
-                                name={'tenants'}
+                                name={'open-countries'}
                                 register={register}
-                                errors={errors['tenants']}
-                                label={'Арендаторы'}
+                                errors={errors['open-countries']}
+                                label={'Открытые страны'}
                             />
-                        </Form.Column>
-                    </Form.Row>
-                </Form.Item>
-
-                <Form.Column width={515}>
-                    <Form.Item>
-                        <TextInput
-                            name={'open-countries'}
-                            register={register}
-                            errors={errors['open-countries']}
-                            label={'Открытые страны'}
-                        />
-                    </Form.Item>
+                        </Form.Field>
+                        <Form.Field width={FieldWidth.w515}>
+                            <TextInput
+                                register={register}
+                                errors={errors['note']}
+                                name={'note'}
+                                label={'Примечание'}
+                            />
+                        </Form.Field>
+                    </Form.Fieldset>
                 </Form.Column>
 
-                <Form.Column width={515}>
-                    <Form.Item>
-                        <TextInput
-                            register={register}
-                            errors={errors['note']}
-                            name={'note'}
-                            label={'Примечание'}
-                        />
-                    </Form.Item>
-                </Form.Column>
+                <Form.Column>
 
-            </Form.Fieldset>
-
-            <Form.Section>
-                <Form.Fieldset>
-                    <Form.Column width={250}>
-                        <Form.Item>
+                    <Form.Fieldset>
+                        <Form.Field>
                             <TextInput
                                 register={register}
                                 errors={errors['organic-link']}
                                 name={'organic-link'}
                                 label={'Органическая ссылка'}
                             />
-                        </Form.Item>
-                    </Form.Column>
-
-                    <Form.Row>
-
-                        <Form.Column width={194}>
-                            <RadioGroup
-                                name={'organic'}
-                                register={register}
-                                label={'Органика'}
-                                options={[
-                                    {label: 'True', value: 'true'},
-                                    {label: 'False', value: 'false'},
-                                ]}
-                            />
-                        </Form.Column>
-
-                        <Form.Column>
-                            <RadioGroup
+                        </Form.Field>
+                        <Form.FieldList>
+                            <div style={{marginRight: '50px', marginBottom: '10px'}}>
+                                <RadioButtonList
+                                    name={'organic'}
+                                    register={register}
+                                    label={'Органика'}
+                                    options={[
+                                        {label: 'True', value: 'true'},
+                                        {label: 'False', value: 'false'},
+                                    ]}
+                                />
+                            </div>
+                            <RadioButtonList
                                 name={'naming'}
                                 register={register}
                                 label={'Нейминг'}
@@ -235,206 +226,228 @@ const NewApp = () => {
                                     {label: 'False', value: 'false'},
                                 ]}
                             />
-                        </Form.Column>
+                        </Form.FieldList>
+                    </Form.Fieldset>
 
-                    </Form.Row>
+                    <Form.Fieldset>
+                        <Form.FieldList>
+                            <Form.Field style={{marginBottom: '43px'}}>
+                                <TextInput
+                                    register={register}
+                                    errors={errors['developer']}
+                                    name={'developer'}
+                                    label={'Разработчик'}
+                                    placeholder={'Имя разработчика'}
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <TextInput
+                                    register={register}
+                                    errors={errors['collector']}
+                                    name={'collector'}
+                                    label={'Сборщик'}
+                                    placeholder={'Имя сборщика'}
+                                />
+                            </Form.Field>
+                        </Form.FieldList>
+                    </Form.Fieldset>
 
-                </Form.Fieldset>
-
-                <Form.Fieldset>
-                    <Form.Item>
-
-                        <Form.Column>
-                            <TextInput
-                                register={register}
-                                errors={errors['developer']}
-                                name={'developer'}
-                                label={'Разработчик'}
-                                placeholder={'Имя разработчика'}
-                            />
-                        </Form.Column>
-
-                        <Form.Column>
-                            <TextInput
-                                register={register}
-                                errors={errors['collector']}
-                                name={'collector'}
-                                label={'Сборщик'}
-                                placeholder={'Имя сборщика'}
-                            />
-                        </Form.Column>
-
-                    </Form.Item>
-                </Form.Fieldset>
-            </Form.Section>
-
-            <Form.Fieldset>
-                <Form.Column>
-                    <Form.Item>
-                        <TextInput
-                            register={register}
-                            errors={errors['facebook-id']}
-                            name={'facebook-id'}
-                            label={'Facebook ID'}
-                        />
-                    </Form.Item>
-                    <Form.Item>
-                        <TextInput
-                            register={register}
-                            errors={errors['client-token']}
-                            name={'client-token'}
-                            label={'Client Token'}
-                        />
-                    </Form.Item>
                 </Form.Column>
-                <Form.Column>
-                    <Form.Item>
-                        <TextInput
-                            register={register}
-                            errors={errors['install-referrer-key']}
-                            name={'install-referrer-key'}
-                            label={'Install Referrer Key'}
-                        />
-                    </Form.Item>
-                    <Form.Item>
-                        <TextInput
-                            register={register}
-                            errors={errors['secret']}
-                            name={'secret'}
-                            label={'Secret'}
-                        />
-                    </Form.Item>
-                </Form.Column>
-            </Form.Fieldset>
 
-            <Form.Fieldset>
-                <Form.Column>
-                    <Form.Item>
-                        <TextInput
-                            register={register}
-                            errors={errors['login-appsFlyer']}
-                            name={'login-appsFlyer'}
-                            label={'Логин AppsFlyer'}
-                        />
-                    </Form.Item>
-                    <Form.Item>
-                        <TextInput
-                            register={register}
-                            errors={errors['dev-key']}
-                            name={'dev-key'}
-                            label={'Dev Key'}
-                            placeholder={'YOUR_APPS_FLYER_DEV_TOKEN'}
-                        />
-                    </Form.Item>
-                </Form.Column>
-                <Form.Column>
-                    <Form.Item>
-                        <TextInput
-                            register={register}
-                            errors={errors['password-appsflyer']}
-                            name={'password-appsflyer'}
-                            label={'Пароль AppsFlyer'}
-                        />
-                    </Form.Item>
-                </Form.Column>
-            </Form.Fieldset>
+            </Form.Row>
 
-            <Form.Fieldset>
-                <Form.Column>
-                    <Form.Item>
-                        <TextInput
-                            register={register}
-                            errors={errors['name-onesignal']}
-                            name={'name-onesignal'}
-                            label={'Название OneSignal'}
-                        />
-                    </Form.Item>
-                    <Form.Item>
-                        <TextInput
-                            register={register}
-                            errors={errors['key-onesignal']}
-                            name={'key-onesignal'}
-                            label={'Key OneSignal'}
-                            placeholder={'YOUR_REST_API_KEY'}
-                        />
-                    </Form.Item>
-                </Form.Column>
-                <Form.Column>
-                    <Form.Item>
-                        <TextInput
-                            register={register}
-                            errors={errors['id-onesignal']}
-                            name={'id-onesignal'}
-                            label={'ID OneSignal'}
-                        />
-                    </Form.Item>
-                </Form.Column>
-            </Form.Fieldset>
 
-            <Form.Fieldset>
-                <Form.Column>
-                    <Form.Item>
-                        <TextInput
-                            register={register}
-                            errors={errors['proxy-host']}
-                            name={'proxy-host'}
-                            label={'Хост прокси'}
-                        />
-                    </Form.Item>
-                    <Form.Item>
-                        <TextInput
-                            register={register}
-                            errors={errors['proxy-login']}
-                            name={'proxy-login'}
-                            label={'Логин прокси'}
-                        />
-                    </Form.Item>
-                </Form.Column>
-                <Form.Column>
-                    <Form.Item>
-                        <TextInput
-                            register={register}
-                            errors={errors['proxy-port']}
-                            name={'proxy-port'}
-                            label={'Порт прокси'}
-                        />
-                    </Form.Item>
-                    <Form.Item>
-                        <TextInput
-                            register={register}
-                            errors={errors['proxy-password']}
-                            name={'proxy-password'}
-                            label={'Пароль прокси'}
-                        />
-                    </Form.Item>
-                </Form.Column>
-            </Form.Fieldset>
-             **/ }
+            <Form.Row>
 
-            <KeyValueFieldList
+                <Form.Column>
+                    <Form.Fieldset>
+                        <Form.FieldList>
+
+                            <Form.Field>
+                                <TextInput
+                                    register={register}
+                                    errors={errors['facebook-id']}
+                                    name={'facebook-id'}
+                                    label={'Facebook ID'}
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <TextInput
+                                    register={register}
+                                    errors={errors['client-token']}
+                                    name={'client-token'}
+                                    label={'Client Token'}
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <TextInput
+                                    register={register}
+                                    errors={errors['install-referrer-key']}
+                                    name={'install-referrer-key'}
+                                    label={'Install Referrer Key'}
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <TextInput
+                                    register={register}
+                                    errors={errors['secret']}
+                                    name={'secret'}
+                                    label={'Secret'}
+                                />
+                            </Form.Field>
+                        </Form.FieldList>
+                    </Form.Fieldset>
+                </Form.Column>
+
+                <Form.Column>
+                    <Form.Fieldset>
+                        <Form.FieldList>
+                            <Form.Field>
+                                <TextInput
+                                    register={register}
+                                    errors={errors['login-appsFlyer']}
+                                    name={'login-appsFlyer'}
+                                    label={'Логин AppsFlyer'}
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <TextInput
+                                    register={register}
+                                    errors={errors['dev-key']}
+                                    name={'dev-key'}
+                                    label={'Dev Key'}
+                                    placeholder={'YOUR_APPS_FLYER_DEV_TOKEN'}
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <TextInput
+                                    register={register}
+                                    errors={errors['password-appsflyer']}
+                                    name={'password-appsflyer'}
+                                    label={'Пароль AppsFlyer'}
+                                />
+                            </Form.Field>
+                        </Form.FieldList>
+                    </Form.Fieldset>
+                </Form.Column>
+
+            </Form.Row>
+
+            <Form.Row>
+                <Form.Column>
+                    <Form.Fieldset>
+                        <Form.FieldList style={{marginBottom: '85px'}}>
+                            <Form.Field>
+                                <TextInput
+                                    register={register}
+                                    errors={errors['name-onesignal']}
+                                    name={'name-onesignal'}
+                                    label={'Название OneSignal'}
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <TextInput
+                                    register={register}
+                                    errors={errors['key-onesignal']}
+                                    name={'key-onesignal'}
+                                    label={'Key OneSignal'}
+                                    placeholder={'YOUR_REST_API_KEY'}
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <TextInput
+                                    register={register}
+                                    errors={errors['id-onesignal']}
+                                    name={'id-onesignal'}
+                                    label={'ID OneSignal'}
+                                />
+                            </Form.Field>
+                        </Form.FieldList>
+                    </Form.Fieldset>
+                </Form.Column>
+
+                <Form.Column>
+                    <Form.Fieldset>
+                        <Form.FieldList style={{marginBottom: '43px'}}>
+                            <Form.Field>
+                                <TextInput
+                                    register={register}
+                                    errors={errors['proxy-host']}
+                                    name={'proxy-host'}
+                                    label={'Хост прокси'}
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <TextInput
+                                    register={register}
+                                    errors={errors['proxy-login']}
+                                    name={'proxy-login'}
+                                    label={'Логин прокси'}
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <TextInput
+                                    register={register}
+                                    errors={errors['proxy-port']}
+                                    name={'proxy-port'}
+                                    label={'Порт прокси'}
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <TextInput
+                                    register={register}
+                                    errors={errors['proxy-password']}
+                                    name={'proxy-password'}
+                                    label={'Пароль прокси'}
+                                />
+                            </Form.Field>
+                        </Form.FieldList>
+
+                        <Button
+                            type={ButtonTypes.FILL}
+                            size={ButtonSizes.SMALL}
+                        >
+                            Прокси из аккаунта
+                        </Button>
+                    </Form.Fieldset>
+                </Form.Column>
+
+            </Form.Row>
+
+
+            <KeyValueInputList
                 register={register}
+                errors={errors}
             />
 
-            <TableSelect
-                register={register}
-                name={'test'}
-                multiple={true}
-                options={[
-                    {label: 'Пунк 1', value: 'item-1'},
-                    {label: 'Пунк 2', value: 'item-2'},
-                    {label: 'Пунк 3', value: 'item-3'},
-                ]}
-                label={'Тип'}
-            />
-
-            <div style={{width: '100%', marginTop: '50px'}}>
-                <button type={'submit'}>
-                    Отправить
-                </button>
+            <div style={{
+                width: '100%',
+                marginTop: '60px',
+                marginBottom: '75px',
+                display: 'flex',
+                justifyContent: 'center'
+            }}>
+                <div style={{
+                    marginRight: '50px'
+                }}>
+                    <Button
+                        type={ButtonTypes.STROKE}
+                        size={ButtonSizes.BIG}
+                        buttonType={'button'}
+                    >
+                        Удалить
+                    </Button>
+                </div>
+                <Button
+                    type={ButtonTypes.FILL}
+                    size={ButtonSizes.BIG}
+                    buttonType={'submit'}
+                >
+                    Сохранить
+                </Button>,
             </div>
 
         </Form.Box>
-
     );
 };
 

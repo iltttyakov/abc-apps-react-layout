@@ -1,5 +1,5 @@
 import React from 'react';
-import TextInput from "../../TextInput/TextInput";
+import TextInput from "../TextInput/TextInput";
 import cls from './DateInput.module.scss'
 import Button, {ButtonTypes} from "../../Button/Button";
 import moment from "moment";

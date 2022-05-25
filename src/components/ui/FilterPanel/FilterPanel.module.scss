@@ -5,6 +5,10 @@
   align-items: center;
 
   list-style: none;
+
+  &.alignRight {
+    justify-content: flex-end;
+  }
 }
 
 .item {
@@ -43,7 +47,7 @@
   transition: all .1s ease;
 
   &:hover {
-    opacity: .7;
+    color: #5030E5;
   }
 
   &:active {
@@ -54,4 +58,8 @@
 .field:checked + .label {
   color: #FFFFFF;
   background-color: #5030E5;
+
+  &:hover {
+    color: #FFFFFF;
+  }
 }

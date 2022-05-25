@@ -7,30 +7,8 @@ import Page from "../../ui/Page/Page";
 import appWhiteCardList from "./BoardWhite";
 import appEmptyCardList from "./BoardEmpty";
 import appBanCardList from "./BoardBan";
+import {useForm} from "react-hook-form";
 
-const initialTabList = [
-    {
-        label: 'С серыми',
-        value: 'grey',
-        checked: true,
-    },
-    {
-        label: 'С белыми',
-        value: 'white'
-    },
-    {
-        label: 'Без приложений',
-        value: 'empty'
-    },
-    {
-        label: 'Бан',
-        value: 'ban'
-    },
-    {
-        label: 'Скрытые',
-        value: 'hide'
-    },
-]
 
 const tabs = {
     'grey': appGreyCardList,
@@ -42,29 +20,42 @@ const tabs = {
 
 
 const Board = () => {
-    let [tabList, setTabList] = useState(initialTabList)
-    let [activeTab, setActiveTab] = useState('grey')
+    const [activeTab, setActiveTab] = useState('grey')
+    const {register} = useForm(
+        {
+            defaultValues: {
+                'board-tabs': activeTab
+            }
+        }
+    )
 
-    const tabOnChangeHandler = (newValue) => {
-        setActiveTab(newValue)
-
-        let newTabList = [...tabList]
-        newTabList.forEach(item => {
-            item['checked'] = item['value'] === newValue
-        })
-        setTabList(newTabList)
+    const onTabChange = (value) => {
+        setActiveTab(value)
     }
-
 
     return (
         <>
             <Page.Top>
-                <TabPanel list={tabList} onChange={tabOnChangeHandler}/>
+                <TabPanel
+                    register={register}
+                    name={'board-tabs'}
+                    options={[
+                        {label: 'С серыми', value: 'grey',},
+                        {label: 'С белыми', value: 'white'},
+                        {label: 'Без приложений', value: 'empty'},
+                        {label: 'Бан', value: 'ban'},
+                        {label: 'Скрытые', value: 'hide'},
+                    ]}
+                    onChange={onTabChange}
+                />
             </Page.Top>
 
-            <CardList
-                items={tabs[activeTab]}
-            />
+            <Page.Content>
+                <CardList
+                    items={tabs[activeTab]}
+                />
+            </Page.Content>
+
         </>
     );
 };

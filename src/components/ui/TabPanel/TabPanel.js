@@ -5,19 +5,19 @@ import makeId from "../../../helpers/makeid";
 
 const TabPanel = (
     {
-        list,
         className,
-        onChange
+        register,
+        name,
+        options,
+        onChange = (value) => {}
     }
 ) => {
-    const name = makeId(5)
-
     return (
         <div className={[cls.box, className].join(' ')}>
             <ul className={cls.list}>
 
                 {
-                    Object.keys(list).map((key, i) => {
+                    options.map((option, i) => {
                         const id = makeId(5)
                         return (
                             <li className={cls.item} key={i}>
@@ -25,18 +25,18 @@ const TabPanel = (
                                     className={cls.field}
                                     type={'radio'}
                                     id={id}
-                                    value={list[key]['value']}
+                                    value={option['value']}
                                     name={name}
+                                    {...register(name)}
                                     onChange={() => {
-                                        onChange(list[key]['value'])
+                                        onChange(option['value'])
                                     }}
-                                    checked={list[key]['checked']}
                                 />
                                 <label
                                     className={cls.label}
                                     htmlFor={id}
                                 >
-                                    {list[key]['label']}
+                                    {option['label']}
                                 </label>
                             </li>
                         )

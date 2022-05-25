@@ -135,7 +135,7 @@ const Accounts = () => {
             }
         },
         {
-            width: 7,
+            width: 9,
             filterable: true,
             filter: {
                 multiple: false,
@@ -149,7 +149,7 @@ const Accounts = () => {
             }
         },
         {
-            width: 7,
+            width: 6,
             filterable: true,
             filter: {
                 multiple: false,
@@ -163,12 +163,13 @@ const Accounts = () => {
                 ...form
             }
         },
-        {header: 'Хост'},
-        {header: 'Порт'},
-        {header: 'Логин'},
-        {header: 'Пароль'},
-        {header: 'Домен'},
-        {header: 'Пароль'},
+        {width: 7, header: 'Хост'},
+        {width: 8, header: 'Порт'},
+        {width: 8, header: 'Логин'},
+        {width: 9, header: 'Пароль'},
+        {width: 8, header: 'Домен'},
+        {width: 9, header: 'Логин'},
+        {width: 9, header: 'Пароль'},
         {}
     ]
 

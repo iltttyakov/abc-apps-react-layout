@@ -3,22 +3,13 @@ import cls from './Layout.module.scss'
 import MainSidebar from "../../sections/MainSidebar/MainSidebar";
 import MainHeader from "../../sections/MainHeader/MainHeader";
 
-const Layout = (
-    {
-        children,
-        fluid = false,
-    }
-) => {
+const Layout = ({children}) => {
     return (
         <div className={cls.box}>
 
-            {
-                !fluid
-                    ? <div className={cls.sidebar}>
-                        <MainSidebar/>
-                    </div>
-                    : null
-            }
+            <div className={cls.sidebar}>
+                <MainSidebar/>
+            </div>
 
             <div className={cls.content}>
 

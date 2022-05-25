@@ -127,7 +127,12 @@
 }
 
 .hideIcon {
+  stroke: #BDBDBD;
+}
 
+.green .hideIcon,
+.yellow .hideIcon {
+  stroke: #FFFFFF;
 }
 
 .body {

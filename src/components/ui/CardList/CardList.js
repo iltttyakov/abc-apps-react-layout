@@ -2,7 +2,11 @@ import React from 'react';
 import cls from './CardList.module.scss'
 
 
-const CardList = ({items}) => {
+const CardList = (
+    {
+        items
+    }
+) => {
     return (
         <ul className={cls.list}>
             {
