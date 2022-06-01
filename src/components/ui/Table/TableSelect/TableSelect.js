@@ -20,6 +20,7 @@ const TableSelect = (
     let [labelText, setLabelText] = useState(label)
 
     const setLabelTextHandler = (newLabelText) => {
+        if (multiple) return
         setLabelText(newLabelText)
     }
 

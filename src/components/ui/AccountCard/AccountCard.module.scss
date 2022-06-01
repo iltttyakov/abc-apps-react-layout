@@ -1,3 +1,17 @@
+@keyframes box-hide-keyframe {
+  0% {
+    width: 340px;
+
+    opacity: 1;
+  }
+
+  100% {
+    width: 0;
+
+    opacity: 0;
+  }
+}
+
 .box {
   overflow: hidden;
 
@@ -6,6 +20,16 @@
   background-color: #FFFFFF;
   box-shadow: 0 4px 8px rgba(80, 48, 229, 0.1);
   border-radius: 16px;
+
+  transition: all .1s ease;
+
+  &.hide {
+    opacity: 0;
+    width: 0;
+    transform: scale(0);
+
+    animation: box-hide-keyframe .5s;
+  }
 }
 
 .header {
@@ -34,6 +58,17 @@
     stroke: #FFFFFF;
 
     background-color: #F8D465;
+
+    .noteButton {
+      background-color: rgba(256, 256, 256, .5);
+    }
+  }
+
+  &.red {
+    color: #FFFFFF;
+    stroke: #FFFFFF;
+
+    background-color: #ED7470;
 
     .noteButton {
       background-color: rgba(256, 256, 256, .5);

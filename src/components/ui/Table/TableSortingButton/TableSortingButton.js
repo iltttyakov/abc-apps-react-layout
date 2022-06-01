@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import cls from './TableSortingButton.module.scss'
 
 
@@ -10,8 +10,8 @@ export const SortTypes = {
 
 const TableSortingButton = (
     {
-        children,
         name,
+        label,
         register,
         setValue,
         getValues,
@@ -32,6 +32,7 @@ const TableSortingButton = (
         }
     }
 
+
     return (
         <>
             <input
@@ -45,7 +46,7 @@ const TableSortingButton = (
                 name={name} value={SortTypes.DESC}
             />
             <button type={'button'} className={cls.button} onClick={sortTypeChangeHandler}>
-                <span className={cls.label}>{children}</span>
+                <span className={cls.label}>{label}</span>
                 <svg
                     className={cls.icon} width="16" height="16" viewBox="0 0 16 16"
                     xmlns="http://www.w3.org/2000/svg"

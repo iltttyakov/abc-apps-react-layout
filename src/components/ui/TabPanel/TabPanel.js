@@ -5,11 +5,10 @@ import makeId from "../../../helpers/makeid";
 
 const TabPanel = (
     {
-        className,
-        register,
         name,
+        register,
         options,
-        onChange = (value) => {}
+        className = null,
     }
 ) => {
     return (
@@ -27,10 +26,7 @@ const TabPanel = (
                                     id={id}
                                     value={option['value']}
                                     name={name}
-                                    {...register(name)}
-                                    onChange={() => {
-                                        onChange(option['value'])
-                                    }}
+                                    {...register}
                                 />
                                 <label
                                     className={cls.label}

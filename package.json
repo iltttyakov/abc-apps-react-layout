@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "React Layout for ABS Apps panel without API",
   "main": "index.js",
+  "proxy": "https://golotomo.site/api/",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --mode=development --open --hot",
@@ -12,12 +13,18 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.4",
+    "http-proxy-middleware": "^2.0.6",
     "moment": "^2.29.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.31.1",
+    "react-redux": "^8.0.2",
     "react-router": "^5.2.1",
-    "react-router-dom": "^5.3.0"
+    "react-router-dom": "^5.3.0",
+    "react-toastify": "^9.0.2",
+    "redux": "^4.2.0",
+    "redux-thunk": "^2.4.1",
+    "universal-cookie": "^4.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",

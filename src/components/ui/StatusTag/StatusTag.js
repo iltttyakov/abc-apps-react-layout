@@ -3,37 +3,34 @@ import cls from './StatusTag.module.scss'
 
 
 export const StatusTypes = {
-    PUBLISH: 'publish',
-    MODERATION: 'moderation',
-    BAN: 'ban'
+    PUBLISH: 'опубликовано',
+    MODERATION: 'на модерации',
+    BAN: 'забанено'
 }
 
 
 const StatusTag = ({status}) => {
     const boxCls = [cls.box]
-    let label = ''
+    let visible = false
 
     switch (status) {
         case StatusTypes.PUBLISH:
             boxCls.push(cls.publish)
-            label = 'опубликовано'
+            visible = true
             break
         case StatusTypes.MODERATION:
             boxCls.push(cls.moderation)
-            label = 'на модерации'
+            visible = true
             break
         case StatusTypes.BAN:
             boxCls.push(cls.ban)
-            label = 'забанено'
+            visible = true
             break
     }
 
-    return (
-        <div className={boxCls.join(' ')}>
-            {/*{label}*/}
-            status
-        </div>
-    );
+    return visible
+        ? <div className={boxCls.join(' ')}>{status}</div>
+        : null
 };
 
 export default StatusTag;

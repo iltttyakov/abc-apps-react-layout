@@ -1,17 +1,13 @@
-.box {
-
-}
-
 .list {
-  margin: 0;
-  padding: 0;
   display: flex;
   flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
 
   list-style: none;
 }
 
 .item {
-  margin-right: 20px;
   margin-bottom: 30px;
+  margin-right: 20px;
 }

@@ -8,96 +8,20 @@ import Checkbox from "../inputs/Checkbox/Checkbox";
 import makeId from "../../../helpers/makeid";
 
 
-const createSortingHeader = (
-    {
-        name,
-        label,
-        register,
-        setValue,
-        getValues,
-    }
-) => {
-    return (
-        <TableSortingButton
-            name={name}
-            register={register}
-            setValue={setValue}
-            getValues={getValues}
-        >
-            {label}
-        </TableSortingButton>
-    )
-}
-
-const createFilteringHeader = (
-    {
-        options,
-        name,
-        register,
-        label,
-        getValues,
-        multiple = false,
-    }
-) => {
-    return (
-        <TableSelect
-            name={name}
-            register={register}
-            label={label}
-            options={options}
-            multiple={multiple}
-            getValues={getValues}
-        />
-    )
-}
-
-
-const createCheckHeader = ({register}) => {
-    const name = makeId(5)
-    return (
-        <Checkbox
-            name={name}
-            register={register}
-        />
-    )
-}
-
-
 const Table = (
     {
         columns,
         data,
+        head,
     }
 ) => {
     return (
         <TableUI.Box>
             <TableUI.Table>
                 <TableUI.Head>
-                    <TableUI.Row>
-                        {
-                            columns
-                                ? columns.map((column, i) => {
-                                    let content = ''
-
-                                    if (column['sortable']) {
-                                        content = createSortingHeader({...column['sorting']})
-                                    } else if (column['filterable']) {
-                                        content = createFilteringHeader({...column['filter']})
-                                    } else if (column['checkable']) {
-                                        content = createCheckHeader({...column['check']})
-                                    } else if (column['header']) {
-                                        content = column['header']
-                                    }
-
-                                    return (
-                                        <TableUI.HeadCell width={column['width'] ?? null} key={i}>
-                                            {content}
-                                        </TableUI.HeadCell>
-                                    )
-                                })
-                                : null
-                        }
-                    </TableUI.Row>
+                    {/*<TableUI.Row>*/}
+                    {head}
+                    {/*</TableUI.Row>*/}
                 </TableUI.Head>
 
                 <TableUI.Body>

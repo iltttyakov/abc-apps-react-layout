@@ -87,3 +87,16 @@
   line-height: 15px;
   color: #ED7470;
 }
+
+.big {
+  .fieldContainer {
+    padding: 0 15px;
+  }
+
+  .field {
+    height: 48px;
+
+    font-size: 14px;
+    line-height: 20px;
+  }
+}

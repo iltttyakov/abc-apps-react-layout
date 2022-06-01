@@ -13,9 +13,7 @@ const LayoutFluid = ({children}) => {
             </header>
 
             <main className={cls.main}>
-                <Container className={cls.container}>
-                    {children}
-                </Container>
+                {children}
             </main>
 
         </>

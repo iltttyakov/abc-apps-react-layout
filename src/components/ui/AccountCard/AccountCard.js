@@ -1,63 +1,100 @@
 import React, {useState} from 'react';
 import cls from './AccountCard.module.scss'
-import IconButton from "../IconButton/IconButton";
 import Icons from "../Icons/Icons";
 import ToggleElement from "../ToggleElement/ToggleElement";
+import SoftIcon from "../SoftIcon/SoftIcon";
+import AppCard from "../AppCard/AppCard";
+import storage from "../../../redux/storage";
+import {ToastContainer, toast} from 'react-toastify';
+
+
+export const accStatuses = {
+    farm: 'farm',
+    ready: 'ready',
+    ban: 'ban'
+}
+
+export const whiteStatuses = {
+    approve: 'approve',
+    create: 'create',
+    ban: 'ban',
+}
 
 
 const AccountCard = (
     {
-        name,
         icon = null,
-        note = '',
-        appList = null,
         backgroundColor = 'grey',
-        date = null
+        date = null,
+        card,
+
+        id,
+        max_id,
+        vpage,
+
+        soft,
+        date_ban_formatted,
+        status,
+        name,
+        note = null,
+        apps,
+        white_status,
+        className = null,
     }
 ) => {
     let [footerIsOpen, setFooterIsOpen] = useState(false)
-
+    let [isHide, setIsHide] = useState(false)
 
     const headerCls = [cls.header]
-    switch (backgroundColor) {
-        case 'green':
-            headerCls.push(cls.green)
-            break
-        case 'yellow':
-            headerCls.push(cls.yellow)
-            break
-        default:
-            headerCls.push(cls.grey)
-            break
+    if (vpage === '2') {
+        switch (status) {
+            case accStatuses.farm:
+                headerCls.push(cls.yellow)
+                break
+            case accStatuses.ready:
+                headerCls.push(cls.green)
+                break
+            case accStatuses.ban:
+                headerCls.push(cls.red)
+                break
+
+            default:
+                headerCls.push(cls.grey)
+                break
+        }
     }
 
+    const hideCardHandler = id => {
+        storage.board.hide(id)
+        setIsHide(true)
+        toast('Карточка скрыта')
+    }
 
     return (
-        <div className={cls.box}>
-
+        <div className={[
+            cls.box, className,
+            isHide ? cls.hide : null
+        ].join(' ')}>
             <div className={headerCls.join(' ')}>
 
                 <div className={cls.accountIconContainer}>
-                    <img
-                        className={cls.accountIcon} src={icon}
-                        width={30} height={30} alt={'Иконка аккаунта'}
-                    />
+                    <SoftIcon soft={soft} className={cls.accountIcon}/>
                 </div>
-
                 <h4 className={cls.title}>
                     {name}
                 </h4>
 
                 <div className={cls.headerRight}>
                     {
-                        date
+                        date_ban_formatted
                             ? <div className={cls.date}>
-                                {date}
+                                {date_ban_formatted}
                             </div>
                             : null
                     }
 
                     <button
+                        type={'button'}
                         className={[cls.noteButton, footerIsOpen ? cls.active : null].join(' ')}
                         onClick={() => setFooterIsOpen(!footerIsOpen)}
                     >
@@ -68,7 +105,12 @@ const AccountCard = (
                         />
                     </button>
 
-                    <button className={cls.hideButton}>
+                    <button
+                        className={cls.hideButton}
+                        onClick={() => {
+                            hideCardHandler(id)
+                        }}
+                    >
                         <Icons className={cls.hideIcon} size={24} name={'close'}/>
                     </button>
                 </div>
@@ -76,9 +118,21 @@ const AccountCard = (
             </div>
 
             {
-                appList
+                apps.length
                     ? <div className={cls.body}>
-                        {appList}
+                        {
+                            apps.map((app, i) => {
+                                console.log(app)
+                                return Object.keys(app).length
+                                    ? <AppCard
+                                        key={i}
+                                        {...app}
+                                        white_status={white_status}
+                                        accountStatus={status}
+                                    />
+                                    : null
+                            })
+                        }
                     </div>
                     : null
             }

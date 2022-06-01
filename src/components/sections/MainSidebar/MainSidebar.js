@@ -3,6 +3,8 @@ import cls from './MainSidebar.module.scss'
 import Logo from "../../ui/Logo/Logo";
 import VerticalNav from "../../ui/VerticalNav/VerticalNav";
 import Icons from "../../ui/Icons/Icons";
+import Button from "../../ui/Button/Button";
+import storage from "../../../redux/storage";
 
 const MainSidebar = (
     {
@@ -28,6 +30,14 @@ const MainSidebar = (
             <div className={[cls.menu, cls.section].join(' ')}>
                 <VerticalNav full={!shrink}/>
             </div>
+
+            <Button
+                onClick={() => {
+                    storage.auth.logout()
+                }}
+            >
+                Выйти
+            </Button>
 
         </nav>
     );

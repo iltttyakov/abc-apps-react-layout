@@ -1,59 +1,49 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import TabPanel from "../../ui/TabPanel/TabPanel";
-import CardList from "../../ui/CardList/CardList";
-
-import appGreyCardList from "./BoardGrey";
+import AccountCardList from "../../ui/AccountCardList/AccountCardList";
 import Page from "../../ui/Page/Page";
-import appWhiteCardList from "./BoardWhite";
-import appEmptyCardList from "./BoardEmpty";
-import appBanCardList from "./BoardBan";
 import {useForm} from "react-hook-form";
-
-
-const tabs = {
-    'grey': appGreyCardList,
-    'white': appWhiteCardList,
-    'empty': appEmptyCardList,
-    'ban': appBanCardList,
-    'hide': appGreyCardList,
-}
+import {useSelector} from "react-redux";
+import storage from "../../../redux/storage";
+import AccountCard from "../../ui/AccountCard/AccountCard";
+import Loader from "../../ui/Loader/Loader";
 
 
 const Board = () => {
-    const [activeTab, setActiveTab] = useState('grey')
-    const {register} = useForm(
-        {
-            defaultValues: {
-                'board-tabs': activeTab
-            }
-        }
-    )
+    const {register} = useForm({defaultValues: {'page': '0'}})
+    const board = useSelector(state => state.board)
 
-    const onTabChange = (value) => {
-        setActiveTab(value)
+    useEffect(() => {
+        storage.board.get('0')
+    }, [])
+
+    const onTabChangeHandler = (page) => {
+        storage.board.get(page)
     }
+
 
     return (
         <>
             <Page.Top>
                 <TabPanel
-                    register={register}
-                    name={'board-tabs'}
+                    name={'page'}
+                    register={register('page', {
+                        onChange: (e) => onTabChangeHandler(e.target.value)
+                    })}
                     options={[
-                        {label: 'С серыми', value: 'grey',},
-                        {label: 'С белыми', value: 'white'},
-                        {label: 'Без приложений', value: 'empty'},
-                        {label: 'Бан', value: 'ban'},
-                        {label: 'Скрытые', value: 'hide'},
+                        {label: 'С серыми', value: '0',},
+                        {label: 'С белыми', value: '1'},
+                        {label: 'Без приложений', value: '2'},
+                        {label: 'Бан', value: '3'},
+                        {label: 'Скрытые', value: '-1'},
                     ]}
-                    onChange={onTabChange}
                 />
             </Page.Top>
 
             <Page.Content>
-                <CardList
-                    items={tabs[activeTab]}
-                />
+                <Loader process={board.listFetchInProgress}>
+                    <AccountCardList items={board.list}/>
+                </Loader>
             </Page.Content>
 
         </>

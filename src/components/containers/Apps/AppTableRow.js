@@ -8,32 +8,33 @@ import CheckIcon from "../../ui/CheckIcon/CheckIcon";
 
 const AppTableRow = (
     {
-        appName,
-        appIcon,
+        name,
+        icon,
+        link_store,
         status,
         id,
         type,
         store,
-        account,
-        publishDate,
-        approveDate,
-        banDate,
-        organic,
+        accs_name,
+        date_create,
+        date_approve,
+        date_ban,
+        mode,
     }
 ) => {
     return (
         <Table.Row>
 
-            <Table.Cell><AppName name={appName} icon={appIcon}/></Table.Cell>
+            <Table.Cell><AppName name={name} icon={icon} linkStore={link_store}/></Table.Cell>
             <Table.Cell><StatusTag status={status}/></Table.Cell>
             <Table.Cell>{id}</Table.Cell>
             <Table.Cell>{type}</Table.Cell>
-            <Table.Cell><StoreIcon/></Table.Cell>
-            <Table.Cell>{account}</Table.Cell>
-            <Table.Cell>{publishDate}</Table.Cell>
-            <Table.Cell>{approveDate}</Table.Cell>
-            <Table.Cell>{banDate}</Table.Cell>
-            <Table.Cell><CheckIcon check={organic}/></Table.Cell>
+            <Table.Cell><StoreIcon store={store}/></Table.Cell>
+            <Table.Cell>{accs_name}</Table.Cell>
+            <Table.Cell>{date_create}</Table.Cell>
+            <Table.Cell>{date_approve}</Table.Cell>
+            <Table.Cell>{date_ban}</Table.Cell>
+            <Table.Cell><CheckIcon check={mode}/></Table.Cell>
             <Table.Cell align={'right'}><MoreButton/></Table.Cell>
 
         </Table.Row>

@@ -3,6 +3,13 @@ import cls from './TextInput.module.scss'
 import makeId from "../../../../helpers/makeid";
 import Icons from "../../Icons/Icons";
 
+
+export const TextInputSizes = {
+    NORMAL: 'normal',
+    BIG: 'big'
+}
+
+
 const TextInput = (
     {
         name,
@@ -13,7 +20,8 @@ const TextInput = (
         inputType = 'text',
         placeholder = null,
         iconName = null,
-        className = null
+        className = null,
+        size = TextInputSizes.NORMAL
     }
 ) => {
     const id = makeId(5)
@@ -24,7 +32,8 @@ const TextInput = (
             className={[
                 cls.box, className,
                 onFocus ? cls.focus : null,
-                errors ? cls.errors : null
+                errors ? cls.errors : null,
+                size === TextInputSizes.BIG ? cls.big : null
             ].join(' ')}
         >
 
