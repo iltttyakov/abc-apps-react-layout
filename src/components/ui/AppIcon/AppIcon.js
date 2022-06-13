@@ -1,11 +1,11 @@
 import React from 'react';
 import cls from './AppIcon.module.scss'
 
-const BASE_URL = 'https://golotomo.site/img/apps/'
-const getUrl = (name) => `${BASE_URL}${name}.png`
 
 import noIcon from './no_icon.png'
 import icons from "../Icons/Icons";
+import {getIconUrl} from "../../../helpers/getIconUrl";
+
 
 const AppIcon = (
     {
@@ -23,7 +23,7 @@ const AppIcon = (
         >
             <img
                 className={cls.icon}
-                src={name ? getUrl(name) : noIcon}
+                src={name ? getIconUrl(name) : noIcon}
                 width={26}
                 height={26}
                 alt={'Иконка приложения'}

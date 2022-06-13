@@ -20,6 +20,7 @@
 .icon {
   margin-left: 6px;
 
+  fill: #0D062D;
   transition: all 0.1s ease;
 
   &.open {
@@ -29,6 +30,7 @@
 
 .body {
   position: absolute;
+  z-index: 10;
   left: 0;
   right: 0;
   top: calc(100% + 10px);
@@ -98,4 +100,14 @@
 
 .field:checked + .label {
   color: #5030E5;
+}
+
+:global(.night) {
+  .icon {
+    fill: #FFFFFF;
+  }
+
+  .label {
+    color: #0D062D;
+  }
 }

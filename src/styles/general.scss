@@ -1,5 +1,6 @@
 body {
   min-width: 320px;
+  transition: background-color .2s ease;
 }
 
 *, *::before, *::after {
@@ -39,4 +40,8 @@ button {
 img {
   max-width: 100%;
   height: auto;
+}
+
+:global(.night) {
+  background-color: #0D062D;
 }

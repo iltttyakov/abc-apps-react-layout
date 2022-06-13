@@ -2,6 +2,7 @@
   overflow: hidden;
 
   width: 258px;
+  height: 100vh;
   border-right: 1px solid #F6F6F6;
 
   transition: all .2s ease;
@@ -15,10 +16,7 @@
   position: relative;
 
   display: flex;
-  align-items: center;
-  height: 64px;
-
-  border-bottom: 1px solid #F6F6F6;
+  padding-top: 20px;
 }
 
 .logo {
@@ -27,12 +25,11 @@
 
 .shrinkButton {
   position: absolute;
-  right: 17px;
-  top: 50%;
+  right: 10px;
+  top: 20px;
 
   width: 26px;
   height: 26px;
-  margin-top: -13px;
 
   padding: 0;
   border: none;
@@ -57,10 +54,23 @@
   padding-top: 44px;
 }
 
-.shrink {
+:global(.shrink) {
   width: 130px;
 
   .shrinkButtonIcon {
     transform: scaleX(-1);
   }
 }
+
+:global(.night) {
+  .box {
+    border-color: #251F40;
+  }
+
+  .shrinkButton {
+    &:hover {
+      color: #FFFFFF;
+    }
+  }
+}
+

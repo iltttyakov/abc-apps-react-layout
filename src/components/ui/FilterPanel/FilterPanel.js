@@ -6,8 +6,9 @@ const FilterPanel = (
     {
         name,
         options,
+        align = 'left',
         register,
-        align = 'left'
+        onChange = null
     }
 ) => {
     const listCLs = [cls.list]
@@ -23,7 +24,14 @@ const FilterPanel = (
                             <input
                                 className={cls.field} type={'checkbox'}
                                 id={id} value={option['value']}
-                                name={name} {...register(name)}
+                                name={name}
+                                {
+                                    ...register(name, {
+                                        onChange: e => {
+                                            onChange(e)
+                                        }
+                                    })
+                                }
                             />
                             <label className={cls.label} htmlFor={id}>
                                 {option['label']}

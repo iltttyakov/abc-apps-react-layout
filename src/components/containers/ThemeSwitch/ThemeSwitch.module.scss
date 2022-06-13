@@ -1,0 +1,20 @@
+.box {
+  display: flex;
+  align-items: center;
+}
+
+.toggle {
+  margin: 0 8px;
+}
+
+.icon {
+  fill: #0D062D;
+  stroke: #0D062D;
+}
+
+:global(.night) {
+  .icon {
+    fill: #FFFFFF;
+    stroke: #FFFFFF;
+  }
+}

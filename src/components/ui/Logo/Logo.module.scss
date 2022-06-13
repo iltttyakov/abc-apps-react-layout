@@ -1,24 +1,58 @@
+.link {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  display: none;
+}
+
 .box {
+  position: relative;
+
   display: flex;
   align-items: center;
+
+  &.withLink {
+    cursor: pointer;
+
+    &:hover {
+      opacity: .8;
+    }
+
+    &:active {
+      opacity: .5;
+    }
+
+    .link {
+      display: block;
+    }
+  }
 }
 
 .image {
-  margin-right: 9px;
-}
+  &.black {
 
-.text {
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 24px;
-  color: #0D062D;
-  white-space: nowrap;
-}
-
-.shrink {
-
-  .text {
-    display: none;
   }
 
+  &.white {
+    display: none;
+  }
+}
+
+:global(.shrink) {
+
+}
+
+:global(.night) {
+  .image {
+    &.black {
+      display: none;
+    }
+
+    &.white {
+      display: block;
+    }
+  }
 }

@@ -25,11 +25,19 @@
 
 .field {
   width: 350px;
+  margin-right: 20px;
+}
 
-  &.key {
-    margin-right: 20px;
-  }
+.delete {
+  margin-top: 28px;
+}
 
-  &.value {
-  }
+.errorText {
+  display: block;
+  margin-top: 5px;
+
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ED7470;
 }

@@ -8,7 +8,9 @@ const CheckedTag = (
         label,
         value,
         register,
-        type = 'radio'
+        type = 'radio',
+        onChange = () => null,
+        onClick = () => null,
     }
 ) => {
     const id = makeId(5)
@@ -19,8 +21,11 @@ const CheckedTag = (
                 className={cls.field}
                 name={name} id={id}
                 value={value}
-                {...register(name)}
+                {...register(name, {
+                    onChange: e => onChange(e)
+                })}
                 type={type}
+                onClick={onClick}
             />
             <label
                 className={cls.label}

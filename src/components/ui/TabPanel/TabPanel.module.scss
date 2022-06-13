@@ -1,6 +1,9 @@
 .box {
   display: flex;
   justify-content: flex-start;
+  margin-bottom: 40px;
+  padding: 0 20px;
+  padding-right: 50px;
 }
 
 .list {
@@ -13,10 +16,6 @@
   list-style: none;
   background-color: #EDEAFC;
   border-radius: 100px;
-}
-
-.item {
-
 }
 
 .field {
@@ -51,4 +50,18 @@
 
 .field:checked + .label {
   background-color: #5030E5;
+}
+
+:global(.night) {
+  .list {
+    background-color: #281C61;
+  }
+
+  .label {
+    color: #BDBDBD;
+  }
+
+  .field:checked + .label {
+    color: #FFFFFF;
+  }
 }

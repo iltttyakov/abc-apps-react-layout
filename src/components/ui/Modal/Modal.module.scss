@@ -2,7 +2,7 @@
   overflow-y: scroll;
 
   position: fixed;
-  z-index: -1;
+  z-index: 1000;
   left: 0;
   top: 0;
   right: 0;
@@ -11,6 +11,10 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
+
+  transition: all .3s ease;
+
+  transform: translateY(-100vh);
 }
 
 .inner {
@@ -35,7 +39,13 @@
   width: 100%;
   height: 100%;
 
+  transition: all .25s ease;
   background: rgba(13, 6, 45, .6);
+
+  &.open {
+    opacity: 1;
+    z-index: 99;
+  }
 }
 
 .box {
@@ -47,7 +57,8 @@
   background: #FFFFFF;
   border-radius: 20px;
 
-  transform: scale(0);
+  transition: all .3s ease;
+  transform: translateY(-100vh);
 
   &.big {
     width: 1145px;
@@ -78,7 +89,6 @@
   font-weight: 500;
   font-size: 24px;
   line-height: 29px;
-  color: #0D062D;
 }
 
 .closeButton {
@@ -91,19 +101,24 @@
   stroke: #0D062D;
 }
 
-.body {
+.open {
+  transform: translateY(0);
 
+  .box {
+    transform: translateY(0);
+  }
 }
 
-.open {
-  z-index: 100;
-
+:global(.night) {
   .overlay {
-    opacity: 1;
+    background: rgba(256, 256, 256, .1);
   }
 
   .box {
-    transition: all .25s ease;
-    transform: scale(1);
+    background-color: #0D062D;
+  }
+
+  .closeButtonIcon {
+    stroke: #FFFFFF;
   }
 }

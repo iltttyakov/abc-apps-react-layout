@@ -6,9 +6,12 @@ const Checkbox = (
     {
         register,
         name,
+        value,
         label = null,
         reverse = false,
-        disable = false
+        disable = false,
+        style = {},
+        onChange = () => null
     }
 ) => {
     const id = makeId(5)
@@ -18,10 +21,13 @@ const Checkbox = (
             <input
                 className={cls.field}
                 type={'checkbox'} id={id}
-                {...register(name)}
+                value={value}
+                {...register(name, {
+                    onChange: e => onChange(e)
+                })}
                 disabled={disable}
             />
-            <label className={[cls.label, reverse ? cls.reverse : null].join(' ')} htmlFor={id}>
+            <label className={[cls.label, reverse ? cls.reverse : null].join(' ')} htmlFor={id} style={style}>
                 {
                     label
                         ? <span className={cls.text}>{label}</span>

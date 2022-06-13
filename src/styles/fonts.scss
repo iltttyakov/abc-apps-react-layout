@@ -19,3 +19,15 @@ textarea {
   font-size: 14px;
   line-height: 17px;
 }
+
+:global(body.night) {
+  color: #FFFFFF;
+
+  button,
+  input,
+  optgroup,
+  select,
+  textarea {
+    color: #FFFFFF;
+  }
+}

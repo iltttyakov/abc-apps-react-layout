@@ -10,12 +10,10 @@ const DomainCheckInput = (
         errors,
         required,
         label,
+        onCheck,
+        disabled = false
     }
 ) => {
-    const checkDomainClickHandler = () => {
-        console.log('check domain')
-    }
-
     return (
         <div className={cls.box}>
 
@@ -26,12 +24,14 @@ const DomainCheckInput = (
                 required={required}
                 label={label}
                 className={cls.field}
+                disabled={disabled}
             />
 
             <Button
                 type={ButtonTypes.FILL}
-                onClick={checkDomainClickHandler}
+                onClick={onCheck}
                 className={cls.button}
+                shadow={false}
             >
                 Проверить домен
             </Button>

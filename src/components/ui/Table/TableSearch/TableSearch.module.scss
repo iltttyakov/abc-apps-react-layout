@@ -1,0 +1,44 @@
+.container {
+  width: 100%;
+  padding-left: 16px;
+  padding-right: 50px;
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  margin-bottom: 30px;
+  width: 100%;
+  padding: 12px;
+
+  background: #FAFAFA;
+  border: 1px solid #F2F2F2;
+  border-radius: 10px;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.field {
+  width: 100%;
+
+  font-size: 14px;
+  line-height: 17px;
+
+  background-color: transparent;
+  border: none;
+  outline: none;
+
+  &::placeholder {
+    color: #BDBDBD;
+  }
+}
+
+:global(.night) {
+  .box {
+    background: #160E3D;
+    border: 1px solid #392E6D;
+  }
+}

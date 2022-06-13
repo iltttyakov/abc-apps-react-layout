@@ -3,7 +3,8 @@ import cls from './AccountCardList.module.scss'
 import AccountCard from "../AccountCard/AccountCard";
 
 
-const AccountCardList = ({items}) => {
+const AccountCardList = ({items, isHiddenPage}) => {
+
     return (
         <ul className={cls.list}>
             {
@@ -14,6 +15,7 @@ const AccountCardList = ({items}) => {
                                 {...item.acc}
                                 apps={item.apps}
                                 white_status={item['white_status']}
+                                isHiddenPage={isHiddenPage}
                             />
                         </li>
                     )

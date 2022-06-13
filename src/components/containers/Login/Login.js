@@ -1,43 +1,18 @@
 import React from 'react';
-import Container from "../../wrappers/Container/Container";
+import Container from "../../ui/Container/Container";
 import cls from './Login.module.scss'
 import TextInput, {TextInputSizes} from "../../ui/inputs/TextInput/TextInput";
 import {useForm} from "react-hook-form";
 import Button, {ButtonSizes} from "../../ui/Button/Button";
-import storage from "../../../redux/storage";
+import storage from "../../../redux/rootActions";
 import Cookies from "universal-cookie";
 import {useSelector} from "react-redux";
 
 
 const Login = () => {
     const {register, handleSubmit, formState: {errors}, setValue, getValues} = useForm()
-    const user = useSelector(state => state.auth)
 
-    const onSubmit = (data, e) => {
-        storage.auth.login(data)
-    }
-
-    const onError = (errors, e) => {
-        console.log(errors, e)
-    }
-
-    const showAuthToken = () => {
-        const cookie = new Cookies()
-        console.log(cookie.get('auth_token'))
-    }
-
-    const logout = () => {
-        storage.auth.logout()
-    }
-
-    const getUser = () => {
-        storage.auth.get()
-    }
-
-    const logUser = () => {
-        console.log(user)
-    }
-
+    const onSubmit = data => storage.auth.login(data)
 
     return (
         <div className={cls.box}>
@@ -47,24 +22,31 @@ const Login = () => {
                     Вход
                 </h1>
 
-                <form onSubmit={handleSubmit(onSubmit, onError)} className={cls.form}>
+                <form onSubmit={handleSubmit(onSubmit)} className={cls.form}>
                     <TextInput
                         label={'Логин'}
                         name={'auth_login'}
                         register={register}
-                        errors={errors['login']}
+                        errors={errors}
                         placeholder={'Введите логин'}
                         size={TextInputSizes.BIG}
                         className={cls.field}
+                        validation={{
+                            required: true,
+                        }}
                     />
                     <TextInput
                         label={'Пароль'}
                         name={'auth_password'}
                         register={register}
-                        errors={errors['login']}
+                        errors={errors}
                         placeholder={'Введите пароль'}
                         size={TextInputSizes.BIG}
                         className={cls.field}
+                        inputType={'password'}
+                        validation={{
+                            required: true,
+                        }}
                     />
                     <Button
                         buttonType={'submit'}
@@ -81,43 +63,6 @@ const Login = () => {
                 {/*        backgroundImage: `url(${bottomImage})`*/}
                 {/*    }}*/}
                 {/*/>*/}
-
-                <br/>
-                <Button
-                    onClick={showAuthToken}
-                >
-                    showAuthToken
-                </Button>
-                <br/>
-                <Button
-                    onClick={logout}
-                >
-                    Выйти
-                </Button>
-                <br/>
-                <Button
-                    onClick={() => {
-                        console.log(storage.auth.isAuthorized())
-                    }}
-                >
-                    Авторизован?
-                </Button>
-                <br/>
-                <Button
-                    onClick={() => {
-                        getUser()
-                    }}
-                >
-                    GET
-                </Button>
-                <br/>
-                <Button
-                    onClick={() => {
-                        logUser()
-                    }}
-                >
-                    LOG
-                </Button>
 
             </Container>
         </div>

@@ -6,7 +6,9 @@ const CheckedTagList = (
     {
         name,
         register,
-        options
+        options,
+        onChange = () => null,
+        onClick = () => null,
     }
 ) => {
     return (
@@ -20,6 +22,8 @@ const CheckedTagList = (
                             key={i}
                             value={option['value']}
                             label={option['label']}
+                            onChange={onChange}
+                            onClick={onClick}
                         />
                     </li>
                 ))

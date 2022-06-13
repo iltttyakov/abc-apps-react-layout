@@ -1,11 +1,13 @@
 .box {
+  position: relative;
+
   width: 100%;
 }
 
 .table {
   width: 100%;
 
-  border-collapse: separate;
+  border-collapse: collapse;
   margin-bottom: 27px;
 }
 
@@ -17,6 +19,8 @@
   font-weight: 500;
 
   border-bottom: 1px solid #F6F6F6;
+
+  transition: border-color .2s ease;
 }
 
 .head {
@@ -39,12 +43,18 @@
 
   border-bottom: 1px solid #F6F6F6;
 
+  transition: border-color .2s ease;
+
   &.left {
     text-align: left;
   }
 
   &.right {
     text-align: right;
+  }
+
+  &.notFound {
+    border: none;
   }
 }
 
@@ -61,6 +71,39 @@
   .cell:last-of-type {
     padding-right: 50px;
   }
+
+  &.failed {
+    background-color: #F4CCCC ;
+  }
+}
+
+.body {
+  position: relative;
+}
+
+.loader {
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+
+  display: none;
+  align-content: center;
+  justify-content: center;
+
+  background-color: rgba(256, 256, 256, .7);
+
+  &.active {
+    display: flex;
+  }
+}
+
+.loaderCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .footer {
@@ -78,4 +121,15 @@
 
 .pagination {
 
+}
+
+:global(.night) {
+  .headCell,
+  .cell {
+    border-color: #251F40;
+  }
+
+  .loader {
+    background-color: rgba(37, 31, 64, .7);
+  }
 }

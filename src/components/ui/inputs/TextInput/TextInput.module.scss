@@ -31,15 +31,15 @@
   }
 }
 
-.errors {
-  .fieldContainer {
-    border-color: #ED7470;
-  }
-}
-
 .focus {
   .fieldContainer {
     border-color: #5030E5;
+  }
+}
+
+.errors {
+  .fieldContainer {
+    border-color: #ED7470;
   }
 }
 
@@ -66,6 +66,12 @@
 
   &::-webkit-calendar-picker-indicator {
     display: none;
+  }
+}
+
+.disabled {
+  .fieldContainer {
+    background-color: #FAFAFA;
   }
 }
 
@@ -98,5 +104,13 @@
 
     font-size: 14px;
     line-height: 20px;
+  }
+}
+
+:global(.night) {
+  .disabled {
+    .fieldContainer {
+      background-color: #160E3D;
+    }
   }
 }

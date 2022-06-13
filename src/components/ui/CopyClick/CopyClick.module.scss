@@ -1,0 +1,9 @@
+.box {
+  cursor: copy;
+
+  transition: all .1s ease;
+
+  &:active {
+    opacity: .7;
+  }
+}

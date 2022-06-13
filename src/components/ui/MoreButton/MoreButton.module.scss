@@ -1,10 +1,30 @@
-.icon {
+.box {
+  padding: 0;
 
+  background: transparent;
+  border: none;
+
+  cursor: pointer;
+}
+
+.icon {
   &.dark {
     stroke: #0D062D;
   }
 
   &.light {
     stroke: #FFFFFF;
+  }
+}
+
+:global(.night) {
+  .icon {
+    &.dark {
+      stroke: #FFFFFF;
+    }
+
+    &.light {
+      stroke: #0D062D;
+    }
   }
 }

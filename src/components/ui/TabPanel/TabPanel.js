@@ -8,6 +8,7 @@ const TabPanel = (
         name,
         register,
         options,
+        onChange,
         className = null,
     }
 ) => {
@@ -21,12 +22,14 @@ const TabPanel = (
                         return (
                             <li className={cls.item} key={i}>
                                 <input
-                                    className={cls.field}
-                                    type={'radio'}
-                                    id={id}
-                                    value={option['value']}
+                                    className={cls.field} type={'radio'}
+                                    id={id} value={option['value']}
                                     name={name}
-                                    {...register}
+                                    {...register(name, {
+                                        onChange: e => {
+                                            onChange(e)
+                                        }
+                                    })}
                                 />
                                 <label
                                     className={cls.label}

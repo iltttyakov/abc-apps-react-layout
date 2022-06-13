@@ -1,7 +1,12 @@
 .container {
+  display: flex;
   flex-shrink: 0;
 }
 
 .icon {
+  margin-right: 3px;
 
+  &:last-of-type {
+    margin-right: 0;
+  }
 }

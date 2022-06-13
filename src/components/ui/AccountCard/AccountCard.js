@@ -4,7 +4,7 @@ import Icons from "../Icons/Icons";
 import ToggleElement from "../ToggleElement/ToggleElement";
 import SoftIcon from "../SoftIcon/SoftIcon";
 import AppCard from "../AppCard/AppCard";
-import storage from "../../../redux/storage";
+import storage from "../../../redux/rootActions";
 import {ToastContainer, toast} from 'react-toastify';
 
 
@@ -40,6 +40,8 @@ const AccountCard = (
         apps,
         white_status,
         className = null,
+
+        isHiddenPage,
     }
 ) => {
     let [footerIsOpen, setFooterIsOpen] = useState(false)
@@ -67,7 +69,12 @@ const AccountCard = (
     const hideCardHandler = id => {
         storage.board.hide(id)
         setIsHide(true)
-        toast('Карточка скрыта')
+        toast.success(isHiddenPage ? 'Карточка восстановлена' : 'Карточка скрыта',
+            {
+                position: 'top-right',
+                autoClose: 3500,
+                hideProgressBar: false,
+            })
     }
 
     return (
@@ -122,7 +129,6 @@ const AccountCard = (
                     ? <div className={cls.body}>
                         {
                             apps.map((app, i) => {
-                                console.log(app)
                                 return Object.keys(app).length
                                     ? <AppCard
                                         key={i}

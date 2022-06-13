@@ -6,6 +6,8 @@ import Icons from "../Icons/Icons";
 
 const MoreButton = (
     {
+        url = null,
+        onClick = null,
         color = 'dark'
     }
 ) => {
@@ -21,9 +23,15 @@ const MoreButton = (
     }
 
     return (
-        <NavLink to={'#'}>
-            <Icons name={'more'} size={20} className={iconCls.join(' ')}/>
-        </NavLink>
+        onClick
+            ? <button className={cls.box} onClick={onClick}>
+                <Icons name={'more'} size={20} className={iconCls.join(' ')}/>
+            </button>
+            : url
+                ? <NavLink to={url} className={cls.box}>
+                    <Icons name={'more'} size={20} className={iconCls.join(' ')}/>
+                </NavLink>
+                : null
     );
 };
 

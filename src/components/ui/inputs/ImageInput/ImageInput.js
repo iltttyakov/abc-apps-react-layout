@@ -5,6 +5,7 @@ import cls from './ImageInput.module.scss'
 const ImageInput = (
     {
         name,
+        register,
         currentImage = null,
         label = null
     }
@@ -42,9 +43,11 @@ const ImageInput = (
                         type={'file'}
                         name={name}
                         className={cls.field}
-                        onChange={(event) => {
-                            setSelectedImage(event.target.files[0])
-                        }}
+                        {...register(name, {
+                            onChange: e => {
+                                setSelectedImage(e.target.files[0])
+                            }
+                        })}
                     />
                     Выберите файл
                 </label>

@@ -1,10 +1,10 @@
 import base from "../base";
-import {AUTH_GET_API_METHOD} from "../urls";
+import methods from "../methods";
 
-const get = data => {
-    return base(AUTH_GET_API_METHOD, data)
-}
+const get = data => base(methods.auth.get, data)
+const editTheme = theme => base(methods.auth.editTheme, {theme})
+const editPassword = (old_password, new_password) => base(methods.auth.editPassword, {old_password, new_password})
 
 export default {
-    get,
+    get, editTheme, editPassword
 }

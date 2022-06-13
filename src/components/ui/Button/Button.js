@@ -19,8 +19,9 @@ const Button = (
         type = ButtonTypes.FILL,
         size = ButtonSizes.NORMAL,
         className = null,
-        shadow = false,
-        buttonType = 'button'
+        shadow = true,
+        buttonType = 'button',
+        disabled = false
     }
 ) => {
     const boxCls = [
@@ -64,6 +65,7 @@ const Button = (
             onClick={onClick}
             className={boxCls.join(' ')}
             type={buttonType}
+            disabled={disabled}
         >
             {children}
         </button>

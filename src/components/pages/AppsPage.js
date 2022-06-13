@@ -1,35 +1,25 @@
 import React from 'react';
-import Layout from "../wrappers/Layout/Layout";
-import Page from "../ui/Page/Page";
+import Layout from "../sections/Layout/Layout";
+
 import Button, {ButtonTypes} from "../ui/Button/Button";
-import Apps from "../containers/Apps/Apps";
+import AppsTable from "../containers/Apps/AppsTable";
+import paths from "../paths";
+import Role from "../containers/Role/Role";
+
 
 const AppsPage = () => {
     return (
-        <Layout>
-            <Page.Box>
-                <Page.Header>
-
-                    <Page.Title>Приложения</Page.Title>
-                    <Page.Actions>
-                        <Button
-                            type={ButtonTypes.FILL}
-                            shadow={true}
-                            to={'/apps/new'}
-                        >
-                            Добавить новое приложение
-                        </Button>
-                    </Page.Actions>
-
-                </Page.Header>
-
-                <Page.Content padding={false}>
-
-                    <Apps/>
-
-                </Page.Content>
-
-            </Page.Box>
+        <Layout
+            title={'Приложения'}
+            actions={
+                <Role accessTo={'apps_add'}>
+                    <Button to={paths.NewAppPage}>
+                        Добавить новое приложение
+                    </Button>
+                </Role>
+            }
+        >
+            <AppsTable/>
         </Layout>
     );
 };

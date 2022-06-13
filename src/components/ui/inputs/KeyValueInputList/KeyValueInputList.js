@@ -1,83 +1,82 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import cls from './KeyValueInputList.module.scss'
 import Button, {ButtonTypes} from "../../Button/Button";
 import TextInput from "../TextInput/TextInput";
-
-
-const KeyValueInputRow = (
-    {
-        itemKey,
-        itemValue,
-        errors,
-        register
-    }
-) => {
-    return (
-        <li className={cls.item}>
-            <div className={[cls.field, cls.key].join(' ')}>
-                <TextInput
-                    name={itemKey}
-                    register={register}
-                    label={'Ключ'}
-                />
-            </div>
-            <div className={[cls.field, cls.value].join(' ')}>
-                <TextInput
-                    name={`value-${itemValue}`}
-                    register={register}
-                    label={'Значение'}
-                />
-            </div>
-        </li>
-    )
-}
+import {useFieldArray, useForm} from "react-hook-form";
 
 
 const KeyValueInputList = (
     {
         register,
-        list,
-        errors
+        errors,
+        control,
+        name,
     }
 ) => {
+    const {fields, append, prepend, remove, swap, move, insert} = useFieldArray({
+        control,
+        name: name,
+    })
+
     const addRowClickHandler = () => {
-        console.log('added new row')
+        append({key: '', val: ''})
     }
+
+    const deleteRow = rowIndex => {
+        remove(rowIndex)
+    }
+
 
     return (
         <div className={cls.box}>
-
             <Button
+                buttonType={'button'}
                 type={ButtonTypes.STROKE}
                 className={cls.button}
                 onClick={addRowClickHandler}
+                shadow={false}
             >
                 Добавить дополнительное поле
             </Button>
 
+
             <ul className={cls.list}>
                 {
-                    list
-                        ? list.map((item, i) =>
-                            <KeyValueInputRow
-                                key={i}
-                                itemKey={item['key']}
-                                itemValue={item['value']}
+                    fields.map((field, index) => (
+                        <li className={cls.item} key={index}>
+                            <TextInput
+                                className={cls.field}
+                                name={`${name}.${index}.key`}
                                 register={register}
                                 errors={errors}
+                                label={'Ключ'}
                             />
-                        )
-                        : null
+                            <TextInput
+                                className={cls.field}
+                                name={`${name}.${index}.val`}
+                                register={register}
+                                errors={errors}
+                                label={'Значение'}
+                            />
+                            <Button
+                                className={cls.delete}
+                                buttonType={'button'}
+                                type={ButtonTypes.STROKE}
+                                shadow={false}
+                                onClick={() => {
+                                    deleteRow(index)
+                                }}
+                            >
+                                Удалить
+                            </Button>
+                        </li>
+                    ))
                 }
-                <KeyValueInputRow
-                    key={'new'}
-                    itemKey={'new-key'}
-                    itemValue={''}
-                    register={register}
-                    errors={errors}
-                />
             </ul>
 
+            <span className={cls.errorText}>
+                {errors[name]?.type === 'custom' && errors[name].message}
+            </span>
         </div>
     );
 };

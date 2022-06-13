@@ -12,16 +12,20 @@ export default function boardReducer(state = initialState, action) {
 
         /** GET **/
         case boardActionTypes.get.start:
-            return {...state, listFetchInProgress: true}
-
+            return {
+                ...state,
+                listFetchInProgress: true
+            }
         case boardActionTypes.get.success:
-            return {...state, list: action.payload.res}
-
-        case boardActionTypes.get.error:
-            return state
-
+            return {
+                ...state,
+                list: action.payload.res
+            }
         case boardActionTypes.get.finish:
-            return {...state, listFetchInProgress: false}
+            return {
+                ...state,
+                listFetchInProgress: false
+            }
         /** END GET **/
 
 
@@ -30,10 +34,6 @@ export default function boardReducer(state = initialState, action) {
             return {...state}
 
         case boardActionTypes.hide.success:
-            console.log(action.payload)
-            return {...state}
-
-        case boardActionTypes.hide.error:
             return {...state}
 
         case boardActionTypes.hide.finish:

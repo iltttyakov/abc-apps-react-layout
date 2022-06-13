@@ -1,0 +1,72 @@
+.box {
+  width: 100%;
+}
+
+.label {
+  display: block;
+  margin-bottom: 4px;
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.011em;
+}
+
+.errors {
+  .fieldContainer {
+    border-color: #ED7470;
+  }
+}
+
+.focus {
+  .fieldContainer {
+    border-color: #5030E5;
+  }
+}
+
+.field {
+  width: 100%;
+  height: 158px;
+  padding: 0 7px;
+  padding-right: 9px;
+
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 24px;
+  color: #0D062D;
+
+  background: transparent;
+  border: 1px solid #BDBDBD;
+  outline: none;
+  border-radius: 8px;
+
+  transition: all .1s ease;
+
+  &:focus {
+    border-color: #5030E5
+  }
+
+  &.error {
+    margin-bottom: 5px;
+
+    border-color: #ED7470
+  }
+
+  &::placeholder {
+    color: #BDBDBD;;
+  }
+
+  &::-webkit-calendar-picker-indicator {
+    display: none;
+  }
+}
+
+.errorText {
+  display: block;
+  margin-top: 5px;
+
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ED7470;
+}

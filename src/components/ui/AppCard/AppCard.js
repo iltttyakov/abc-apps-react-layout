@@ -4,6 +4,8 @@ import {NavLink} from "react-router-dom";
 import Icons from "../Icons/Icons";
 import AppIcon from "../AppIcon/AppIcon";
 import {accStatuses, whiteStatuses} from "../AccountCard/AccountCard";
+import MoreButton from "../MoreButton/MoreButton";
+import {urls} from "../../paths";
 
 const appTypes = {
     white: 'white',
@@ -20,6 +22,7 @@ const AppCard = (
         gdate,
         mode,
         link_store,
+        id,
 
         white_status,
         accountStatus,
@@ -69,9 +72,7 @@ const AppCard = (
                     : null
             }
 
-            <NavLink className={cls.moreLink} to={link}>
-                <Icons className={cls.moreIcon} name={'more'} size={20}/>
-            </NavLink>
+            <MoreButton url={urls.AppSinglePage(id)} color={'light'}/>
 
         </div>
     );

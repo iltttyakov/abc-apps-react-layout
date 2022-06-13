@@ -15,13 +15,14 @@ const TextInput = (
         name,
         register,
         errors = null,
-        required = true,
         label = null,
         inputType = 'text',
         placeholder = null,
         iconName = null,
         className = null,
-        size = TextInputSizes.NORMAL
+        size = TextInputSizes.NORMAL,
+        validation = {},
+        disabled = false
     }
 ) => {
     const id = makeId(5)
@@ -32,11 +33,11 @@ const TextInput = (
             className={[
                 cls.box, className,
                 onFocus ? cls.focus : null,
-                errors ? cls.errors : null,
+                errors[name] ? cls.errors : null,
+                disabled ? cls.disabled : null,
                 size === TextInputSizes.BIG ? cls.big : null
             ].join(' ')}
         >
-
             {
                 label
                     ? <label className={cls.label} htmlFor={id}>{label}</label>
@@ -44,7 +45,11 @@ const TextInput = (
             }
             <div className={cls.fieldContainer}>
                 <input
-                    {...register(name, {required})}
+                    {
+                        ...register(name, {
+                            ...validation
+                        })
+                    }
                     className={cls.field}
                     type={inputType}
                     id={id}
@@ -56,6 +61,7 @@ const TextInput = (
                     onBlur={() => {
                         setOnFocus(false)
                     }}
+                    disabled={disabled}
                 />
                 {
                     iconName
@@ -63,13 +69,11 @@ const TextInput = (
                         : null
                 }
             </div>
-            {
-                errors
-                    ? <span className={cls.errorText}>
-                        Описание ошибки
-                    </span>
-                    : null
-            }
+            <span className={cls.errorText}>
+                {errors[name]?.type === 'required' && 'Обязательное поле'}
+                {errors[name] && errors[name].type === 'maxLength' && `Максимальная длина ${validation['maxLength']}`}
+                {errors[name]?.type === 'custom' && errors[name].message}
+            </span>
 
         </div>
     );

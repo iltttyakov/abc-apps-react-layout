@@ -1,43 +1,34 @@
-import React, {useState} from 'react';
+import React from 'react';
 import cls from './MainSidebar.module.scss'
 import Logo from "../../ui/Logo/Logo";
-import VerticalNav from "../../ui/VerticalNav/VerticalNav";
+import VerticalNav from "../VerticalNav/VerticalNav";
 import Icons from "../../ui/Icons/Icons";
-import Button from "../../ui/Button/Button";
-import storage from "../../../redux/storage";
+import {useSelector} from "react-redux";
+import actions from "../../../redux/rootActions";
 
-const MainSidebar = (
-    {
-        className = ''
-    }
-) => {
-    let [shrink, setShrink] = useState(false)
+
+const MainSidebar = () => {
+    const shrink = useSelector(state => state.auth.sidebarShrink)
+
 
     return (
-        <nav className={[cls.box, shrink ? cls.shrink : null, 'test'].join(' ')}>
+        <nav className={[cls.box, shrink ? 'shrink' : null].join(' ')}>
 
             <div className={[cls.header, cls.section].join(' ')}>
                 <div className={cls.logo}>
-                    <Logo full={!shrink}/>
+                    <Logo/>
                 </div>
-                <button className={cls.shrinkButton} onClick={() => {
-                    setShrink(!shrink)
-                }}>
+                <button
+                    className={cls.shrinkButton}
+                    onClick={actions.auth.shrinkSidebar}
+                >
                     <Icons className={cls.shrinkButtonIcon} name={'sidebar-shrink'} size={26}/>
                 </button>
             </div>
 
             <div className={[cls.menu, cls.section].join(' ')}>
-                <VerticalNav full={!shrink}/>
+                <VerticalNav/>
             </div>
-
-            <Button
-                onClick={() => {
-                    storage.auth.logout()
-                }}
-            >
-                Выйти
-            </Button>
 
         </nav>
     );

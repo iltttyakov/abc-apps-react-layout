@@ -3,90 +3,82 @@ import cls from './DropDown.module.scss'
 import makeId from "../../../../helpers/makeid";
 import ToggleElement from "../../ToggleElement/ToggleElement";
 
+const list = [10, 25, 50, 100]
+
 const DropDown = (
     {
         register,
-        options,
+        getValues,
         name,
-        label = null,
-        multiple = false,
-        placeholder = null,
+        onChange = () => {
+        },
+        position = 'bottom'
     }
 ) => {
-    const [bodyIsOpen, setBodyIsOpen] = useState(false)
-    const [currentLabel, setCurrentLabel] = useState('')
+    const [isOpen, setIsOpen] = useState(false)
+    const [label, setLabel] = useState(getValues(name))
     const ref = useRef()
-
 
     const handleClickOutside = (event) => {
         if (ref.current && !ref.current.contains(event.target)) {
-            setBodyIsOpen(false)
+            setIsOpen(false)
         }
     }
-
     useEffect(() => {
         document.addEventListener('click', handleClickOutside)
-
         return () => {
             document.removeEventListener('click', handleClickOutside)
         }
     }, [ref])
 
 
+    const clickHandler = e => {
+        setLabel(e.target.value)
+        onChange(e)
+    }
+
     return (
-        <div className={cls.container} ref={ref}>
+        <div className={[cls.box, position === 'top' ? cls.top : null].join(' ')} ref={ref}>
 
-            {
-                label
-                    ? <p className={cls.boxLabel}>{label}</p>
-                    : null
-            }
+            <div className={cls.preLabel}>Показать</div>
 
-            <div className={[cls.box, bodyIsOpen ? cls.open : null].join(' ')}>
+            <div className={cls.dropdown}>
 
-                <button className={cls.head} type={'button'} onClick={() => {
-                    setBodyIsOpen(!bodyIsOpen)
+                <button className={cls.head} onClick={() => {
+                    setIsOpen(!isOpen)
                 }}>
                     <span className={cls.currentValue}>
-                        {
-                            currentLabel
-                                ? currentLabel
-                                : placeholder
-                                    ? <span className={cls.placeholder}>{placeholder}</span>
-                                    : null
-                        }
+                        {label}
                     </span>
-                    <svg className={cls.icon} width="20" height="20" viewBox="0 0 20 20" fill="none"
+                    <svg className={cls.icon} width="16" height="16" viewBox="0 0 16 16" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M16.5408 8.20711C16.9313 7.81658 16.9313 7.18342 16.5408 6.79289C16.1502 6.40237 15.5171 6.40237 15.1266 6.79289L16.5408 8.20711ZM10.0003 13.3333L9.29322 14.0404C9.68374 14.431 10.3169 14.431 10.7074 14.0404L10.0003 13.3333ZM4.8741 6.79289C4.48357 6.40237 3.85041 6.40237 3.45989 6.79289C3.06936 7.18342 3.06936 7.81658 3.45989 8.20711L4.8741 6.79289ZM15.1266 6.79289L9.29322 12.6262L10.7074 14.0404L16.5408 8.20711L15.1266 6.79289ZM10.7074 12.6262L4.8741 6.79289L3.45989 8.20711L9.29322 14.0404L10.7074 12.6262Z"
-                            fill="#BDBDBD"/>
+                        <path fillRule="evenodd" clipRule="evenodd"
+                              d="M4.6665 6.66666L7.99984 10L11.3332 6.66666H4.6665Z" fill="#768193"/>
                     </svg>
                 </button>
 
-                <ToggleElement isOpen={bodyIsOpen} className={cls.body}>
+                <ToggleElement className={cls.body} isOpen={isOpen}>
                     <ul className={cls.list}>
                         {
-                            options.map((option, i) => {
+                            list.map((item, i) => {
                                 const id = makeId(5)
                                 return (
                                     <li className={cls.item} key={i}>
                                         <input
-                                            type={multiple ? 'checkbox' : 'radio'}
-                                            id={id}
-                                            value={option['value']}
-                                            {...register(name)}
-                                            name={name}
-                                            onChange={() => {
-                                                setCurrentLabel(option['label'])
-                                            }}
                                             className={cls.field}
+                                            type={'radio'} id={id}
+                                            value={item} name={name}
+                                            {...register(name, {
+                                                onChange: e => {
+                                                    clickHandler(e)
+                                                }
+                                            })}
                                         />
                                         <label
                                             className={cls.label}
                                             htmlFor={id}
                                         >
-                                            {option['label']}
+                                            {item}
                                         </label>
                                     </li>
                                 )
@@ -95,6 +87,10 @@ const DropDown = (
                     </ul>
                 </ToggleElement>
 
+            </div>
+
+            <div className={cls.postLabel}>
+                записей
             </div>
 
         </div>

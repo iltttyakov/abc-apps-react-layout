@@ -1,5 +1,6 @@
-import React, {useEffect} from 'react';
+import React, {useState} from 'react';
 import cls from './TableSortingButton.module.scss'
+import makeId from "../../../../helpers/makeid";
 
 
 export const SortTypes = {
@@ -7,45 +8,54 @@ export const SortTypes = {
     DESC: 'desc'
 }
 
-
 const TableSortingButton = (
     {
-        name,
+        orderByName,
+        value,
+        orderName,
         label,
         register,
         setValue,
         getValues,
+        onChange = null
     }
 ) => {
+    const [labelCls, setLabelCls] = useState([cls.button])
+
     const sortTypeChangeHandler = () => {
-        const value = getValues(name)
-        switch (value) {
-            case SortTypes.ASC:
-                setValue(name, SortTypes.DESC)
-                break
-            case SortTypes.DESC:
-                setValue(name, null)
-                break
-            default:
-                setValue(name, SortTypes.ASC)
-                break
+        const order = getValues(orderName)
+        const orderBy = getValues(orderByName)
+
+        if (orderBy === value) {
+            if (order === SortTypes.DESC) {
+                setValue(orderName, SortTypes.ASC)
+                setValue(orderByName, value)
+                setLabelCls([cls.button, cls.asc])
+            } else {
+                setValue(orderName, null)
+                setValue(orderByName, null)
+                setLabelCls([cls.button])
+            }
+        } else {
+            setValue(orderName, SortTypes.DESC)
+            setValue(orderByName, value)
+            setLabelCls([cls.button, cls.desc])
         }
+
+        onChange()
     }
 
+    const id = makeId(5)
 
     return (
         <>
             <input
-                {...register(name)}
-                type={'radio'} className={[cls.field, cls.asc].join(' ')}
-                name={name} value={SortTypes.ASC}
+                {...register(orderByName)}
+                type={'radio'} className={cls.field}
+                name={orderByName} value={value}
+                id={id}
             />
-            <input
-                {...register(name)}
-                type={'radio'} className={[cls.field, cls.desc].join(' ')}
-                name={name} value={SortTypes.DESC}
-            />
-            <button type={'button'} className={cls.button} onClick={sortTypeChangeHandler}>
+            <button className={labelCls.join(' ')} onClick={sortTypeChangeHandler}>
                 <span className={cls.label}>{label}</span>
                 <svg
                     className={cls.icon} width="16" height="16" viewBox="0 0 16 16"

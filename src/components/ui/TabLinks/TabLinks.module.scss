@@ -1,0 +1,56 @@
+.box {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 40px;
+  padding: 0 20px;
+  padding-right: 50px;
+}
+
+.list {
+  overflow: hidden;
+
+  display: flex;
+  padding: 0;
+  margin: 0;
+
+  list-style: none;
+  background-color: #EDEAFC;
+  border-radius: 100px;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  min-width: 170px;
+  padding: 5px 20px;
+
+  font-size: 14px;
+  line-height: 15px;
+  text-align: center;
+  color: #FFFFFF;
+
+  border-radius: 100px;
+
+  cursor: pointer;
+  transition: all .1s ease;
+
+  &.active {
+    background-color: #5030E5;
+  }
+}
+
+:global(.night) {
+  .list {
+    background-color: #281C61;
+  }
+
+  .label {
+    color: #BDBDBD;
+
+    &.active {
+      color: #FFFFFF;
+    }
+  }
+}

@@ -4,35 +4,48 @@ import cls from './StoreIcon.module.scss'
 import playMarket from './playMarket.svg'
 import huawei from './huawei.svg'
 import appStore from './appStore.svg'
+import makeId from "../../../helpers/makeid";
 
 
-const StoreIcon = ({store = 'google'}) => {
-    let icon = null
-    let alt = ''
+const StoreIcon = ({store}) => {
+    let icons = []
 
-    switch (store) {
-        case 'PM':
-            icon = playMarket
-            alt = 'Play market'
-            break
+    store.split(',').forEach(store => {
+        if (store === 'PM' || store === 'playMarket') {
+            icons.push(
+                <img
+                    key={makeId(3)}
+                    className={cls.icon} src={playMarket} alt={'Play market'}
+                    width={22} height={22}
+                />
+            )
+        } else if (store === 'AS' || store === 'appStore') {
+            icons.push(
+                <img
+                    key={makeId(3)}
+                    className={cls.icon} src={appStore} alt={'AppSingle Store'}
+                    width={22} height={22}
+                />
+            )
+        } else if (store === 'H' || store === 'huawei') {
+            icons.push(
+                <img
+                    key={makeId(3)}
+                    className={cls.icon} src={huawei} alt={'Huawei'}
+                    width={22} height={22}
+                />
+            )
+        }
+    })
 
-        case 'AS':
-            icon = appStore
-            alt = 'App Store'
-            break
-
-        case 'H':
-            icon = huawei
-            alt = 'Huawei'
-            break
-    }
 
     return (
         <div className={cls.container}>
-            <img
-                className={cls.icon} src={icon} alt={alt}
-                width={22} height={22}
-            />
+            {
+                icons.length
+                    ? icons
+                    : null
+            }
         </div>
     );
 };

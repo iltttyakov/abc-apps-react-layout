@@ -2,6 +2,7 @@ import createAction from "../createAction";
 import api from "../../api/api";
 import {dispatch} from "../store";
 import boardActionTypes from "./boardActionTypes";
+import errorToasty from "../../helpers/errorToasty";
 
 
 const get = page => {
@@ -12,7 +13,8 @@ const get = page => {
                 dispatch(createAction(boardActionTypes.get.success, response))
             })
             .catch(response => {
-                dispatch(createAction(boardActionTypes.get.error, response))
+                errorToasty(response.msg)
+                console.log(response)
             })
             .finally(() => {
                 dispatch(createAction(boardActionTypes.get.finish))
@@ -28,7 +30,8 @@ const hide = id => {
                 dispatch(createAction(boardActionTypes.hide.success, response))
             })
             .catch(response => {
-                dispatch(createAction(boardActionTypes.hide.error, response))
+                errorToasty(response.msg)
+               console.log(response)
             })
             .finally(() => {
                 dispatch(createAction(boardActionTypes.hide.finish))

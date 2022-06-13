@@ -20,7 +20,7 @@ softIcons[soft.incognition] = incognitionIcon
 softIcons[soft.multilogin] = multiloginIcon
 
 
-const SoftIcon = ({soft, className, size = 30}) => {
+const SoftIcon = ({soft, className, size = 26}) => {
     return (
         <img
             className={[cls.image, className].join(' ')}

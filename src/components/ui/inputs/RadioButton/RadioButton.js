@@ -7,7 +7,8 @@ const RadioButton = (
         name,
         label,
         value,
-        register
+        register,
+        validation
     }
 ) => {
     const id = makeId(5)
@@ -20,7 +21,9 @@ const RadioButton = (
                 name={name}
                 id={id}
                 value={value}
-                {...register(name)}
+                {...register(name, {
+                    ...validation
+                })}
             />
             <label
                 id={id}

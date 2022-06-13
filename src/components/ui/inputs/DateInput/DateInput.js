@@ -19,7 +19,7 @@ const DateInput = (
     }
 
     const resetClickHandler = () => {
-        setValue(name, null)
+        setValue(name, '')
     }
 
     return (
@@ -41,6 +41,7 @@ const DateInput = (
                 onClick={todayClickHandler}
                 className={[cls.controls, cls.today].join(' ')}
                 type={ButtonTypes.FILL}
+                shadow={false}
             >
                 Сегодня
             </Button>
@@ -49,6 +50,7 @@ const DateInput = (
                 onClick={resetClickHandler}
                 className={[cls.controls, cls.reset].join(' ')}
                 type={ButtonTypes.STROKE}
+                shadow={false}
             >
                 Сбросить
             </Button>

@@ -17,10 +17,6 @@
   cursor: pointer;
 }
 
-.label {
-
-}
-
 .icon {
   margin-left: 6px;
 
@@ -36,20 +32,26 @@
   height: 1px !important;
   width: 1px !important;
   overflow: hidden;
+}
 
-  &.asc:checked ~ .button {
-    color: #5030E5;
+.field:checked + .button.asc {
+  color: #5030E5;
 
-    .iconAsc {
-      fill: #5030E5;
-    }
+  .iconAsc {
+    fill: #5030E5;
   }
+}
 
-  &.desc:checked ~ .button {
-    color: #5030E5;
+.field:checked + .button.desc {
+  color: #5030E5;
 
-    .iconDesc {
-      fill: #5030E5;
-    }
+  .iconDesc {
+    fill: #5030E5;
+  }
+}
+
+:global(.night) {
+  .button {
+    fill: #FFFFFF;
   }
 }

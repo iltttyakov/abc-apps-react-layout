@@ -1,23 +1,14 @@
 import React from 'react';
-import Layout from "../wrappers/Layout/Layout";
-import Board from "../containers/Board/Board";
-import Page from "../ui/Page/Page";
+import Layout from "../sections/Layout/Layout";
+import Board from "../containers/Board";
 
 
 const BoardPage = () => {
     return (
-        <Layout>
-            <Page.Box>
-
-                <Page.Header>
-                    <Page.Title>
-                        Доска
-                    </Page.Title>
-                </Page.Header>
-
-                <Board/>
-
-            </Page.Box>
+        <Layout
+            title={'Доска'}
+        >
+            <Board/>
         </Layout>
     );
 };

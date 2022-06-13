@@ -1,0 +1,107 @@
+.list {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.label {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.item {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  min-height: 36px;
+  margin-bottom: 22px;
+
+  color: #BDBDBD;
+
+  cursor: pointer;
+  transition: all .1s ease;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  &:hover {
+    color: #0D062D;
+
+    .label {
+      font-weight: 600;
+    }
+  }
+
+  &:active {
+    opacity: .7;
+  }
+}
+
+.icon {
+  margin-right: 10px;
+  flex-shrink: 0;
+  fill: currentColor;
+
+  &.stroke {
+    fill: none;
+    stroke: currentColor;
+  }
+}
+
+.active:last-of-type ~ .label {
+  font-weight: 600;
+
+  color: #0D062D;
+  cursor: default;
+}
+
+.active:last-of-type ~ .icon {
+  fill: #0D062D;
+
+  &.stroke {
+    fill: transparent;
+    stroke: #0D062D;
+  }
+}
+
+.link {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+:global(.shrink) {
+  .label {
+    display: none;
+  }
+
+  .icon {
+    margin-right: 0;
+  }
+}
+
+:global(.night) {
+  .item {
+    &:hover {
+      color: #FFFFFF;
+    }
+  }
+
+  .active:last-of-type ~ .label {
+    color: #FFFFFF;
+  }
+
+  .active:last-of-type ~ .icon {
+    fill: #FFFFFF;
+
+    &.stroke {
+      stroke: #FFFFFF;
+    }
+  }
+}

@@ -194,3 +194,28 @@
     }
   }
 }
+
+:global(.night) {
+  .box {
+    background-color: #241959;
+    box-shadow: 0px 4px 8px rgba(80, 48, 229, 0.1);
+  }
+
+  .header {
+    background-color: #5B539B;
+  }
+
+  .noteButton {
+    background-color: #5030E5;
+    stroke: #FFFFFF;
+
+    &.active {
+      stroke: #5030E5;
+      background-color: rgba(255, 255, 255, 3);
+    }
+  }
+
+  .footer {
+    border-color: #5030E5;
+  }
+}

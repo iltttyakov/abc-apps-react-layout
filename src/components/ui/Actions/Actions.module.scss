@@ -1,0 +1,22 @@
+.actions {
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+  width: 100%;
+
+  &.center {
+    justify-content: center;
+  }
+
+  &.right {
+    justify-content: flex-end;
+  }
+}
+
+.action {
+  margin-right: 10px;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+}

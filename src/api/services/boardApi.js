@@ -1,15 +1,10 @@
 import base from "../base";
-import {BOARD_GET_API_METHOD, BOARD_HIDE_API_METHOD} from "../urls";
+import methods from "../methods";
 
-const get = data => {
-    return base(BOARD_GET_API_METHOD, data)
-}
+const get = body => base(methods.board.get, body)
+const hide = body => base(methods.board.hide, body)
 
-const hide = data => {
-    return base(BOARD_HIDE_API_METHOD, data)
-}
 
 export default {
-    get,
-    hide
+    get, hide
 }

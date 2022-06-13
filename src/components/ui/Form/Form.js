@@ -11,7 +11,7 @@ export const FieldWidth = {
 
 
 export default {
-    Box: ({children, onSubmit, className = ''}) => {
+    Box: ({children, onSubmit = () => null, className = ''}) => {
         return (
             <form onSubmit={onSubmit} className={[cls.box, className].join(' ')}>
                 {children}

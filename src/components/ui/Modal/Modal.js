@@ -1,6 +1,7 @@
 import React from 'react';
 import cls from './Modal.module.scss'
 import Icons from "../Icons/Icons";
+import Loader from "../Loader/Loader";
 
 export const ModalSizes = {
     SMALL: 'small',
@@ -11,9 +12,9 @@ const Modal = (
     {
         isOpen,
         title,
-        onClose = () => {
-        },
+        onClose = () => null,
         size = ModalSizes.SMALL,
+        isLoading = false,
         children,
     }
 ) => {
@@ -32,29 +33,32 @@ const Modal = (
     }
 
     return (
-        <div className={[cls.container, isOpen ? cls.open : null].join(' ')}>
-            <div className={cls.overlay} onClick={closeHandler}></div>
+        <>
+            <div className={[cls.overlay, isOpen ? cls.open : null].join(' ')} onClick={closeHandler}></div>
+            <div className={[cls.container, isOpen ? cls.open : null].join(' ')}>
+                <div className={cls.inner}>
+                    <div className={boxCls.join(' ')}>
 
-            <div className={cls.inner}>
-                <div className={boxCls.join(' ')}>
+                        <div className={cls.top}>
+                            <p className={cls.title}>
+                                {isLoading ? null : title}
+                            </p>
+                            <button className={cls.closeButton} onClick={closeHandler}>
+                                <Icons size={30} className={cls.closeButtonIcon} name={'close'}/>
+                            </button>
+                        </div>
 
-                    <div className={cls.top}>
-                        <p className={cls.title}>
-                            {title}
-                        </p>
-                        <button className={cls.closeButton} onClick={closeHandler}>
-                            <Icons size={30} className={cls.closeButtonIcon} name={'close'}/>
-                        </button>
+                        <div className={cls.body}>
+                            <Loader process={isLoading}>
+                                {children}
+                            </Loader>
+                        </div>
+
                     </div>
-
-                    <div className={cls.body}>
-                        {children}
-                    </div>
-
                 </div>
-            </div>
 
-        </div>
+            </div>
+        </>
     );
 };
 

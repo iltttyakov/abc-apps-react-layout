@@ -1,12 +1,32 @@
 import React from 'react';
 import cls from './Pagination.module.scss'
-import Icons from "../Icons/Icons";
 
-const Pagination = () => {
+
+const Pagination = (
+    {
+        current,
+        count,
+        onPagination,
+    }
+) => {
+    const clickHandler = delta => {
+        if (delta === -1 && current === 1) return
+        if (delta === 1 && count === current) return
+        onPagination(current + delta)
+    }
+
     return (
         <div className={cls.box}>
 
-            <button className={[cls.control, cls.prev, cls.disable].join(' ')}>
+            <button
+                className={[
+                    cls.control, cls.prev,
+                    current === 1 ? cls.disable : null
+                ].join(' ')}
+                onClick={() => {
+                    clickHandler(-1)
+                }}
+            >
                 <svg className={cls.controlIcon} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         className={cls.arrow}
@@ -17,17 +37,21 @@ const Pagination = () => {
                 </svg>
             </button>
 
-            <div className={cls.current}>
-                1
-            </div>
 
+            <div className={cls.current}>{current}</div>
             <span className={cls.separator}>/</span>
+            <span className={cls.total}>{count}</span>
 
-            <span className={cls.total}>
-                195
-            </span>
 
-            <button className={[cls.control, cls.next].join(' ')}>
+            <button
+                className={[
+                    cls.control, cls.next,
+                    count === current ? cls.disable : null
+                ].join(' ')}
+                onClick={() => {
+                    clickHandler(1)
+                }}
+            >
                 <svg className={cls.controlIcon} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         className={cls.arrow}
@@ -39,8 +63,7 @@ const Pagination = () => {
             </button>
 
         </div>
-    )
-        ;
+    );
 };
 
 export default Pagination;

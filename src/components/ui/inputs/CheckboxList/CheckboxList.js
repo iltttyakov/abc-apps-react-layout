@@ -30,9 +30,13 @@ const CheckboxList = (
             {
                 label
                     ? <p
-                        className={[cls.label, labelSize === CheckboxListLabelSize.SMALL ? cls.small : null].join('')}
+                        className={[
+                            cls.label,
+                            labelSize === CheckboxListLabelSize.SMALL ? cls.small : null
+                        ].join('')}
                     >
-                        {label}</p>
+                        {label}
+                    </p>
                     : null
             }
             <ul className={listCls.join(' ')}>
@@ -40,7 +44,7 @@ const CheckboxList = (
                     options.map((option, i) => {
                         return (<li className={cls.item} key={i}>
                             <Checkbox
-                                name={name}
+                                name={option['name'] ? option['name'] : name}
                                 register={register}
                                 label={option['label']}
                                 value={option['value']}

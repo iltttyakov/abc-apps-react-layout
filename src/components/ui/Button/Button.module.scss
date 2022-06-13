@@ -1,6 +1,9 @@
 .box {
+  position: relative;
+
   padding: 10px 19px;
   height: 40px;
+  display: block;
 
   font-weight: 500;
   font-size: 14px;
@@ -43,6 +46,10 @@
     &:hover {
       background-color: #3418B7;
     }
+
+    &:disabled {
+      opacity: .7;
+    }
   }
 
   &.stroke {
@@ -55,7 +62,27 @@
       color: #FFFFFF;
       background-color: #5030E5;
     }
+
+    &:disabled {
+      border-color: #BDBDBD;
+      color: #BDBDBD;
+
+      &:hover {
+        color: #BDBDBD;
+        background-color: #FFFFFF;
+      }
+    }
   }
 
   // END COLORS //
+
+  &:disabled {
+    cursor: default;
+    opacity: .7;
+  }
 }
+
+.mr10 {
+  margin-right: 10px;
+}
+

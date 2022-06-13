@@ -1,19 +1,21 @@
 import axios from "axios";
-import {AUTH_GET_API_METHOD, BASE_API_URL} from "./urls";
+import methods, {BASE_API_URL} from "./methods";
 import Cookies from 'universal-cookie';
+import {useHistory} from "react-router";
 
 const cookies = new Cookies();
 
 
 function base(
     method,
-    data
+    body,
+    optional = []
 ) {
     const auth_token = cookies.get('auth_token')
 
-    if (!auth_token && method !== AUTH_GET_API_METHOD) {
+    if (!auth_token && method !== methods.auth.get) {
 
-        console.log('return to login page')
+        window.location.href = '/'
 
     } else {
 
@@ -21,8 +23,14 @@ function base(
         formData.append('body', JSON.stringify({
             method,
             auth_token,
-            ...data
+            ...body
         }))
+
+        if (optional) {
+            optional.forEach(row => {
+                formData.append(row.name, row.data)
+            })
+        }
 
         return new Promise((resolve, reject) => {
             axios.post(

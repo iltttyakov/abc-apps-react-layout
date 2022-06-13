@@ -13,38 +13,53 @@ const RadioButtonList = (
         options,
         name,
         register,
+        errors = null,
         label = null,
-        labelPosition = RadioButtonListLabelPosition.TOP
+        labelPosition = RadioButtonListLabelPosition.TOP,
+        validation = {}
     }
 ) => {
     return (
-        <div
-            className={[cls.box, labelPosition === RadioButtonListLabelPosition.LEFT ? cls.row : null].join(' ')}
-        >
+        <div className={[
+            cls.box,
+            labelPosition === RadioButtonListLabelPosition.LEFT ? cls.row : null
+        ].join(' ')}>
+
+            <div className={cls.container}>
+                {
+                    label
+                        ? <p className={cls.label}>
+                            {label}
+                        </p>
+                        : null
+                }
+
+                <ul className={cls.list}>
+                    {
+                        options.map((option, i) =>
+                            <li className={cls.item} key={i}>
+                                <RadioButton
+                                    name={name}
+                                    value={option['value']}
+                                    label={option['label']}
+                                    register={register}
+                                    validation={validation}
+                                    errors={errors}
+                                />
+                            </li>
+                        )
+                    }
+                </ul>
+            </div>
+
 
             {
-                label
-                    ? <p className={cls.label}>
-                        {label}
-                    </p>
+                errors
+                    ? <span className={cls.errorText}>
+                        {errors[name]?.type === 'required' && 'Обязательное поле'}
+                    </span>
                     : null
             }
-
-            <ul className={cls.list}>
-                {
-                    options.map((option, i) =>
-                        <li className={cls.item} key={i}>
-                            <RadioButton
-                                name={name}
-                                value={option['value']}
-                                label={option['label']}
-                                register={register}
-                            />
-                        </li>
-                    )
-                }
-            </ul>
-
         </div>
     );
 };
