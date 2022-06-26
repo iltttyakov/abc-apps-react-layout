@@ -73,7 +73,11 @@ const DomainModal = () => {
             onClose={cancel}
             isLoading={domainIsLoading}
         >
-            <DomainForm form={form} onSubmit={onSubmit}/>
+            <DomainForm
+                form={form}
+                onSubmit={onSubmit}
+                isOpen={modalIsOpen}
+            />
             <Actions
                 items={[
                     <Button

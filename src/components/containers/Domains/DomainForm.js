@@ -7,9 +7,11 @@ import TextInput from "../../ui/inputs/TextInput/TextInput";
 import SelectInput from "../../ui/inputs/SelectInput/SelectInput";
 
 
-const DomainForm = ({form, onSubmit}) => {
+const DomainForm = ({form, onSubmit, isOpen = true}) => {
     const accs = useSelector(state => state.domain.accs)
-    useEffect(storage.domain.getAccs, [])
+    useEffect(() => {
+        if (isOpen) storage.domain.getAccs()
+    }, [isOpen])
 
     const {handleSubmit, register, formState: {errors}, control, watch} = form
 
