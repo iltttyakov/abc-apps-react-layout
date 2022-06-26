@@ -8,16 +8,19 @@ import Role from "../Role/Role";
 import accessCheck from "../../../helpers/accessCheck";
 
 
-const StreamForm = ({form, onSubmit}) => {
+const StreamForm = ({form, onSubmit, isOpen = true}) => {
     const userRights = useSelector(state => state.auth.rights)
     const owners = useSelector(state => state.stream.owners)
+    const apps = useSelector(state => state.stream.apps)
+
     useEffect(() => {
-        if (accessCheck(userRights, 'streams_all')) {
+        if (accessCheck(userRights, 'streams_all') && isOpen) {
             storage.stream.getOwners()
         }
-    }, [])
-    const apps = useSelector(state => state.stream.apps)
-    useEffect(storage.stream.getApps, [])
+    }, [isOpen])
+    useEffect(() => {
+        if (isOpen) storage.stream.getApps()
+    }, [isOpen])
 
     const {handleSubmit, register, formState: {errors}, control, getValues, watch} = form
 

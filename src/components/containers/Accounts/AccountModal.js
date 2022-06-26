@@ -120,7 +120,11 @@ const AccountModal = () => {
             size={ModalSizes.BIG}
             isLoading={accountIsLoading}
         >
-            <AccountForm onSubmit={onSubmit} form={form}/>
+            <AccountForm
+                onSubmit={onSubmit}
+                form={form}
+                isOpen={modalIsOpen}
+            />
             <Actions
                 items={[
                     <Role accessTo={'accs_rw'}>

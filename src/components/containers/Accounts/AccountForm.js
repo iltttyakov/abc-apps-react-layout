@@ -11,10 +11,12 @@ import Role from "../Role/Role";
 import accessCheck from "../../../helpers/accessCheck";
 
 
-const AccountForm = ({form, onSubmit}) => {
+const AccountForm = ({form, onSubmit, isOpen = true}) => {
     const userRights = useSelector(state => state.auth.rights)
     const domains = useSelector(state => state.acc.domains)
-    useEffect(storage.acc.getDomains, [])
+    useEffect(() => {
+        if (isOpen) storage.acc.getDomains()
+    }, [isOpen])
 
     const {handleSubmit, register, formState: {errors}, control, watch} = form
 

@@ -276,7 +276,7 @@
 
   .header {
     background-color: #5B539B;
-    
+
     &.grey {
       background-color: #5B539B;
     }
@@ -286,10 +286,6 @@
       stroke: #FFFFFF;
 
       background-color: #78BD7E;
-
-      .noteButton {
-        background-color: rgba(256, 256, 256, .5);
-      }
     }
 
     &.yellow {
@@ -297,10 +293,6 @@
       stroke: #FFFFFF;
 
       background-color: #F8D465;
-
-      .noteButton {
-        background-color: rgba(256, 256, 256, .5);
-      }
     }
 
     &.red {
@@ -308,13 +300,11 @@
       stroke: #FFFFFF;
 
       background-color: #ED7470;
-
-      .noteButton {
-        background-color: rgba(256, 256, 256, .5);
-      }
     }
   }
 
+  .header.green .noteButton,
+  .header.yellow .noteButton,
   .noteButton {
     background-color: #5030E5;
     stroke: #FFFFFF;

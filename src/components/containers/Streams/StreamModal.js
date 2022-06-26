@@ -79,7 +79,11 @@ const StreamModal = () => {
             onClose={cancel}
             isLoading={streamIsLoading}
         >
-            <StreamForm form={form} onSubmit={onSubmit}/>
+            <StreamForm
+                form={form}
+                onSubmit={onSubmit}
+                isOpen={modalIsOpen}
+            />
 
             <Actions
                 items={[

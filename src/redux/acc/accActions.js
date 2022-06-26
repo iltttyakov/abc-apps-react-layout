@@ -13,7 +13,6 @@ const table = (body) => {
         dispatch(createAction(accActionTypes.table.start))
         api.acc.table(body)
             .then(response => {
-                console.log(response)
                 dispatch(createAction(accActionTypes.table.success, response.res))
             })
             .catch(response => {
