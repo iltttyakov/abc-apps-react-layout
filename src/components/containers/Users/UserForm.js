@@ -5,6 +5,7 @@ import Checkbox from "../../ui/inputs/Checkbox/Checkbox";
 import CheckedTagList from "../../ui/inputs/CheckedTagList/CheckedTagList";
 import RadioButtonList from "../../ui/inputs/RadioButtonList/RadioButtonList";
 import CheckboxList, {CheckboxListDirection, CheckboxListLabelSize} from "../../ui/inputs/CheckboxList/CheckboxList";
+import validatePassword from "../../../helpers/validatePassword";
 
 
 const UserForm = ({form, onSubmit, roleForm, changeRole}) => {
@@ -40,6 +41,7 @@ const UserForm = ({form, onSubmit, roleForm, changeRole}) => {
                                     required: true,
                                     minLength: 8,
                                     maxLength: 32,
+                                    validate: validatePassword
                                 }}
                             />
                         </Form.Field>
@@ -109,7 +111,7 @@ const UserForm = ({form, onSubmit, roleForm, changeRole}) => {
                                 name={'streams'}
                                 options={[
                                     {label: 'Недоступны', value: 'streams_no'},
-                                    {label: 'Доступно', value: 'streams_own'},
+                                    {label: 'Свои', value: 'streams_own'},
                                     {label: 'Все', value: 'streams_all'},
                                 ]}
                                 register={register}
@@ -210,7 +212,7 @@ const UserForm = ({form, onSubmit, roleForm, changeRole}) => {
                                 register={register}
                                 label={'Поля Покупатель и Арендаторы'}
                                 name={'apps_rw_buyer'}
-                                disable={watch('white') === 'white_no' && watch('grey') === 'grey_no'}
+                                disabled={watch('white') === 'white_no' && watch('grey') === 'grey_no'}
                             />
                         </Form.Field>
                         <Form.Field width={FieldWidth.FULL} style={{marginBottom: '13px'}}>
@@ -224,7 +226,7 @@ const UserForm = ({form, onSubmit, roleForm, changeRole}) => {
                                         disable: watch('white') === 'white_no' && watch('grey') === 'grey_no'
                                     },
                                     {
-                                        label: 'AppSingle Store',
+                                        label: 'App Store',
                                         name: 'apps_appStore', value: '1',
                                         disable: watch('white') === 'white_no' && watch('grey') === 'grey_no'
                                     },
@@ -275,12 +277,12 @@ const UserForm = ({form, onSubmit, roleForm, changeRole}) => {
                                 {
                                     label: 'Добавление',
                                     name: 'accs_add', value: '1',
-                                    disable: watch('accs') === 'accs_no'
+                                    disable: watch('accs') !== 'accs_rw'
                                 },
                                 {
                                     label: 'Удаление',
-                                    name: 'accs_add', value: '1',
-                                    disable: watch('accs') === 'accs_no'
+                                    name: 'accs_del', value: '1',
+                                    disable: watch('accs') !== 'accs_rw'
                                 },
                             ]}
                         />
@@ -311,7 +313,7 @@ const UserForm = ({form, onSubmit, roleForm, changeRole}) => {
                                 register={register}
                                 name={'notifications_buyer'}
                                 label={'Интерфейс покупателя'}
-                                disable={watch('notifications') === 'notifications_no'}
+                                disabled={watch('notifications') === 'notifications_no'}
                             />
                         </Form.Field>
                         <Checkbox

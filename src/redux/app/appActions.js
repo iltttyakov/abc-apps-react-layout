@@ -2,10 +2,7 @@ import createAction from "../createAction";
 import appActionTypes from "./appActionTypes";
 import api from "../../api/api";
 import {dispatch} from "../store";
-import {toast} from "react-toastify";
 import AsyncToasty from "../../helpers/asyncToasty";
-import groupActionTypes from "../group/groupActionTypes";
-import paths from "../../components/paths";
 import errorToasty from "../../helpers/errorToasty";
 
 
@@ -107,7 +104,6 @@ const edit = (body, image, onSuccess) => {
                 onSuccess()
             })
             .catch(response => {
-                console.log(response)
                 toast.error(response.msg)
             })
             .finally(() => {

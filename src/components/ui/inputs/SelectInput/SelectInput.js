@@ -1,70 +1,9 @@
 import React from 'react';
 import cls from './SelectInput.module.scss'
-
 import {Controller} from "react-hook-form";
 import Select from 'react-select';
 import SelectMultiple from "react-select";
-
-
-const customStyles = {
-    control: () => ({
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        minHeight: 40,
-        width: '100%',
-        backgroundColor: 'transparent',
-        border: '1px solid #BDBDBD',
-        borderRadius: '8px',
-    }),
-    indicatorSeparator: () => ({
-        display: 'none',
-    }),
-    option: (provided, state) => ({
-        color: state.isSelected ? '#ffffff' : '#0D062D',
-        backgroundColor:
-            state.isSelected
-                ? '#5030E5'
-                : state.isFocused
-                    ? '#F7F6FD'
-                    : '#ffffff',
-        padding: '1px 9px',
-        fontSize: '13px',
-        lineHeight: '24px',
-        ':hover': {
-            backgroundColor: '#F7F6FD',
-            color: '#0D062D',
-            cursor: 'pointer',
-        },
-        ':active': {
-            backgroundColor: '#F7F6FD',
-            color: '#0D062D',
-            cursor: 'pointer',
-        }
-    }),
-    multiValue: () => ({
-        display: 'flex',
-        flexDirection: 'row-revers',
-        paddingLeft: 8,
-        marginRight: 5,
-        marginBottom: 5,
-        alignItems: 'center',
-        height: '28px',
-        border: '1px solid #5030E5',
-        borderRadius: '5px',
-        // backgroundColor: '#ffffff',
-        // fill: '#0D062D'
-    }),
-    multiValueLabel: () => ({
-        // color: '#0D062D',
-        fontSize: '13px',
-        lineHeight: '16px',
-        fontWeight: 500,
-    }),
-    // clearIndicator: () => ({
-    //     display: 'none',
-    // })
-}
+import {useSelector} from "react-redux";
 
 
 const SelectInput = (
@@ -77,9 +16,84 @@ const SelectInput = (
         placeholder = '',
         validation,
         changeHandler = () => null,
-        disabled  = false,
+        disabled = false,
     }
 ) => {
+    const theme = useSelector(state => state.auth.theme)
+    const customStyles = {
+        menu: (provided, state) => ({
+            ...provided,
+            backgroundColor: theme === 'night'
+                ? '#392E6D'
+                : '#ffffff',
+            borderRadius: 5,
+        }),
+        control: () => ({
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            minHeight: 40,
+            width: '100%',
+            backgroundColor: 'transparent',
+            border: '1px solid #BDBDBD',
+            borderRadius: '8px',
+        }),
+        indicatorSeparator: () => ({
+            display: 'none',
+        }),
+        option: (provided, state) => ({
+            color: theme === 'night'
+                ? '#ffffff'
+                : state.isSelected
+                    ? '#ffffff'
+                    : '#0D062D',
+            backgroundColor: theme === 'night'
+                ? state.isSelected
+                    ? '#5030E5'
+                    : state.isFocused
+                        ? 'transparent'
+                        : ''
+                : state.isSelected
+                    ? '#5030E5'
+                    : state.isFocused
+                        ? '#F7F6FD'
+                        : 'transparent',
+            padding: '1px 9px',
+            fontSize: '13px',
+            lineHeight: '24px',
+            ':hover': {
+                backgroundColor: '#F7F6FD',
+                color: '#0D062D',
+                cursor: 'pointer',
+            },
+            ':active': {
+                backgroundColor: '#F7F6FD',
+                color: '#0D062D',
+                cursor: 'pointer',
+            }
+        }),
+        multiValue: () => ({
+            display: 'flex',
+            flexDirection: 'row-revers',
+            paddingLeft: 8,
+            marginRight: 5,
+            marginBottom: 5,
+            alignItems: 'center',
+            height: '28px',
+            border: '1px solid #5030E5',
+            borderRadius: '5px',
+        }),
+        multiValueLabel: () => ({
+            fontSize: '13px',
+            lineHeight: '16px',
+            fontWeight: 500,
+        }),
+        singleValue: (provided, state) => ({
+            ...provided,
+            color: 'inherit',
+        })
+    }
+
     return (
         <div className={cls.container}>
             {

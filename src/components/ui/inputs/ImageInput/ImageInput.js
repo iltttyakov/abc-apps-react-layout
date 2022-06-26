@@ -7,13 +7,26 @@ const ImageInput = (
         name,
         register,
         currentImage = null,
-        label = null
+        label = null,
+        disabled,
     }
 ) => {
     let [selectedImage, setSelectedImage] = useState(null)
 
+    const uploadFile = (file) => {
+        if (
+            file.type === 'image/png' ||
+            file.type === 'image/jpeg' ||
+            file.type === 'image/jpg'
+        ) {
+            setSelectedImage(file)
+        } else {
+            alert('Загрузите изображение')
+        }
+    }
+
     return (
-        <div className={cls.box}>
+        <div className={[cls.box, disabled ? cls.disabled : null].join(' ')}>
             {
                 label
                     ? <p className={cls.label}>
@@ -45,9 +58,11 @@ const ImageInput = (
                         className={cls.field}
                         {...register(name, {
                             onChange: e => {
-                                setSelectedImage(e.target.files[0])
+                                uploadFile(e.target.files[0])
                             }
                         })}
+                        accept={'image/png,image/jpeg,image/jpg'}
+                        disabled={disabled}
                     />
                     Выберите файл
                 </label>

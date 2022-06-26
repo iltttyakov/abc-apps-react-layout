@@ -6,6 +6,11 @@
 .icon {
   margin-right: 3px;
 
+  &.small {
+    width: 16px;
+    height: 16px;
+  }
+
   &:last-of-type {
     margin-right: 0;
   }

@@ -42,6 +42,46 @@ img {
   height: auto;
 }
 
+:global(.react-datepicker__day--selected) {
+  background-color: #5030E5;
+}
+
+:global(.react-datepicker__header) {
+  background: transparent;
+  border-color: #F2F2F2;
+}
+
+:global(.react-datepicker__current-month) {
+  text-transform: uppercase;
+}
+
 :global(.night) {
   background-color: #0D062D;
+
+  :global(.swal2-popup) {
+    color: #FFFFFF;
+    background: #0D062D;
+  }
+
+  :global(.react-datepicker) {
+    background: #160E3D;
+    border: none;
+    box-shadow: 0 4px 8px rgb(80 48 229 / 10%);
+  }
+
+  :global(.react-datepicker__day) {
+    color: #FFFFFF;
+
+    &:hover {
+      background-color: #5030E5;
+    }
+  }
+
+  :global(.react-datepicker__current-month) {
+    color: #FFFFFF;
+  }
+
+  :global(.react-datepicker__day-name) {
+    color: #FFFFFF;
+  }
 }

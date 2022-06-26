@@ -12,7 +12,7 @@ export const StatusTypes = {
 }
 
 
-const StatusTag = ({status, children}) => {
+const StatusTag = ({status, style = {}, children}) => {
     const boxCls = [cls.box]
     let visible = false
 
@@ -43,7 +43,9 @@ const StatusTag = ({status, children}) => {
     }
 
     return visible
-        ? <div className={boxCls.join(' ')}>{children}</div>
+        ? <div className={boxCls.join(' ')} style={style}>
+            {children}
+        </div>
         : null
 };
 

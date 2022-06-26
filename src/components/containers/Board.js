@@ -23,8 +23,9 @@ const Board = () => {
         filterTable()
     }, [])
 
+
     return (
-        <div style={{padding: 20}}>
+        <>
             <TabPanel
                 name={'page'}
                 register={register}
@@ -37,14 +38,16 @@ const Board = () => {
                     {label: 'Скрытые', value: '-1'},
                 ]}
             />
+            <div style={{padding: 20}}>
+                <Loader process={board.listFetchInProgress}>
+                    <AccountCardList
+                        items={board.list}
+                        isHiddenPage={getValues('page') === '-1'}
+                    />
+                </Loader>
+            </div>
 
-            <Loader process={board.listFetchInProgress}>
-                <AccountCardList
-                    items={board.list}
-                    isHiddenPage={getValues('page') === '-1'}
-                />
-            </Loader>
-        </div>
+        </>
     );
 };
 

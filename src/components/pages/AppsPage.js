@@ -1,13 +1,19 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Layout from "../sections/Layout/Layout";
-
 import Button, {ButtonTypes} from "../ui/Button/Button";
 import AppsTable from "../containers/Apps/AppsTable";
 import paths from "../paths";
 import Role from "../containers/Role/Role";
+import setTitle from "../../helpers/seo";
+import storage from "../../redux/rootActions";
 
 
 const AppsPage = () => {
+    useEffect(() => {
+        setTitle('Приложения')
+        storage.auth.get()
+    }, [])
+
     return (
         <Layout
             title={'Приложения'}

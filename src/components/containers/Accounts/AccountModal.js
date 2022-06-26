@@ -9,6 +9,7 @@ import inArray from "../../../helpers/inArray";
 import Actions from "../../ui/Actions/Actions";
 import Button, {ButtonTypes} from "../../ui/Button/Button";
 import Role from "../Role/Role";
+import queryString from 'query-string';
 
 
 const defaultValues = {
@@ -44,10 +45,10 @@ const accountPacking = (data, account = {}) => {
         ? inArray(data.store, 'playMarket') ? '1' : null
         : null
     data['store_appStore'] = data.store
-        ? inArray(data.store, 'playMarket') ? '1' : null
+        ? inArray(data.store, 'appStore') ? '1' : null
         : null
     data['store_huawei'] = data.store
-        ? inArray(data.store, 'playMarket') ? '1' : null
+        ? inArray(data.store, 'huawei') ? '1' : null
         : null
 
     return {
@@ -73,6 +74,16 @@ const AccountModal = () => {
     useEffect(() => {
         setDirty(form.formState.isDirty)
     }, [form.watch()])
+
+    useEffect(() => {
+        const queryParams = new URLSearchParams(window.location.search)
+        const id = queryParams.get('id')
+
+        if (id) {
+            storage.acc.modalOpen()
+            storage.acc.get(id)
+        }
+    }, [])
 
 
     const reset = () => {
@@ -121,8 +132,7 @@ const AccountModal = () => {
                         </Button>
                     </Role>,
                     account
-                        ?
-                        <Role accessTo={'accs_rw'}>
+                        ? <Role accessTo={'accs_rw'}>
                             <Button
                                 disabled={editInProcess}
                                 onClick={del}

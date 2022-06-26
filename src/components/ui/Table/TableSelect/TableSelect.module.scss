@@ -103,11 +103,20 @@
 }
 
 :global(.night) {
+  .list {
+    background-color: #160E3D;
+    border-color: #392E6D;
+  }
+
   .icon {
     fill: #FFFFFF;
   }
 
   .label {
-    color: #0D062D;
+    color: #FFFFFF;
+
+    &::after {
+      background-color: #392E6D;
+    }
   }
 }

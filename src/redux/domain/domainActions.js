@@ -97,14 +97,22 @@ const del = id => {
     }
 }
 
-const check = ids => {
+const check = (ids, toastType = 'default') => {
     return dispatch => {
         const toast = new AsyncToasty('Проверяем домены')
         dispatch(createAction(domainActionTypes.check.start))
         api.domain.check(ids)
             .then(response => {
-                toast.success('Домены проверены')
                 dispatch(createAction(domainActionTypes.check.success, response.res))
+                if (toastType === 'default') {
+                    toast.success('Домены проверены')
+                } else {
+                    if (response.res.failed) {
+                        toast.error('Домен не прошёл проверку')
+                    } else {
+                        toast.success('Домены прошёл проверку')
+                    }
+                }
             })
             .catch(response => {
                 toast.error(response.msg)
@@ -122,5 +130,5 @@ export default {
     edit: (body, onSuccess = () => null) => dispatch(edit(body, onSuccess)),
     getAccs: () => dispatch(getAccs()),
     del: id => dispatch(del(id)),
-    check: ids => dispatch(check(ids)),
+    check: (ids, toastType = 'default') => dispatch(check(ids, toastType)),
 }

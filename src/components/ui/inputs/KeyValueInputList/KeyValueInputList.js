@@ -11,6 +11,7 @@ const KeyValueInputList = (
         errors,
         control,
         name,
+        disabled = false,
     }
 ) => {
     const {fields, append, prepend, remove, swap, move, insert} = useFieldArray({
@@ -29,15 +30,20 @@ const KeyValueInputList = (
 
     return (
         <div className={cls.box}>
-            <Button
-                buttonType={'button'}
-                type={ButtonTypes.STROKE}
-                className={cls.button}
-                onClick={addRowClickHandler}
-                shadow={false}
-            >
-                Добавить дополнительное поле
-            </Button>
+            {
+                disabled
+                    ? null
+                    : <Button
+                        buttonType={'button'}
+                        type={ButtonTypes.STROKE}
+                        className={cls.button}
+                        onClick={addRowClickHandler}
+                        shadow={false}
+                        disabled={disabled}
+                    >
+                        Добавить дополнительное поле
+                    </Button>
+            }
 
 
             <ul className={cls.list}>
@@ -50,6 +56,7 @@ const KeyValueInputList = (
                                 register={register}
                                 errors={errors}
                                 label={'Ключ'}
+                                disabled={disabled}
                             />
                             <TextInput
                                 className={cls.field}
@@ -57,18 +64,23 @@ const KeyValueInputList = (
                                 register={register}
                                 errors={errors}
                                 label={'Значение'}
+                                disabled={disabled}
                             />
-                            <Button
-                                className={cls.delete}
-                                buttonType={'button'}
-                                type={ButtonTypes.STROKE}
-                                shadow={false}
-                                onClick={() => {
-                                    deleteRow(index)
-                                }}
-                            >
-                                Удалить
-                            </Button>
+                            {
+                                disabled
+                                    ? null
+                                    : <Button
+                                        className={cls.delete}
+                                        buttonType={'button'}
+                                        type={ButtonTypes.STROKE}
+                                        shadow={false}
+                                        onClick={() => {
+                                            deleteRow(index)
+                                        }}
+                                    >
+                                        Удалить
+                                    </Button>
+                            }
                         </li>
                     ))
                 }

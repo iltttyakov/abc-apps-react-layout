@@ -75,3 +75,14 @@
   line-height: 16px;
   color: #BDBDBD;
 }
+
+.disabled {
+  .button {
+    opacity: .7;
+    cursor: default;
+
+    &:hover {
+      background-color: #5030E5;
+    }
+  }
+}

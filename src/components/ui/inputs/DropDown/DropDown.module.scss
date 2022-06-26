@@ -93,3 +93,14 @@
 
   cursor: pointer;
 }
+
+:global(.night) {
+  .list {
+    background: #160E3D;
+    border: 1px solid #392E6D;
+  }
+
+  .label {
+    background: #160E3D;
+  }
+}

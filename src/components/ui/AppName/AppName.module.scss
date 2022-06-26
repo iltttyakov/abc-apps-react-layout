@@ -8,8 +8,17 @@
 }
 
 .name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
 }
 
 .nameLink {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
 
+  color: #0D062D;
 }

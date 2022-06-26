@@ -22,11 +22,22 @@ const TextInput = (
         className = null,
         size = TextInputSizes.NORMAL,
         validation = {},
-        disabled = false
+        disabled = false,
+        counter = null,
+        onClick = event => null
     }
 ) => {
     const id = makeId(5)
     const [onFocus, setOnFocus] = useState(false)
+    const [characterCounter, setCharacterCounter] = useState(counter)
+
+    const changeHandler = e => {
+        if (e.target.value.length > counter) {
+            setCharacterCounter(0)
+        } else {
+            setCharacterCounter(counter - e.target.value.length)
+        }
+    }
 
     return (
         <div
@@ -47,7 +58,8 @@ const TextInput = (
                 <input
                     {
                         ...register(name, {
-                            ...validation
+                            onChange: counter ? changeHandler : () => null,
+                            ...validation,
                         })
                     }
                     className={cls.field}
@@ -62,19 +74,32 @@ const TextInput = (
                         setOnFocus(false)
                     }}
                     disabled={disabled}
+                    onClick={onClick}
                 />
                 {
                     iconName
                         ? <Icons className={cls.icon} name={iconName} size={20}/>
                         : null
                 }
+                {
+                    counter
+                        ? <p className={cls.counter}>{characterCounter}</p>
+                        : null
+                }
             </div>
-            <span className={cls.errorText}>
-                {errors[name]?.type === 'required' && 'Обязательное поле'}
-                {errors[name] && errors[name].type === 'maxLength' && `Максимальная длина ${validation['maxLength']}`}
-                {errors[name]?.type === 'custom' && errors[name].message}
-            </span>
-
+            {
+                errors
+                    ? <span className={cls.errorText}>
+                        {errors[name]?.type === 'required' && 'Обязательное поле'}
+                        {errors[name] && errors[name].type === 'maxLength' && `Максимальная длина ${validation['maxLength']}`}
+                        {errors[name] && errors[name].type === 'minLength' && `Минимальная длина ${validation['minLength']}`}
+                        {errors[name]?.type === 'custom' && errors[name].message}
+                        {
+                            errors[name] && errors[name].type === 'validate'
+                            && `Пароль должен содержать от 8 до 32 символов без пробелов и русских букв, а также содержать цифру, заглавную и строчную букву`}
+                    </span>
+                    : null
+            }
         </div>
     );
 };

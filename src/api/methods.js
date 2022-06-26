@@ -13,6 +13,7 @@ export default {
     board: {
         get: 'board.get',
         hide: 'board.acc_hide',
+        editAccNote: 'board.edit_acc_note',
     },
 
     acc: {

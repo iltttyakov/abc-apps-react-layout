@@ -1,24 +1,21 @@
-import React from 'react';
-import Layout from "../sections/Layout/Layout";
-
-import Button, {ButtonTypes} from "../ui/Button/Button";
+import React, {useEffect} from 'react';
 import StreamsTable from "../containers/Streams/StreamsTable";
-import storage from "../../redux/rootActions";
 import StreamModal from "../containers/Streams/StreamModal";
+import setTitle from "../../helpers/seo";
+import storage from "../../redux/rootActions";
+
 
 const StreamsPage = () => {
+    useEffect(() => {
+        setTitle('Потоки')
+        storage.auth.get()
+    }, [])
+
     return (
-        <Layout
-            title={'Потоки'}
-            actions={
-                <Button onClick={storage.stream.modalOpen}>
-                    Добавить новый поток
-                </Button>
-            }
-        >
+        <>
             <StreamsTable/>
             <StreamModal/>
-        </Layout>
+        </>
     );
 };
 

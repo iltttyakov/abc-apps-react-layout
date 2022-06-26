@@ -1,10 +1,13 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Route, Switch} from "react-router-dom"
 
+
+import 'react-toastify/dist/ReactToastify.css';
+import 'react-datepicker/dist/react-datepicker.css';
 import '../styles/fonts.scss'
 import '../styles/general.scss'
 import '../styles/normalize.scss'
-import 'react-toastify/dist/ReactToastify.css';
+
 
 import {useSelector} from "react-redux";
 import storage from "../redux/rootActions";
@@ -29,15 +32,30 @@ import ProfilePage from "./pages/ProfilePage";
 import SmartNotificationsPage from "./pages/SmartNotificationsPage";
 import AppsBuyerPage from "./pages/AppsBuyerPage";
 import AppsTenantPage from "./pages/AppsTenantPage";
+import SmartNotificationNewPage from "./pages/SmartNotificationNewPage";
+import inArray from "../helpers/inArray";
 
 
 function App() {
     const user = useSelector(state => state.auth)
+    const [homePage, setHomePage] = useState(() => BoardPage)
 
     useEffect(() => {
         if (storage.auth.isAuthorized()) {
             storage.auth.get()
         }
+    }, [])
+
+    useEffect(() => {
+        if (inArray(user.rights, 'apps_buyer')) {
+            setHomePage(() => AppsBuyerPage)
+        } else if (inArray(user.rights, 'apps_tenant')) {
+            setHomePage(() => AppsTenantPage)
+        }
+    }, [user])
+
+    useEffect(() => {
+        console.log('updated at 21:46')
     }, [])
 
 
@@ -47,17 +65,18 @@ function App() {
                 {
                     !!user.login
                         ? <>
-                            <Route exact path={paths.BoardPage} component={BoardPage}/>
+                            <Route exact path={paths.HomePage} component={homePage}/>
+                            <Route exact path={paths.AppsBuyerPage} component={AppsBuyerPage}/>
+                            <Route exact path={paths.AppsTenantPage} component={AppsTenantPage}/>
                             <Route exact path={paths.AppPage} component={AppSinglePage}/>
                             <Route exact path={paths.NewAppPage} component={AppNewPage}/>
                             <Route exact path={paths.AppsPage} component={AppsPage}/>
-                            <Route exact path={paths.AppsBuyerPage} component={AppsBuyerPage}/>
-                            <Route exact path={paths.AppsTenantPage} component={AppsTenantPage}/>
                             <Route exact path={paths.AccountsPage} component={AccountsPage}/>
                             <Route exact path={paths.StreamsPage} component={StreamsPage}/>
                             <Route exact path={paths.DomainsPage} component={DomainsPage}/>
                             <Route exact path={paths.LogsPage} component={LogsPage}/>
                             <Route exact path={paths.SmartNotificationsPage} component={SmartNotificationsPage}/>
+                            <Route exact path={paths.SmartNotificationNewPage} component={SmartNotificationNewPage}/>
                             <Route exact path={paths.NotificationNewPage} component={NotificationNewPage}/>
                             <Route exact path={paths.NotificationSinglePage} component={NotificationSinglePage}/>
                             <Route exact path={paths.NotificationsPage} component={NotificationsPage}/>

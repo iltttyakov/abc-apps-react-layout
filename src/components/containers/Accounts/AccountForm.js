@@ -8,9 +8,11 @@ import RadioButtonList from "../../ui/inputs/RadioButtonList/RadioButtonList";
 import CheckboxList from "../../ui/inputs/CheckboxList/CheckboxList";
 import SelectInput from "../../ui/inputs/SelectInput/SelectInput";
 import Role from "../Role/Role";
+import accessCheck from "../../../helpers/accessCheck";
 
 
 const AccountForm = ({form, onSubmit}) => {
+    const userRights = useSelector(state => state.auth.rights)
     const domains = useSelector(state => state.acc.domains)
     useEffect(storage.acc.getDomains, [])
 
@@ -32,6 +34,7 @@ const AccountForm = ({form, onSubmit}) => {
                                     required: true,
                                     maxLength: 50,
                                 }}
+                                disabled={!accessCheck(userRights, 'accs_rw')}
                             />
                         </Form.Field>
                         <Form.Field width={FieldWidth.FULL}>
@@ -41,14 +44,31 @@ const AccountForm = ({form, onSubmit}) => {
                                 errors={errors}
                                 label={'Программа'}
                                 options={[
-                                    {label: 'Dolphin', value: 'dolphin'},
-                                    {label: 'OctoBrowser', value: 'octobrowser'},
-                                    {label: 'Incognition', value: 'incognition'},
-                                    {label: 'Multilogin', value: 'multilogin'},
+                                    {
+                                        label: 'Dolphin',
+                                        value: 'dolphin',
+                                        disable: !accessCheck(userRights, 'accs_rw')
+                                    },
+                                    {
+                                        label: 'OctoBrowser',
+                                        value: 'octobrowser',
+                                        disable: !accessCheck(userRights, 'accs_rw')
+                                    },
+                                    {
+                                        label: 'Incognition',
+                                        value: 'incognition',
+                                        disable: !accessCheck(userRights, 'accs_rw')
+                                    },
+                                    {
+                                        label: 'Multilogin',
+                                        value: 'multilogin',
+                                        disable: !accessCheck(userRights, 'accs_rw')
+                                    },
                                 ]}
                                 validation={{
                                     required: true,
                                 }}
+                                disabled={!accessCheck(userRights, 'accs_rw')}
                             />
                         </Form.Field>
                         <Form.Field width={FieldWidth.FULL}>
@@ -58,12 +78,21 @@ const AccountForm = ({form, onSubmit}) => {
                                 errors={errors}
                                 label={'Тип'}
                                 options={[
-                                    {label: 'Лог', value: 'log'},
-                                    {label: 'Фарм', value: 'farm'},
+                                    {
+                                        label: 'Лог',
+                                        value: 'log',
+                                        disable: !accessCheck(userRights, 'accs_rw')
+                                    },
+                                    {
+                                        label: 'Фарм',
+                                        value: 'farm',
+                                        disable: !accessCheck(userRights, 'accs_rw')
+                                    },
                                 ]}
                                 validation={{
                                     required: true,
                                 }}
+                                disabled={!accessCheck(userRights, 'accs_rw')}
                             />
                         </Form.Field>
                         <Form.Field width={FieldWidth.FULL}>
@@ -73,13 +102,26 @@ const AccountForm = ({form, onSubmit}) => {
                                 errors={errors}
                                 label={'Статус'}
                                 options={[
-                                    {label: 'Фарм', value: 'farm'},
-                                    {label: 'Сдан', value: 'ready'},
-                                    {label: 'Бан', value: 'ban'},
+                                    {
+                                        label: 'Фарм',
+                                        value: 'farm',
+                                        disable: !accessCheck(userRights, 'accs_rw')
+                                    },
+                                    {
+                                        label: 'Сдан',
+                                        value: 'ready',
+                                        disable: !accessCheck(userRights, 'accs_rw')
+                                    },
+                                    {
+                                        label: 'Бан',
+                                        value: 'ban',
+                                        disable: !accessCheck(userRights, 'accs_rw')
+                                    },
                                 ]}
                                 validation={{
                                     required: true,
                                 }}
+                                disabled={!accessCheck(userRights, 'accs_rw')}
                             />
                         </Form.Field>
                         <Form.Field width={FieldWidth.FULL}>
@@ -88,9 +130,21 @@ const AccountForm = ({form, onSubmit}) => {
                                 register={register}
                                 label={'Магазин'}
                                 options={[
-                                    {label: 'Play Market', value: 'playMarket'},
-                                    {label: 'AppSingle Store', value: 'appStore'},
-                                    {label: 'Huawei', value: 'huawei'},
+                                    {
+                                        label: 'Play Market',
+                                        value: 'playMarket',
+                                        disable: !accessCheck(userRights, 'accs_rw')
+                                    },
+                                    {
+                                        label: 'App Store',
+                                        value: 'appStore',
+                                        disable: !accessCheck(userRights, 'accs_rw')
+                                    },
+                                    {
+                                        label: 'Huawei',
+                                        value: 'huawei',
+                                        disable: !accessCheck(userRights, 'accs_rw')
+                                    },
                                 ]}
                             />
                         </Form.Field>
@@ -104,6 +158,7 @@ const AccountForm = ({form, onSubmit}) => {
                                 validation={{
                                     maxLength: 32,
                                 }}
+                                disabled={!accessCheck(userRights, 'accs_rw')}
                             />
                         </Form.Field>
                         <Form.Field width={FieldWidth.FULL}>
@@ -116,6 +171,7 @@ const AccountForm = ({form, onSubmit}) => {
                                 validation={{
                                     maxLength: 32,
                                 }}
+                                disabled={!accessCheck(userRights, 'accs_rw')}
                             />
                         </Form.Field>
                     </Form.Fieldset>
@@ -128,10 +184,10 @@ const AccountForm = ({form, onSubmit}) => {
                                 errors={errors}
                                 name={'proxy_host'}
                                 label={'Хост прокси'}
-                                placeholder={'Хост прокси'}
                                 validation={{
                                     maxLength: 32,
                                 }}
+                                disabled={!accessCheck(userRights, 'accs_rw')}
                             />
                         </Form.Field>
                         <Form.Field width={FieldWidth.FULL}>
@@ -140,10 +196,10 @@ const AccountForm = ({form, onSubmit}) => {
                                 errors={errors}
                                 name={'proxy_port'}
                                 label={'Порт прокси'}
-                                placeholder={'Порт прокси'}
                                 validation={{
                                     maxLength: 32,
                                 }}
+                                disabled={!accessCheck(userRights, 'accs_rw')}
                             />
                         </Form.Field>
                         <Form.Field width={FieldWidth.FULL}>
@@ -152,10 +208,10 @@ const AccountForm = ({form, onSubmit}) => {
                                 errors={errors}
                                 name={'proxy_login'}
                                 label={'Логин прокси'}
-                                placeholder={'Логин прокси'}
                                 validation={{
                                     maxLength: 32,
                                 }}
+                                disabled={!accessCheck(userRights, 'accs_rw')}
                             />
                         </Form.Field>
                         <Form.Field width={FieldWidth.FULL}>
@@ -164,10 +220,10 @@ const AccountForm = ({form, onSubmit}) => {
                                 errors={errors}
                                 name={'proxy_password'}
                                 label={'Пароль прокси'}
-                                placeholder={'Пароль прокси'}
                                 validation={{
                                     maxLength: 32,
                                 }}
+                                disabled={!accessCheck(userRights, 'accs_rw')}
                             />
                         </Form.Field>
                         <Role accessTo={'accs_rw'}>
@@ -184,20 +240,22 @@ const AccountForm = ({form, onSubmit}) => {
                                             : {},
                                         ...domains.map(domain => ({label: domain.domain, value: domain.id})),
                                     ]}
+                                    disabled={!accessCheck(userRights, 'accs_rw')}
                                 />
                             </Form.Field>
                         </Role>
                         <Role accessTo={'accs_rw'}>
-                            <Form.Field width={FieldWidth.FULL}>
+                            <Form.Field width={FieldWidth.FULL} style={{marginBottom: 65}}>
                                 <TextInput
                                     register={register}
                                     errors={errors}
                                     name={'note'}
                                     label={'Примечание'}
-                                    placeholder={'Примечание'}
+                                    placeholder={'Примечание к аккаунту'}
                                     validation={{
                                         maxLength: 255,
                                     }}
+                                    disabled={!accessCheck(userRights, 'accs_rw')}
                                 />
                             </Form.Field>
                         </Role>

@@ -10,6 +10,10 @@ import AppName from "../../ui/AppName/AppName";
 import StatusTag from "../../ui/StatusTag/StatusTag";
 import CopyClick from "../../ui/CopyClick/CopyClick";
 import MoreButton from "../../ui/MoreButton/MoreButton";
+import Button from "../../ui/Button/Button";
+import Layout from "../../sections/Layout/Layout";
+import {urls} from "../../paths";
+import TextOverflow from "../../ui/TextOverflow/TextOverflow";
 
 
 const columns = [
@@ -18,29 +22,39 @@ const columns = [
         sortable: true,
         label: 'Приложение',
         name: 'apps_name',
-        scheme: item => <AppName name={item['apps_name']} icon={item['apps_icon']}/>,
+        scheme: item => <AppName
+            name={item['apps_name']}
+            icon={item['apps_icon']}
+            to={urls.AppSinglePage(item.id)}
+        />,
     },
     {
-        width: 9,
-        scheme: item => item['apps_date_ban'] ? <StatusTag status={'ban'}/> : null,
+        width: 5,
+        scheme: item => <div style={{paddingRight: 20}}>
+            {item['apps_date_ban'] ? <StatusTag status={'ban'} style={{width: 50}}>ban</StatusTag> : null}
+        </div>,
     },
     {
-        width: 13,
-        label: 'Нейминг',
+        width: 20,
+        label: 'Тип',
         name: 'search_type',
         filterable: true,
         multiple: true,
         options: [
             {label: 'Органические', value: 'organic'},
-            {label: 'Нейминг', value: 'organic'},
+            {label: 'Нейминг', value: 'naming'},
         ],
-        scheme: item => item.naming ? item.naming : 'organic',
+        scheme: item => <TextOverflow width={180}>
+            <CopyClick>{item.naming ? item.naming : 'organic'}</CopyClick>
+        </TextOverflow>,
     },
     {
         width: 13,
         label: 'Ссылка',
         name: 'link',
-        scheme: item => <CopyClick>{item.link}</CopyClick>,
+        scheme: item => <TextOverflow width={97}>
+            <CopyClick>{item.link}</CopyClick>
+        </TextOverflow>,
     },
     {
         width: 10,
@@ -100,6 +114,7 @@ const columns = [
     },
     {
         name: 'controls',
+        align: 'right',
         scheme: item => <MoreButton onClick={() => {
             storage.stream.modalOpen()
             storage.stream.get(item.id)
@@ -125,25 +140,45 @@ const StreamsTable = () => {
         if (resetPagination) form.setValue('list', 1)
         const filterParams = clearFilterParams(form.getValues())
 
+        filterParams['search_is_banned'] = filterParams['search_is_banned'] === 'true' ? 'true' : 'false'
+
         storage.stream.table(filterParams)
     }
 
+    useEffect(filterTable, [])
     useEffect(() => {
         if (tableForcedUpdate) filterTable()
     }, [tableForcedUpdate])
 
 
     return (
-        <>
-            <FilterPanel
-                name={'search_is_banned'}
-                options={[
-                    {label: 'Скрыть забаненные', value: 'false'}
-                ]}
-                {...form}
-                onChange={filterTable}
-                align={'right'}
-            />
+
+        <Layout
+            title={'Потоки'}
+            actions={
+                <div style={{
+                    display: 'flex'
+                }}>
+                    <FilterPanel
+                        name={'search_is_banned'}
+                        options={[
+                            {label: 'Бан', value: 'true'}
+                        ]}
+                        {...form}
+                        onChange={filterTable}
+                        align={'right'}
+                        style={{
+                            margin: 0,
+                            marginRight: 10,
+                            padding: 0,
+                        }}
+                    />
+                    <Button onClick={storage.stream.modalOpen}>
+                        Добавить новый поток
+                    </Button>
+                </div>
+            }
+        >
 
             <Table
                 columns={columns}
@@ -153,7 +188,8 @@ const StreamsTable = () => {
                 form={form}
                 onChange={filterTable}
             />
-        </>
+
+        </Layout>
     );
 };
 

@@ -40,7 +40,7 @@
   font-size: 14px;
   line-height: 15px;
   text-align: center;
-  color: #FFFFFF;
+  color: #5030E5;
 
   border-radius: 100px;
 
@@ -49,6 +49,8 @@
 }
 
 .field:checked + .label {
+  color: #FFFFFF;
+
   background-color: #5030E5;
 }
 

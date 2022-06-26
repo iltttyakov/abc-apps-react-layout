@@ -14,16 +14,23 @@ import CheckboxList from "../../ui/inputs/CheckboxList/CheckboxList";
 import RadioButtonList from "../../ui/inputs/RadioButtonList/RadioButtonList";
 import Role from "../Role/Role";
 import {getNotificationIconUrl} from "../../../helpers/getIconUrl";
+import inArray from "../../../helpers/inArray";
+import RoleFunc from "../Role/RoleFunc";
 
 
-const NotificationForm = ({form, notification, onSubmit}) => {
+const NotificationForm = ({form, notification = {}, onSubmit}) => {
+    const userRights = useSelector(state => state.auth.rights)
     const groups = useSelector(state => state.notification.groups)
     const apps = useSelector(state => state.notification.apps)
     const owners = useSelector(state => state.notification.owners)
     useEffect(() => {
-        actions.notification.getGroups()
+        if (!inArray(userRights, 'notifications_buyer')) {
+            actions.notification.getGroups()
+        }
+        if (inArray(userRights, 'notifications_all')) {
+            actions.notification.getOwners()
+        }
         actions.notification.getApps()
-        actions.notification.getOwners()
     }, [])
 
     const {handleSubmit, register, formState: {errors}, control, watch, setValue, getValues, setError} = form
@@ -41,22 +48,24 @@ const NotificationForm = ({form, notification, onSubmit}) => {
                 <Form.Column>
                     <Form.Fieldset>
 
-                        <Form.Field width={FieldWidth.FULL}>
-                            <SelectInput
-                                label={'Группа'}
-                                name={'group_id'}
-                                control={control}
-                                multiple={false}
-                                options={[
-                                    {label: 'Группа не выбрана', value: '0'},
-                                    ...groups.map(group => ({label: group.name, value: group.id}))
-                                ]}
-                                disabled={watch('was_sent') !== null && watch('generator ') === '0'}
-                                changeHandler={value => {
-                                    setAppsFromGroup(value)
-                                }}
-                            />
-                        </Form.Field>
+                        <RoleFunc callback={rights => !inArray(rights, 'notifications_buyer')}>
+                            <Form.Field width={FieldWidth.FULL}>
+                                <SelectInput
+                                    label={'Группа'}
+                                    name={'group_id'}
+                                    control={control}
+                                    multiple={false}
+                                    options={[
+                                        {label: 'Группа не выбрана', value: '0'},
+                                        ...groups.map(group => ({label: group.name, value: group.id}))
+                                    ]}
+                                    disabled={watch('was_sent') !== null && watch('is_generator') === 'false'}
+                                    changeHandler={value => {
+                                        setAppsFromGroup(value)
+                                    }}
+                                />
+                            </Form.Field>
+                        </RoleFunc>
 
                         <Form.Field width={FieldWidth.FULL}>
                             <SelectInput
@@ -65,7 +74,7 @@ const NotificationForm = ({form, notification, onSubmit}) => {
                                 control={control}
                                 multiple={true}
                                 options={apps.map(app => ({label: app.name, value: app.id}))}
-                                disabled={watch('was_sent') !== null && watch('generator ') === '0'}
+                                disabled={watch('was_sent') !== null && watch('is_generator') === 'false'}
                             />
                         </Form.Field>
 
@@ -77,7 +86,7 @@ const NotificationForm = ({form, notification, onSubmit}) => {
                                     control={control}
                                     multiple={true}
                                     options={countries}
-                                    disabled={watch('was_sent') !== null && watch('generator ') === '0'}
+                                    disabled={watch('was_sent') !== null && watch('is_generator') === 'false'}
                                 />
                             </Form.Field>
                             <Checkbox
@@ -90,7 +99,7 @@ const NotificationForm = ({form, notification, onSubmit}) => {
                                     alignItems: 'center',
                                     display: 'flex',
                                 }}
-                                disabled={watch('was_sent') !== null && watch('generator ') === '0'}
+                                disabled={watch('was_sent') !== null && watch('is_generator') === 'false'}
                             />
                         </Form.Row>
 
@@ -101,7 +110,11 @@ const NotificationForm = ({form, notification, onSubmit}) => {
                                 name={'heading'}
                                 label={'Заголовок'}
                                 placeholder={'Заголовок'}
-                                disabled={watch('was_sent') !== null && watch('generator ') === '0'}
+                                disabled={watch('was_sent') !== null && watch('is_generator') === 'false'}
+                                validation={{
+                                    maxLength: 60,
+                                }}
+                                counter={60}
                             />
                         </Form.Field>
 
@@ -112,7 +125,11 @@ const NotificationForm = ({form, notification, onSubmit}) => {
                                 name={'subtitle'}
                                 label={'Подзаголовок'}
                                 placeholder={'Подзаголовок'}
-                                disabled={watch('was_sent') !== null && watch('generator ') === '0'}
+                                disabled={watch('was_sent') !== null && watch('is_generator') === 'false'}
+                                validation={{
+                                    maxLength: 40,
+                                }}
+                                counter={40}
                             />
                         </Form.Field>
 
@@ -123,7 +140,11 @@ const NotificationForm = ({form, notification, onSubmit}) => {
                                 name={'text'}
                                 label={'Текст'}
                                 placeholder={'Текст'}
-                                disabled={watch('was_sent') !== null && watch('generator ') === '0'}
+                                disabled={watch('was_sent') !== null && watch('is_generator') === 'false'}
+                                validation={{
+                                    maxLength: 511,
+                                }}
+                                counter={511}
                             />
                         </Form.Field>
 
@@ -131,7 +152,7 @@ const NotificationForm = ({form, notification, onSubmit}) => {
                 </Form.Column>
 
                 <Form.Column>
-                    <Form.Fieldset>
+                    <Form.Fieldset style={{height: 'calc(100% - 20px)'}}>
 
                         <Form.Field width={FieldWidth.FULL}>
                             <ImageInput
@@ -143,7 +164,7 @@ const NotificationForm = ({form, notification, onSubmit}) => {
                                         ? notification.image ? getNotificationIconUrl(notification.image) : null
                                         : null
                                 }
-                                disabled={watch('was_sent') !== null && watch('generator ') === '0'}
+                                disabled={watch('was_sent') !== null && watch('is_generator') === 'false'}
                             />
                         </Form.Field>
 
@@ -154,7 +175,8 @@ const NotificationForm = ({form, notification, onSubmit}) => {
                                 errors={errors}
                                 register={register}
                                 setValue={setValue}
-                                disabled={watch('was_sent') !== null && watch('generator ') === '0'}
+                                control={control}
+                                disabled={watch('was_sent') !== null && watch('is_generator') === 'false'}
                             />
                         </Form.Field>
 
@@ -165,7 +187,7 @@ const NotificationForm = ({form, notification, onSubmit}) => {
                                 errors={errors}
                                 register={register}
                                 setValue={setValue}
-                                disabled={watch('was_sent') !== null && watch('generator ') === '0'}
+                                disabled={watch('was_sent') !== null && watch('is_generator') === 'false'}
                             />
                         </Form.Field>
 
@@ -174,25 +196,30 @@ const NotificationForm = ({form, notification, onSubmit}) => {
                                 register={register}
                                 label={'Настройки'}
                                 options={[
-                                    {label: 'согласно таймзоне', name: 'settings_timezone', value: '1'}
+                                    {
+                                        label: 'согласно таймзоне',
+                                        name: 'settings_timezone',
+                                        value: '1',
+                                        disable: watch('was_sent') !== null && watch('is_generator') === 'false'
+                                    }
                                 ]}
-                                disabled={watch('was_sent') !== null && watch('generator ') === '0'}
+                                disabled={watch('was_sent') !== null && watch('is_generator') === 'false'}
                             />
                         </Form.Field>
 
-                        <Form.Field width={FieldWidth.FULL}>
-                            <RadioButtonList
-                                register={register}
-                                label={'Повтор'}
-                                name={'repeat_period'}
-                                options={[
-                                    {label: 'Однократно', value: 'once'},
-                                    {label: 'День', value: 'day'},
-                                    {label: 'Неделя', value: 'week'},
-                                ]}
-                                disabled={watch('was_sent') !== null && watch('generator ') === '0'}
-                            />
-                        </Form.Field>
+                        {/*<Form.Field width={FieldWidth.FULL}>*/}
+                        {/*    <RadioButtonList*/}
+                        {/*        register={register}*/}
+                        {/*        label={'Повтор'}*/}
+                        {/*        name={'repeat_period'}*/}
+                        {/*        options={[*/}
+                        {/*            {label: 'Однократно', value: 'once'},*/}
+                        {/*            {label: 'День', value: 'day'},*/}
+                        {/*            {label: 'Неделя', value: 'week'},*/}
+                        {/*        ]}*/}
+                        {/*        disabled={watch('was_sent') !== null && watch('is_generator') === 'false'}*/}
+                        {/*    />*/}
+                        {/*</Form.Field>*/}
 
                         <Role accessTo={'notifications_all'}>
                             <Form.Field width={FieldWidth.FULL}>
@@ -202,7 +229,7 @@ const NotificationForm = ({form, notification, onSubmit}) => {
                                     control={control}
                                     multiple={false}
                                     options={owners.map(owner => ({label: owner.login, value: owner.id}))}
-                                    disabled={watch('was_sent') !== null && watch('generator ') === '0'}
+                                    disabled={watch('was_sent') !== null && watch('is_generator') === 'false'}
                                 />
                             </Form.Field>
                         </Role>

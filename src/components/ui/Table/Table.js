@@ -5,7 +5,6 @@ import Pagination from "../Pagination/Pagination";
 import TableSortingButton from "./TableSortingButton/TableSortingButton";
 import TableSelect from "./TableSelect/TableSelect";
 import TableSearch from "./TableSearch/TableSearch";
-import Checkbox from "../inputs/Checkbox/Checkbox";
 import Role from "../../containers/Role/Role";
 
 
@@ -73,7 +72,10 @@ const Table = (
 
             const cells = columns.map((column, k) =>
                 <Role accessTo={column.rights} key={k}>
-                    <TableUI.Cell align={column.align ? column.align : 'left'}>
+                    <TableUI.Cell
+                        width={column.width}
+                        align={column.align ? column.align : 'left'}
+                    >
                         {column.scheme(item)}
                     </TableUI.Cell>
                 </Role>

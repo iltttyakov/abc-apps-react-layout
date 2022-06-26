@@ -3,7 +3,9 @@ import boardActionTypes from "./boardActionTypes";
 
 const initialState = {
     listFetchInProgress: true,
-    list: []
+    list: [],
+
+    editAccNoteInProcess: false,
 }
 
 export default function boardReducer(state = initialState, action) {
@@ -39,6 +41,18 @@ export default function boardReducer(state = initialState, action) {
         case boardActionTypes.hide.finish:
             return {...state}
         /** END HIDE **/
+
+
+        /** EDIT ACC NOTE **/
+        case boardActionTypes.editAccNote.start:
+            return {...state, editAccNoteInProcess: true}
+
+        case boardActionTypes.editAccNote.success:
+            return {...state}
+
+        case boardActionTypes.editAccNote.finish:
+            return {...state, editAccNoteInProcess: false}
+        /** END EDIT ACC NOTE **/
 
 
         default:

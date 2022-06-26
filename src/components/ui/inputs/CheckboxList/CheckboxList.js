@@ -19,7 +19,7 @@ const CheckboxList = (
         options,
         direction = CheckboxListDirection.ROW,
         label = null,
-        labelSize = CheckboxListLabelSize.BIG
+        labelSize = CheckboxListLabelSize.BIG,
     }
 ) => {
     const listCls = [cls.list]
@@ -48,7 +48,7 @@ const CheckboxList = (
                                 register={register}
                                 label={option['label']}
                                 value={option['value']}
-                                disable={option['disable'] ?? false}
+                                disabled={option['disable'] ?? false}
                             />
                         </li>)
                     })

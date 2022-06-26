@@ -49,6 +49,10 @@
 
     &:disabled {
       opacity: .7;
+
+      &:hover {
+        background-color: #5030E5;
+      }
     }
   }
 
@@ -86,3 +90,28 @@
   margin-right: 10px;
 }
 
+:global(.night) {
+  .box {
+    &.stroke {
+      color: #FFFFFF;
+
+      background-color: transparent;
+      border-color: #5030E5;
+
+      &:hover {
+        color: #FFFFFF;
+        background-color: #5030E5;
+      }
+
+      &:disabled {
+        border-color: #BDBDBD;
+        color: #BDBDBD;
+
+        &:hover {
+          color: #BDBDBD;
+          background-color: transparent;
+        }
+      }
+    }
+  }
+}

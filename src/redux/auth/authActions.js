@@ -6,7 +6,7 @@ import authActionTypes from "./authActionTypes";
 import AsyncToasty from "../../helpers/asyncToasty";
 import errorToasty from "../../helpers/errorToasty";
 
-const login = ({auth_login, auth_password}) => {
+const login = (auth_login, auth_password) => {
     return dispatch => {
         dispatch(createAction(authActionTypes.login.start))
         api.auth.get({auth_login, auth_password})
@@ -58,7 +58,9 @@ const editTheme = theme => {
     return dispatch => {
         dispatch(createAction(authActionTypes.editTheme.toggle))
         api.auth.editTheme(theme)
-            .then(response => console.log(response))
+            .then(response => {
+
+            })
             .catch(response => console.log(response))
     }
 }
@@ -85,7 +87,7 @@ const shrinkSidebar = () => dispatch(createAction(authActionTypes.shrinkSidebar)
 
 
 export default {
-    login: data => dispatch(login(data)),
+    login: ({auth_login, auth_password}) => dispatch(login(auth_login, auth_password)),
     logout: () => dispatch(logout()),
     isAuthorized: () => isAuthorized(),
     get: () => dispatch(get()),

@@ -11,7 +11,8 @@ const TimeInput = (
         errors,
         label,
         setValue,
-        required = true
+        required = true,
+        disabled = false,
     }
 ) => {
     const todayClickHandler = () => {
@@ -32,9 +33,10 @@ const TimeInput = (
                 name={name}
                 inputType={'time'}
                 placeholder={'__:__'}
-                iconName={'calendar'}
+                iconName={'clock'}
                 className={cls.input}
                 required={required}
+                disabled={disabled}
             />
 
             <Button
@@ -42,6 +44,7 @@ const TimeInput = (
                 className={[cls.controls, cls.now].join(' ')}
                 type={ButtonTypes.FILL}
                 shadow={false}
+                disabled={disabled}
             >
                 Сейчас
             </Button>
@@ -51,6 +54,7 @@ const TimeInput = (
                 className={[cls.controls, cls.reset].join(' ')}
                 type={ButtonTypes.STROKE}
                 shadow={false}
+                disabled={disabled}
             >
                 Сбросить
             </Button>

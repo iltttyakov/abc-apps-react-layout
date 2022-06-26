@@ -7,7 +7,22 @@ import appStore from './appStore.svg'
 import makeId from "../../../helpers/makeid";
 
 
-const StoreIcon = ({store}) => {
+export const StoreIconSizes = {
+    NORMAL: 'normal',
+    SMALL: 'small'
+}
+
+
+const StoreIcon = (
+    {
+        store,
+        size = StoreIconSizes.NORMAL
+    }
+) => {
+    const iconCls = [cls.icon]
+
+    if (size === StoreIconSizes.SMALL) iconCls.push(cls.small)
+
     let icons = []
 
     store.split(',').forEach(store => {
@@ -15,7 +30,7 @@ const StoreIcon = ({store}) => {
             icons.push(
                 <img
                     key={makeId(3)}
-                    className={cls.icon} src={playMarket} alt={'Play market'}
+                    className={iconCls.join(' ')} src={playMarket} alt={'Play market'}
                     width={22} height={22}
                 />
             )
@@ -23,7 +38,7 @@ const StoreIcon = ({store}) => {
             icons.push(
                 <img
                     key={makeId(3)}
-                    className={cls.icon} src={appStore} alt={'AppSingle Store'}
+                    className={iconCls.join(' ')} src={appStore} alt={'AppSingle Store'}
                     width={22} height={22}
                 />
             )
@@ -31,7 +46,7 @@ const StoreIcon = ({store}) => {
             icons.push(
                 <img
                     key={makeId(3)}
-                    className={cls.icon} src={huawei} alt={'Huawei'}
+                    className={iconCls.join(' ')} src={huawei} alt={'Huawei'}
                     width={22} height={22}
                 />
             )

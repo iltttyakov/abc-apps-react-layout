@@ -28,7 +28,7 @@ const columns = [
         filterable: true,
         multiple: true,
         options: [
-            {label: 'Амин', value: 'Админ'},
+            {label: 'Админ', value: 'Админ'},
             {label: 'Разработчик', value: 'Разработчик'},
             {label: 'Разработчик iOS', value: 'Разработчик iOS'},
             {label: 'Фармер', value: 'Фармер'},
@@ -70,6 +70,8 @@ const UsersTable = () => {
         storage.user.table(filterParams)
     }
 
+
+    useEffect(filterTable, [])
     useEffect(() => {
         if (tableForcedUpdate) filterTable()
     }, [tableForcedUpdate])

@@ -47,3 +47,12 @@
     border-width: 5px;
   }
 }
+
+.field:disabled + .label {
+  color: #BDBDBD;
+  cursor: default;
+
+  &::before {
+    border-color: #BDBDBD;
+  }
+}

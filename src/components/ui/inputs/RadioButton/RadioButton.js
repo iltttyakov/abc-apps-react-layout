@@ -8,7 +8,8 @@ const RadioButton = (
         label,
         value,
         register,
-        validation
+        validation,
+        disabled = false,
     }
 ) => {
     const id = makeId(5)
@@ -24,6 +25,7 @@ const RadioButton = (
                 {...register(name, {
                     ...validation
                 })}
+                disabled={disabled}
             />
             <label
                 id={id}

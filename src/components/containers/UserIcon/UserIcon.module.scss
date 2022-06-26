@@ -10,6 +10,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
 
   font-weight: 700;
   font-size: 14px;
@@ -19,17 +20,10 @@
 
   border-radius: 50%;
   background: #F9EEE3;
+  border: none;
 
   cursor: pointer;
   transition: all .1s ease;
-
-  &:hover {
-    opacity: .8;
-  }
-
-  &:active {
-    opacity: .5;
-  }
 }
 
 .profileLink {
@@ -45,38 +39,55 @@
 }
 
 .dropdown {
-  display: none;
-  padding-top: 10px;
-
   position: absolute;
   z-index: 1000;
-  top: calc(100%);
+  top: calc(100% + 10px);
   right: 0;
-}
-
-.dropdownInner {
-  padding: 15px;
 
   background-color: #FFFFFF;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgb(80 48 229 / 10%);
 }
 
-.box:hover .dropdown {
-  display: block;
+.dropdownInner {
+  padding: 15px;
 }
 
 .login {
+  display: block;
   margin: 0;
-  margin-bottom: 10px;
+  margin-bottom: 7px;
 }
 
 .logout {
   width: 100%;
+  margin: 0;
+  padding: 0;
+
+  border: none;
+  background: transparent;
+}
+
+.link {
+  color: inherit;
+  cursor: pointer;
+
+  text-align: left;
+
+  transition: all .1s ease;
+
+  &:hover {
+    color: #5030E5;
+  }
 }
 
 :global(.night) {
-  .dropdownInner {
+  .initials {
+    background-color: #F9EEE3;
+    color: #D58D49;
+  }
+
+  .dropdown {
     background-color: #160E3D;
   }
 }

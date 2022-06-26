@@ -12,21 +12,12 @@ import Actions from "../../ui/Actions/Actions";
 const defaultValues = {
     id: '',
     link: '',
-    owner: '',
     offer: ''
-}
-
-const streamUnpacking = stream => {
-    return stream
-        ? {
-            ...defaultValues,
-            ...stream
-        }
-        : defaultValues
 }
 
 
 const StreamModal = () => {
+    const userId = useSelector(state => state.auth.id)
     const stream = useSelector(state => state.stream.active)
     const modalIsOpen = useSelector(state => state.stream.modalIsOpen)
     const streamIsLoading = useSelector(state => state.stream.activeIsLoading)
@@ -34,6 +25,18 @@ const StreamModal = () => {
     const [dirty, setDirty] = useState(false)
 
     const form = useForm({defaultValues})
+
+    const streamUnpacking = stream => {
+        return stream
+            ? {
+                ...defaultValues,
+                ...stream
+            }
+            : {
+                owner: userId,
+                ...defaultValues
+            }
+    }
 
     useEffect(() => {
         form.reset(streamUnpacking(stream))

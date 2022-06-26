@@ -1,29 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import LayoutFluid from "../sections/Layout/LayoutFluid";
-import Container from "../ui/Container/Container";
-
 import Button, {ButtonTypes} from "../ui/Button/Button";
 import paths from "../paths";
 import {useParams} from "react-router";
 import NotificationSingle from "../containers/Notifications/NotificationSingle";
+import setTitle from "../../helpers/seo";
+import storage from "../../redux/rootActions";
 
 const NotificationSinglePage = () => {
+    useEffect(() => {
+        setTitle('Уведомление')
+        storage.auth.get()
+    }, [])
     const params = useParams()
 
     return (
-        <LayoutFluid
-            title={'Уведомление'}
-            actions={
-                <Button
-                    type={ButtonTypes.STROKE}
-                    to={paths.NotificationsPage}
-                >
-                    Все уведомления
-                </Button>
-            }
-        >
             <NotificationSingle id={params.id}/>
-        </LayoutFluid>
     );
 };
 

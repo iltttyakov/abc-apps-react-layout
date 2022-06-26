@@ -12,6 +12,10 @@
     margin-bottom: 0;
   }
 
+  &.grey {
+    background-color: #404D61;
+  }
+
   &.green {
     background-color: #78BD7E;
   }
@@ -23,16 +27,19 @@
   &.red {
     background-color: #ED7470;
   }
-
-  &.grey {
-    background-color: #404D61;
-  }
 }
 
 .name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+
   margin: 0;
   margin-right: auto;
+  padding-right: 10px;
 
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
   letter-spacing: 0.05em;
   color: #FFFFFF;
 }

@@ -8,14 +8,15 @@ const FilterPanel = (
         options,
         align = 'left',
         register,
-        onChange = null
+        onChange = null,
+        style = {},
     }
 ) => {
     const listCLs = [cls.list]
     if (align === 'right') listCLs.push(cls.alignRight)
 
     return (
-        <ul className={listCLs.join(' ')}>
+        <ul className={listCLs.join(' ')} style={style}>
             {
                 options.map((option, i) => {
                     const id = makeId(5)

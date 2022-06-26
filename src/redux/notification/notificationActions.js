@@ -43,8 +43,6 @@ const get = (id) => {
 
 const edit = (body, image, onSuccess) => {
     return dispatch => {
-        console.log(body)
-
         const toast = new AsyncToasty('Сохраняем')
         dispatch(createAction(notificationActionTypes.edit.start, body))
         api.notification.edit(
@@ -74,7 +72,6 @@ const getGroups = () => {
             })
             .catch(response => {
                 errorToasty(response.msg)
-                console.log(response)
             })
             .finally(() => {
                 dispatch(createAction(notificationActionTypes.getGroups.finish))

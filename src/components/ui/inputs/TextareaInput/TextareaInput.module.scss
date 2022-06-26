@@ -24,11 +24,27 @@
   }
 }
 
+.container {
+  position: relative;
+}
+
+.counter {
+  position: absolute;
+  top: 3px;
+  right: 6px;
+
+  margin: 0;
+
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 24px;
+}
+
 .field {
   width: 100%;
   height: 158px;
   padding: 0 7px;
-  padding-right: 9px;
+  padding-right: 30px;
 
   font-weight: 400;
   font-size: 13px;
@@ -58,6 +74,10 @@
 
   &::-webkit-calendar-picker-indicator {
     display: none;
+  }
+
+  &:disabled {
+
   }
 }
 

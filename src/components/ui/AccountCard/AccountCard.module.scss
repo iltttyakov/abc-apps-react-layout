@@ -104,6 +104,10 @@
   line-height: 20px;
 }
 
+.titleLink {
+  color: #0D062D;
+}
+
 .headerRight {
   margin-left: auto;
   display: flex;
@@ -141,6 +145,18 @@
     background-color: #5030E5;
   }
 }
+
+.header.green,
+.header.yellow,
+.header.red {
+  .noteButton {
+    &.active {
+      stroke: #FFFFFF;
+      background-color: #5030E5;
+    }
+  }
+}
+
 
 .noteButtonIcon {
   stroke: inherit;
@@ -195,14 +211,108 @@
   }
 }
 
+.noteForm {
+  display: flex;
+  align-items: center;
+}
+
+.noteField {
+  width: 100%;
+  height: 20px;
+  padding: 0;
+  margin-right: 5px;
+
+  font-style: italic;
+  font-size: 12px;
+  line-height: 15px;
+  color: #0D062D;
+
+  border: none;
+  outline: none;
+  background: transparent;
+
+  &::placeholder {
+    opacity: .5;
+  }
+}
+
+.noteFormButton {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  width: 20px;
+
+  background: transparent;
+  border: none;
+
+  cursor: pointer;
+  transition: all .1s ease;
+
+  &:hover {
+    opacity: .7;
+  }
+
+  &:disabled {
+    opacity: .5;
+
+    &:hover {
+      cursor: default;
+      opacity: .5;
+    }
+  }
+}
+
+.noteFormIcon {
+
+}
+
 :global(.night) {
   .box {
     background-color: #241959;
-    box-shadow: 0px 4px 8px rgba(80, 48, 229, 0.1);
+    box-shadow: 0 4px 8px rgba(80, 48, 229, 0.1);
   }
 
   .header {
     background-color: #5B539B;
+    
+    &.grey {
+      background-color: #5B539B;
+    }
+
+    &.green {
+      color: #FFFFFF;
+      stroke: #FFFFFF;
+
+      background-color: #78BD7E;
+
+      .noteButton {
+        background-color: rgba(256, 256, 256, .5);
+      }
+    }
+
+    &.yellow {
+      color: #FFFFFF;
+      stroke: #FFFFFF;
+
+      background-color: #F8D465;
+
+      .noteButton {
+        background-color: rgba(256, 256, 256, .5);
+      }
+    }
+
+    &.red {
+      color: #FFFFFF;
+      stroke: #FFFFFF;
+
+      background-color: #ED7470;
+
+      .noteButton {
+        background-color: rgba(256, 256, 256, .5);
+      }
+    }
   }
 
   .noteButton {

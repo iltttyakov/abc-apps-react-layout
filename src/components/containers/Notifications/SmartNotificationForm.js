@@ -16,16 +16,24 @@ import CheckboxList from "../../ui/inputs/CheckboxList/CheckboxList";
 import RadioButtonList from "../../ui/inputs/RadioButtonList/RadioButtonList";
 import Role from "../Role/Role";
 import {getIconUrl, getNotificationIconUrl} from "../../../helpers/getIconUrl";
+import inArray from "../../../helpers/inArray";
+import RoleFunc from "../Role/RoleFunc";
 
 
 const NotificationForm = ({form, notification, onSubmit}) => {
+    const userRights = useSelector(state => state.auth.rights)
     const groups = useSelector(state => state.notification.groups)
     const apps = useSelector(state => state.notification.apps)
     const owners = useSelector(state => state.notification.owners)
     useEffect(() => {
-        actions.notification.getGroups()
+
+        if (!inArray(userRights, 'notifications_buyer')) {
+            actions.notification.getGroups()
+        }
+        if (inArray(userRights, 'notifications_all')) {
+            actions.notification.getOwners()
+        }
         actions.notification.getApps()
-        actions.notification.getOwners()
     }, [])
 
     const {handleSubmit, register, formState: {errors}, control, watch, setValue, getValues, setError} = form
@@ -50,19 +58,21 @@ const NotificationForm = ({form, notification, onSubmit}) => {
                 <Form.Column>
                     <Form.Fieldset>
 
-                        <Form.Field width={FieldWidth.FULL}>
-                            <SelectInput
-                                label={'Группа'}
-                                name={'group_id'}
-                                control={control}
-                                multiple={false}
-                                options={[
-                                    {label: 'Группа не выбрана', value: '0'},
-                                    ...groups.map(group => ({label: group.name, value: group.id}))
-                                ]}
-                                disabled={watch('was_sent') !== null && watch('generator ') === '0'}
-                            />
-                        </Form.Field>
+                        <RoleFunc callback={rights => !inArray(rights, 'notifications_buyer')}>
+                            <Form.Field width={FieldWidth.FULL}>
+                                <SelectInput
+                                    label={'Группа'}
+                                    name={'group_id'}
+                                    control={control}
+                                    multiple={false}
+                                    options={[
+                                        {label: 'Группа не выбрана', value: '0'},
+                                        ...groups.map(group => ({label: group.name, value: group.id}))
+                                    ]}
+                                    disabled={watch('was_sent') !== null && watch('generator ') === '0'}
+                                />
+                            </Form.Field>
+                        </RoleFunc>
 
                         <Form.Field width={FieldWidth.FULL}>
                             <SelectInput
@@ -109,6 +119,10 @@ const NotificationForm = ({form, notification, onSubmit}) => {
                                 label={'Заголовок'}
                                 placeholder={'Заголовок'}
                                 disabled={watch('was_sent') !== null && watch('generator ') === '0'}
+                                validation={{
+                                    maxLength: 60,
+                                }}
+                                counter={60}
                             />
                         </Form.Field>
 
@@ -120,6 +134,10 @@ const NotificationForm = ({form, notification, onSubmit}) => {
                                 label={'Подзаголовок'}
                                 placeholder={'Подзаголовок'}
                                 disabled={watch('was_sent') !== null && watch('generator ') === '0'}
+                                validation={{
+                                    maxLength: 40,
+                                }}
+                                counter={40}
                             />
                         </Form.Field>
 
@@ -131,6 +149,10 @@ const NotificationForm = ({form, notification, onSubmit}) => {
                                 label={'Текст'}
                                 placeholder={'Текст'}
                                 disabled={watch('was_sent') !== null && watch('generator ') === '0'}
+                                validation={{
+                                    maxLength: 511,
+                                }}
+                                counter={511}
                             />
                         </Form.Field>
 
@@ -138,7 +160,7 @@ const NotificationForm = ({form, notification, onSubmit}) => {
                 </Form.Column>
 
                 <Form.Column>
-                    <Form.Fieldset>
+                    <Form.Fieldset style={{height: 'calc(100% - 20px)'}}>
 
                         <Form.Field width={FieldWidth.FULL}>
                             <ImageInput
@@ -162,7 +184,10 @@ const NotificationForm = ({form, notification, onSubmit}) => {
                                 errors={errors}
                                 options={[
                                     {label: 'Установил, но за 15 минут не зарегистрировался', value: 'install_noreg'},
-                                    {label: 'Зарегистрировался, но не совершил депозит за 30 минут', value: 'reg_nodep'},
+                                    {
+                                        label: 'Зарегистрировался, но не совершил депозит за 30 минут',
+                                        value: 'reg_nodep'
+                                    },
                                     {label: 'Совершил депозит', value: 'dep'},
                                 ]}
                             />

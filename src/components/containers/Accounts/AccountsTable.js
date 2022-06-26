@@ -6,11 +6,12 @@ import StatusTag from "../../ui/StatusTag/StatusTag";
 import MoreButton from "../../ui/MoreButton/MoreButton";
 import storage from "../../../redux/rootActions";
 import {useSelector} from "react-redux";
-import StoreIcon from "../../ui/StoreIcon/StoreIcon";
+import StoreIcon, {StoreIconSizes} from "../../ui/StoreIcon/StoreIcon";
 import SoftIcon from "../../ui/SoftIcon/SoftIcon";
 import clearFilterParams from "../../../api/clearFilterParams";
 import CheckIcon from "../../ui/CheckIcon/CheckIcon";
 import CopyClick from "../../ui/CopyClick/CopyClick";
+import TextOverflow from "../../ui/TextOverflow/TextOverflow";
 
 
 const columns = [
@@ -29,25 +30,29 @@ const columns = [
         scheme: item => <SoftIcon soft={item.soft}/>
     },
     {
-        width: 14,
+        width: 10,
         name: 'name',
         label: 'Название',
         sortable: true,
-        scheme: item => <><span style={{marginRight: '20px'}}>{item.name}</span>
+        scheme: item => <CopyClick>{item.name}</CopyClick>
+    },
+    {
+        width: 5,
+        scheme: item => <div style={{paddingRight: 20}}>
             <StatusTag status={item.status}>{item.status}</StatusTag>
-        </>
+        </div>
     },
     {
         width: 9,
         name: 'search_type',
-        label: 'Фарм',
+        label: 'Тип',
         filterable: true,
         multiple: true,
         options: [
             {label: 'Фарм', value: 'farm'},
-            {label: 'Не фарм', value: 'not-farm'}
+            {label: 'Лог', value: 'log'}
         ],
-        scheme: item => <CheckIcon check={item.type === 'farm'}/>
+        scheme: item => item.type === 'farm' ? 'Фарм' : 'Лог'
     },
     {
         width: 12,
@@ -60,50 +65,67 @@ const columns = [
             {label: 'AS', value: 'appStore'},
             {label: 'H', value: 'huawei'},
         ],
-        scheme: item => <StoreIcon store={item.store}/>
+        scheme: item => <StoreIcon
+            store={item.store}
+            size={StoreIconSizes.SMALL}
+        />
     },
     {
-        width: 7,
+        width: 10,
         name: 'proxy_host',
         label: 'Хост',
-        scheme: item => <CopyClick>{item['proxy_host']}</CopyClick>
+        scheme: item => <TextOverflow width={56}>
+            <CopyClick>{item['proxy_host']}</CopyClick>
+        </TextOverflow>
     },
     {
-        width: 8,
+        width: 10,
         name: 'proxy_port',
         label: 'Порт',
-        scheme: item => <CopyClick>{item['proxy_port']}</CopyClick>
+        scheme: item => <TextOverflow width={56}>
+            <CopyClick>{item['proxy_port']}</CopyClick>
+        </TextOverflow>
     },
     {
-        width: 8,
+        width: 10,
         name: 'proxy_login',
         label: 'Логин',
-        scheme: item => <CopyClick>{item['proxy_login']}</CopyClick>
+        scheme: item => <TextOverflow width={56}>
+            <CopyClick>{item['proxy_login']}</CopyClick>
+        </TextOverflow>
     },
     {
-        width: 9,
+        width: 10,
         name: 'proxy_password',
         label: 'Пароль',
-        scheme: item => <CopyClick>{item['proxy_password']}</CopyClick>
+        scheme: item => <TextOverflow width={56}>
+            <CopyClick>{item['proxy_password']}</CopyClick>
+        </TextOverflow>
     },
     {
-        width: 8,
+        width: 10,
         name: '',
         label: 'Домен',
         rights: 'accs_rw',
-        scheme: item => <CopyClick>{item['domains_domain']}</CopyClick>
+        scheme: item => <TextOverflow width={56}>
+            <CopyClick>{item['domains_domain']}</CopyClick>
+        </TextOverflow>
     },
     {
-        width: 9,
+        width: 10,
         name: '',
         label: 'Логин',
-        scheme: item => <CopyClick>{item.login}</CopyClick>
+        scheme: item => <TextOverflow width={56}>
+            <CopyClick>{item.login}</CopyClick>
+        </TextOverflow>
     },
     {
-        width: 9,
+        width: 10,
         name: '',
         label: 'Пароль',
-        scheme: item => <CopyClick>{item.password}</CopyClick>
+        scheme: item => <TextOverflow width={56}>
+            <CopyClick>{item.password}</CopyClick>
+        </TextOverflow>
     },
     {
         name: 'controls',
@@ -123,7 +145,6 @@ const AccountsTable = () => {
     const tableIsLoading = useSelector(state => state.acc.tableIsLoading)
     const tableForcedUpdate = useSelector(state => state.acc.tableForcedUpdate)
 
-
     const form = useForm({
         defaultValues: {
             length: 50,
@@ -137,6 +158,8 @@ const AccountsTable = () => {
         storage.acc.table(filterParams)
     }
 
+
+    useEffect(filterTable, [])
     useEffect(() => {
         if (tableForcedUpdate) filterTable()
     }, [tableForcedUpdate])

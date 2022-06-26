@@ -14,7 +14,7 @@ export const ButtonSizes = {
 const Button = (
     {
         children,
-        onClick = null,
+        onClick = () => null,
         to = null,
         type = ButtonTypes.FILL,
         size = ButtonSizes.NORMAL,

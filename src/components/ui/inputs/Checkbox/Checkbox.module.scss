@@ -60,7 +60,8 @@
   }
 }
 
-.field:disabled + .label {
+.label.disabled,
+.field:checked + .label.disabled {
   color: #BDBDBD;
   cursor: default;
 

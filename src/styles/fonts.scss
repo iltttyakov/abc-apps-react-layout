@@ -31,3 +31,11 @@ textarea {
     color: #FFFFFF;
   }
 }
+
+:global(.react-datepicker) {
+  font-family: 'Montserrat', 'Arial', sans-serif;
+  color: #0D062D;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+}

@@ -55,6 +55,7 @@ const GroupsTable = () => {
         storage.group.table(filterParams)
     }
 
+    useEffect(filterTable, [])
     useEffect(() => {
         if (tableForcedUpdate) filterTable()
     }, [tableForcedUpdate])

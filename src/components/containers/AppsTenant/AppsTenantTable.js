@@ -6,6 +6,7 @@ import {useSelector} from "react-redux";
 import clearFilterParams from "../../../api/clearFilterParams";
 import storage from "../../../redux/rootActions";
 import Table from "../../ui/Table/Table";
+import Role from "../Role/Role";
 
 
 const columns = [
@@ -18,10 +19,12 @@ const columns = [
     {
         name: 'controls',
         align: 'right',
-        scheme: item => <MoreButton onClick={() => {
-            storage.appTenant.modalOpen()
-            storage.appTenant.get(item.id)
-        }}/>,
+        scheme: item => <Role accessTo={item.type === 'серое' ? 'grey_rw' : 'white_rw'}>
+            <MoreButton onClick={() => {
+                storage.appTenant.modalOpen()
+                storage.appTenant.get(item.id)
+            }}/>
+        </Role>,
     }
 ]
 

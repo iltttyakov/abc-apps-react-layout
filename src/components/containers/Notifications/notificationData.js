@@ -8,7 +8,6 @@ export const notificationDefaultValues = {
     time: '',
     repeat_period: 'once',
     smart_type: 'install_noreg',
-    owner: '0',
     apps: [],
     group_id: '0',
     settings_all_countries: false,
@@ -36,10 +35,11 @@ export const notificationAppsUnpacking = notification => {
 }
 
 
-export const notificationUnpacking = notification => {
+export const notificationUnpacking = (notification, userId) => {
     return notification
         ? {
             ...notificationDefaultValues,
+            owner: userId,
             ...notification,
             apps: notificationAppsUnpacking(notification),
             settings_active: notification.settings_active === '1',
@@ -53,7 +53,6 @@ export const notificationPackaging = (data, notification = {}) => {
     const clearData = {
         ...notification,
         ...data,
-        countries: data['countries'] ? data['countries'].join(',') : ''
     }
 
     if (!clearData['settings_active']) delete clearData['settings_active']

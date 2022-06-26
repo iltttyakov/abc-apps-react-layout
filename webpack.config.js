@@ -63,9 +63,9 @@ module.exports = {
     devServer: {
         historyApiFallback: true,
     },
-    optimization: {
-        minimizer: [new UglifyJsPlugin()],
-    },
+    // optimization: {
+    //     minimizer: [new UglifyJsPlugin()],
+    // },
     plugins: [
         new HtmlWebPackPlugin({
             template: './src/index.html',

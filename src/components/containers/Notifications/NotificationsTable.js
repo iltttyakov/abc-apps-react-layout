@@ -42,7 +42,6 @@ const NotificationsTable = () => {
         const filterParams = clearFilterParams(form.getValues())
         if (filterParams['search_status'] === '-') delete filterParams['search_status']
 
-
         actions.notification.table(filterParams)
     }
 
@@ -58,6 +57,7 @@ const NotificationsTable = () => {
         }
     }
     useEffect(filterTable, [])
+
 
     const columns = [
         {
@@ -96,21 +96,41 @@ const NotificationsTable = () => {
             scheme: item => <CopyClick>{item.heading}</CopyClick>
         },
         {
-            width: 14,
-            scheme: item => item['heading_status'] === 'Отменен'
-                ? <StatusTag status={StatusTypes.BAN}>{item['heading_status']}</StatusTag>
-                : item['heading_status']
+            width: 8,
+            scheme: item => {
+                let statusType = null
+
+                switch (item['heading_status']) {
+                    case 'Отменен':
+                        statusType = StatusTypes.BAN
+                        break
+                    case 'запланирован':
+                        statusType = StatusTypes.MODERATION
+                        break
+                    case 'отправлен':
+                        statusType = StatusTypes.READY
+                        break
+                }
+
+                return statusType
+                    ? <StatusTag
+                        status={statusType}
+                        style={{width: 120}}
+                    >
+                        {item['heading_status']}
+                    </StatusTag>
+                    : item['heading_status']
+            }
         },
         {
             width: 14,
             sortable: true,
             label: 'Дата',
-            name: 'heading_date',
+            name: 'date',
             scheme: item => <CopyClick>{item['heading_date']}</CopyClick>
         },
         {
             width: 23,
-            sortable: true,
             label: 'Текст',
             name: 'text',
             scheme: item => <CopyClick>{item.text}</CopyClick>
@@ -119,18 +139,20 @@ const NotificationsTable = () => {
             width: 13,
             sortable: true,
             label: 'Владелец',
-            name: 'users_login',
+            name: 'owner',
             rights: 'notifications_all',
             scheme: item => <CopyClick>{item['users_login']}</CopyClick>
         },
         {
             width: 9,
             header: 'Получено',
+            label: 'Получено',
             scheme: item => <CopyClick>{item.successful}</CopyClick>
         },
         {
             width: 4,
             header: 'CTR, %',
+            label: 'CTR, %',
             scheme: item => <CopyClick>{item.ctr}</CopyClick>
         },
         {
@@ -147,7 +169,11 @@ const NotificationsTable = () => {
 
     return (
         <>
-            <PageActions>
+            <div style={{
+                display: 'flex',
+                padding: '0 20px',
+                paddingRight: '50px',
+            }}>
                 <Button
                     shadow={false}
                     type={ButtonTypes.STROKE}
@@ -171,7 +197,7 @@ const NotificationsTable = () => {
                         filterTable()
                     }}
                 />
-            </PageActions>
+            </div>
             <Table
                 columns={columns}
                 data={table}

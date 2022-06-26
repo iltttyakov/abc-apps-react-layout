@@ -5,8 +5,7 @@ import TextInput, {TextInputSizes} from "../../ui/inputs/TextInput/TextInput";
 import {useForm} from "react-hook-form";
 import Button, {ButtonSizes} from "../../ui/Button/Button";
 import storage from "../../../redux/rootActions";
-import Cookies from "universal-cookie";
-import {useSelector} from "react-redux";
+import validatePassword from "../../../helpers/validatePassword";
 
 
 const Login = () => {
@@ -46,6 +45,9 @@ const Login = () => {
                         inputType={'password'}
                         validation={{
                             required: true,
+                            minLength: 8,
+                            maxLength: 32,
+                            validate: validatePassword,
                         }}
                     />
                     <Button

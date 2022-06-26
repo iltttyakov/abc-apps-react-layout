@@ -7,6 +7,7 @@ import {useSelector} from "react-redux";
 import clearFilterParams from "../../../api/clearFilterParams";
 import storage from "../../../redux/rootActions";
 import Table from "../../ui/Table/Table";
+import Role from "../Role/Role";
 
 
 const columns = [
@@ -14,15 +15,21 @@ const columns = [
         width: 90,
         name: 'name',
         label: 'Название',
-        scheme: item => <AppName name={item['name']} icon={item['icon']} linkStore={item['link_store']}/>
+        scheme: item => <AppName
+            name={item['name']}
+            icon={item['icon']}
+            linkStore={item['link_store']}
+        />
     },
     {
         name: 'controls',
         align: 'right',
-        scheme: item => <MoreButton onClick={() => {
-            storage.appBuyer.modalOpen()
-            storage.appBuyer.get(item.id)
-        }}/>,
+        scheme: item => <Role accessTo={'apps_buyer'}>
+            <MoreButton onClick={() => {
+                storage.appBuyer.modalOpen()
+                storage.appBuyer.get(item.id)
+            }}/>
+        </Role>,
     }
 ]
 
@@ -46,6 +53,8 @@ const AppsBuyerTable = () => {
         storage.appBuyer.table(filterParams)
     }
 
+
+    useEffect(filterTable, [])
     useEffect(() => {
         if (tableForcedUpdate) filterTable()
     }, [tableForcedUpdate])

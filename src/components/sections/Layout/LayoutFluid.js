@@ -14,7 +14,7 @@ const LayoutFluid = ({title, actions, children}) => {
                 <main className={cls.main}>
                     {
                         title || actions
-                            ? <div className={cls.pageHeader}>
+                            ? <div className={cls.pageHeaderFluid}>
                                 <h1 className={cls.title}>{title}</h1>
                                 <div className={cls.actions}>
                                     {actions}

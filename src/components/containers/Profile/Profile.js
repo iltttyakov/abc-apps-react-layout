@@ -24,6 +24,7 @@ const Profile = () => {
             form.setError('new_password', {type: 'custom', message: ''})
             form.setError('new_password_repeat', {type: 'custom', message: 'Пароли должны совпадать'})
         }
+
         if (!hasErrors) onSubmit(data)
     }
     const submit = () => form.handleSubmit(validateBeforeSubmit)()

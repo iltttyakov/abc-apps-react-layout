@@ -45,6 +45,7 @@ const RadioButtonList = (
                                     register={register}
                                     validation={validation}
                                     errors={errors}
+                                    disabled={option['disable'] ?? false}
                                 />
                             </li>
                         )

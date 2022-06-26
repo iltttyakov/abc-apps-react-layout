@@ -2,14 +2,14 @@ export const appDefaultValues = {
     id: '',
     name: '',
     package: '',
-    type: "white",
-    store: "playMarket",
+    type: 'white',
+    store: 'playMarket',
     account: '',
     buyer: '0',
     date_create: '',
     date_approve: '',
     date_ban: '',
-    mode: 'true',
+    mode: 'false',
     proxy_host: '',
     proxy_port: '',
     proxy_login: '',
@@ -27,7 +27,7 @@ export const appDefaultValues = {
     onesignal_key: '',
     creator: '',
     builder: '',
-    naming: 'true',
+    naming: 'false',
     link: '',
     countries: '',
     fields: [{key: '', val: ''}]
@@ -36,11 +36,11 @@ export const appDefaultValues = {
 export const appUnpacking = app => {
     return app
         ? {
-            countries: app.countries.split(','),
-            tenants: app.tenants.split(','),
-            fields: [...app.fields, {key: '', val: ''}],
-            link: app.link_store,
             ...app,
+            countries: app.countries ? app.countries.split(',') : '',
+            tenants: app.tenants ? app.tenants.split(',') : '',
+            fields: [...app.fields, {key: '', val: ''}],
+            // link: app.link_store ? app.link_store : '',
         }
         : appDefaultValues
 }
@@ -51,6 +51,7 @@ export const appPacking = (data, app = {}) => {
             return {key: field.key, value: field.val}
         }
     })
+    data['link'] = data['link'] ? data['link'] : ''
 
     return {
         ...app,

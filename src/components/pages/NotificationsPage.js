@@ -1,14 +1,19 @@
-import React, {useState} from 'react';
+import React, {useEffect} from 'react';
 import Layout from "../sections/Layout/Layout";
-
 import Button, {ButtonTypes} from "../ui/Button/Button";
-import {useForm} from "react-hook-form";
 import NotificationsTable from "../containers/Notifications/NotificationsTable";
 import paths from "../paths";
 import TabLinks from "../ui/TabLinks/TabLinks";
+import setTitle from "../../helpers/seo";
+import storage from "../../redux/rootActions";
 
 
 const NotificationsPage = () => {
+    useEffect(() => {
+        setTitle('Уведомления')
+        storage.auth.get()
+    }, [])
+
     return (
         <Layout
             title={'Уведомления'}

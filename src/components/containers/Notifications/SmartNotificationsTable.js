@@ -10,7 +10,6 @@ import MoreButton from "../../ui/MoreButton/MoreButton";
 import storage from "../../../redux/rootActions";
 import {urls} from "../../paths";
 import Checkbox from "../../ui/inputs/Checkbox/Checkbox";
-import PageActions from "../../ui/PageActions/PageActions";
 import Button, {ButtonTypes} from "../../ui/Button/Button";
 import FilterPanel from "../../ui/FilterPanel/FilterPanel";
 
@@ -20,13 +19,12 @@ const SmartNotificationsTable = () => {
     const tableFilteredCount = useSelector(state => state.notification.tableFilteredCount)
     const tableIsLoading = useSelector(state => state.notification.tableIsLoading)
 
-
     const form = useForm({
         defaultValues: {
             length: 50,
             list: 1,
             page: '1',
-            search_status: ['отправлен', 'запланирован']
+            search_status: ['смарт \\(отправлен\\)', 'смарт \\(запланирован\\)']
         },
     })
     const checkForm = useForm({
@@ -95,6 +93,21 @@ const SmartNotificationsTable = () => {
         },
         {
             width: 14,
+            scheme: item => {
+                if (item['heading_status'] === 'Отменен') {
+                    return <StatusTag status={StatusTypes.BAN}>{item['heading_status']}</StatusTag>
+                }
+                if (item['heading_status'] === 'смарт (запланирован)') {
+                    return <StatusTag status={StatusTypes.MODERATION}>запланирован</StatusTag>
+                }
+                if (item['heading_status'] === 'смарт (отправлен)') {
+                    return <StatusTag status={StatusTypes.READY}>отправлен</StatusTag>
+                }
+                return item['heading_status']
+            }
+        },
+        {
+            width: 14,
             sortable: true,
             label: 'Дата',
             name: 'heading_date',
@@ -118,11 +131,13 @@ const SmartNotificationsTable = () => {
         {
             width: 9,
             header: 'Получено',
+            label: 'Получено',
             scheme: item => <CopyClick>{item.successful}</CopyClick>
         },
         {
             width: 4,
             header: 'CTR, %',
+            label: 'CTR, %',
             scheme: item => <CopyClick>{item.ctr}</CopyClick>
         },
         {
@@ -139,7 +154,11 @@ const SmartNotificationsTable = () => {
 
     return (
         <>
-            <PageActions>
+            <div style={{
+                display: 'flex',
+                padding: '0 20px',
+                paddingRight: '50px',
+            }}>
                 <Button
                     shadow={false}
                     type={ButtonTypes.STROKE}
@@ -152,8 +171,8 @@ const SmartNotificationsTable = () => {
                 <FilterPanel
                     name={'search_status'}
                     options={[
-                        {value: 'отправлен', label: 'Отправлен'},
-                        {value: 'запланирован', label: 'Запланирован'},
+                        {value: 'смарт \\(отправлен\\)', label: 'Отправлен'},
+                        {value: 'смарт \\(запланирован\\)', label: 'Запланирован'},
                         {value: 'отменен', label: 'Отменен'},
                         {value: '-', label: 'Все уведомления'},
                     ]}
@@ -163,7 +182,7 @@ const SmartNotificationsTable = () => {
                         filterTable()
                     }}
                 />
-            </PageActions>
+            </div>
             <Table
                 columns={columns}
                 data={table}

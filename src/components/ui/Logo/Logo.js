@@ -28,7 +28,7 @@ const Logo = () => {
                 width={64} height={64}
                 alt={'Логотип'}
             />
-            <NavLink to={paths.BoardPage} className={cls.link}/>
+            <NavLink to={paths.HomePage} className={cls.link}/>
         </div>
     );
 };

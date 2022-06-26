@@ -40,6 +40,7 @@ const DomainsTable = () => {
         storage.domain.table(filterParams)
     }
 
+    useEffect(filterTable, [])
     useEffect(() => {
         if (tableForcedUpdate) filterTable()
     }, [tableForcedUpdate])

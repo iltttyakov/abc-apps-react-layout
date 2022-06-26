@@ -1,13 +1,18 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import LayoutFluid from "../sections/Layout/LayoutFluid";
-import Container from "../ui/Container/Container";
-
 import Button, {ButtonTypes} from "../ui/Button/Button";
 import paths from "../paths";
-import NotificationSingle from "../containers/Notifications/NotificationSingle";
+import NotificationNew from "../containers/Notifications/NotificationNew";
+import setTitle from "../../helpers/seo";
+import storage from "../../redux/rootActions";
 
 
 const NotificationNewPage = () => {
+    useEffect(() => {
+        setTitle('Новое уведомление')
+        storage.auth.get()
+    }, [])
+
     return (
         <LayoutFluid
             title={'Добавить новое уведомление'}
@@ -20,7 +25,7 @@ const NotificationNewPage = () => {
                 </Button>
             }
         >
-            <NotificationSingle/>
+            <NotificationNew/>
         </LayoutFluid>
     );
 };

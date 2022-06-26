@@ -4,7 +4,7 @@ const initialState = {
     table: [],
     tableFilteredCount: null,
     tableIsLoading: true,
-    tableForcedUpdate: true,
+    tableForcedUpdate: false,
 
     modalIsOpen: false,
 

@@ -13,6 +13,8 @@
 }
 
 .fieldContainer {
+  position: relative;
+
   display: flex;
   align-items: center;
   width: 100%;
@@ -44,6 +46,8 @@
 }
 
 .field {
+  position: relative;
+
   width: 100%;
   height: 38px;
 
@@ -64,8 +68,36 @@
     color: #BDBDBD;;
   }
 
+  &[type='date'] {
+    letter-spacing: -.05em;
+
+    & + .icon {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+
+      transform: translate(0, -50%);
+    }
+  }
+
   &::-webkit-calendar-picker-indicator {
-    display: none;
+    position: absolute;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    width: 20px;
+    height: auto;
+
+    color: transparent;
+    background: transparent;
+
+    cursor: pointer;
+  }
+
+  &:-webkit-autofill {
+    -webkit-box-shadow: inset 0 0 0 50px #fff !important;
   }
 }
 
@@ -75,13 +107,20 @@
   }
 }
 
-.field[type='date'] {
-  letter-spacing: -.05em;
-}
-
 .icon {
   flex-shrink: 0;
   margin-left: 2px;
+}
+
+.counter {
+  position: relative;
+  top: -5px;
+
+  margin: 0;
+
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 24px;
 }
 
 .errorText {
@@ -112,5 +151,12 @@
     .fieldContainer {
       background-color: #160E3D;
     }
+  }
+
+  .field:-webkit-autofill {
+    -webkit-box-shadow: inset 0 0 0 50px #0D062D !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    color: #FFFFFF !important;
+    caret-color: #FFFFFF !important;
   }
 }

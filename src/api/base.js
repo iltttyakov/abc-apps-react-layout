@@ -41,6 +41,11 @@ function base(
                 }
             )
                 .then(response => {
+                    if (response.data.msg === 'Ошибка авторизации' && method !== methods.auth.get) {
+                        window.location.href = '/'
+                        reject(response.data)
+                    }
+
                     if (response.data.msg !== 'OK') {
                         reject(response.data)
                     } else {
@@ -48,6 +53,9 @@ function base(
                     }
                 })
                 .catch(response => {
+                    if (response.data.msg === 'Ошибка авторизации' && method !== methods.auth.get) {
+                        window.location.href = '/'
+                    }
                     reject(response)
                 })
         })

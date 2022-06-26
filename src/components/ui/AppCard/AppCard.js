@@ -9,7 +9,8 @@ import {urls} from "../../paths";
 
 const appTypes = {
     white: 'white',
-    grey: 'grey'
+    grey: 'grey',
+    ban: 'ban',
 }
 
 
@@ -23,6 +24,7 @@ const AppCard = (
         mode,
         link_store,
         id,
+        color,
 
         white_status,
         accountStatus,
@@ -30,9 +32,22 @@ const AppCard = (
 ) => {
     const boxCls = [cls.box]
 
-
     if (accountStatus === accStatuses.ban) {
         boxCls.push(cls.red)
+    } else if (type === 'grey') {
+        switch (color) {
+            case whiteStatuses.approve:
+                boxCls.push(cls.green)
+                break
+            case whiteStatuses.create:
+                boxCls.push(cls.yellow)
+                break
+            case whiteStatuses.ban:
+                boxCls.push(cls.red)
+                break
+            default:
+                boxCls.push(cls.grey)
+        }
     } else {
         switch (white_status) {
             case whiteStatuses.approve:

@@ -5,15 +5,21 @@ import {useSelector} from "react-redux";
 import SelectInput from "../../ui/inputs/SelectInput/SelectInput";
 import storage from "../../../redux/rootActions";
 import Role from "../Role/Role";
+import accessCheck from "../../../helpers/accessCheck";
 
 
 const StreamForm = ({form, onSubmit}) => {
+    const userRights = useSelector(state => state.auth.rights)
     const owners = useSelector(state => state.stream.owners)
-    useEffect(storage.stream.getOwners, [])
+    useEffect(() => {
+        if (accessCheck(userRights, 'streams_all')) {
+            storage.stream.getOwners()
+        }
+    }, [])
     const apps = useSelector(state => state.stream.apps)
     useEffect(storage.stream.getApps, [])
 
-    const {handleSubmit, register, formState: {errors}, control, getValues} = form
+    const {handleSubmit, register, formState: {errors}, control, getValues, watch} = form
 
 
     return (
@@ -71,12 +77,16 @@ const StreamForm = ({form, onSubmit}) => {
                             name={'app'}
                             control={control}
                             multiple={false}
-                            options={apps.map(
-                                app => ({label: app.name, value: app.id})
-                            )}
+                            options={[
+                                watch('apps_name') && watch('app')
+                                    ? {label: watch('apps_name'), value: watch('app')}
+                                    : {},
+                                ...apps.map(app => ({label: app.name, value: app.id}))
+                            ]}
                             validation={{
                                 required: true,
                             }}
+                            disabled={watch('naming') === ''}
                         />
                     </Form.Field>
                 </Form.Column>

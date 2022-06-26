@@ -2,11 +2,12 @@ import documentation from "../documentation";
 
 export const urls = {
     AppSinglePage: id => `/apps/${id}`,
-    NotificationSinglePage: id => `/notifications/${id}`
+    NotificationSinglePage: id => `/notifications/${id}`,
+    AccountsPage: id => `/accounts?id=${id}`
 }
 
 export default {
-    BoardPage: '/',
+    HomePage: '/',
     AppPage: '/apps/:id(\\d+)',
     NewAppPage: '/apps/new',
     AppsPage: '/apps',
@@ -20,6 +21,7 @@ export default {
     NotificationSinglePage: '/notifications/:id(\\d+)',
     NotificationNewPage: '/notifications/new',
     GroupsPage: '/groups',
+    SmartNotificationNewPage: '/smart-notifications/new',
     SmartNotificationsPage: '/smart-notifications',
     UsersPage: '/users',
     LoginPage: '/login',

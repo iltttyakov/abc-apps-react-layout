@@ -25,6 +25,14 @@
   padding-right: 50px;
 }
 
+.pageHeaderFluid {
+  display: flex;
+  align-items: center;
+  min-height: 60px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
 .title {
   margin: 0;
 

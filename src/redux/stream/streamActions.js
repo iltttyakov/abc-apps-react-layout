@@ -19,9 +19,8 @@ const table = body => {
             })
             .catch(response => {
                 errorToasty(response.msg)
-                console.log(response)
             })
-            .finally(() => {
+            .finally(response => {
                 dispatch(createAction(streamActionTypes.table.finish))
             })
     }
@@ -36,7 +35,7 @@ const get = (id) => {
             })
             .catch(response => {
                 errorToasty(response.msg)
-                console.log(response)
+                console.log('stream.get', response)
             })
             .finally(() => {
                 dispatch(createAction(streamActionTypes.get.finish))
@@ -53,7 +52,7 @@ const getOwners = () => {
             })
             .catch(response => {
                 errorToasty(response.msg)
-                console.log(response)
+                console.log('stream.getOwners', response)
             })
             .finally(() => dispatch(createAction(streamActionTypes.getOwners.finish)))
     }
@@ -68,7 +67,7 @@ const getApps = () => {
             })
             .catch(response => {
                 errorToasty(response.msg)
-                console.log(response)
+                console.log('stream.getApps', response)
             })
             .finally(() => {
                 dispatch(createAction(streamActionTypes.getApps.finish))

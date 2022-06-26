@@ -3,10 +3,49 @@
   align-items: flex-end;
 }
 
-.input {
-  margin-right: 20px;
+.container {
+  position: relative;
   max-width: 250px;
   width: 100%;
+  margin-right: 20px;
+
+  display: flex;
+
+  :global(.react-datepicker-wrapper) {
+    position: absolute;
+    z-index: 10;
+    bottom: 0;
+  }
+
+  :global(.react-datepicker-popper) {
+    z-index: 20;
+  }
+}
+
+.input {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+}
+
+.iconButton {
+  position: absolute;
+  z-index: 9;
+  right: 10px;
+  bottom: -7px;
+
+  padding: 0;
+
+  transform: translate(0, -50%);
+  background-color: transparent;
+  border: none;
+
+  cursor: pointer;
+}
+
+.icon {
+
 }
 
 .today {
@@ -15,4 +54,5 @@
 
 .controls {
   width: 143px;
+  margin-bottom: 6px;
 }

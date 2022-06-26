@@ -1,16 +1,24 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Button from "../ui/Button/Button";
 import paths from "../paths";
 import Layout from "../sections/Layout/Layout";
 import SmartNotificationsTable from "../containers/Notifications/SmartNotificationsTable";
 import TabLinks from "../ui/TabLinks/TabLinks";
+import setTitle from "../../helpers/seo";
+import storage from "../../redux/rootActions";
+
 
 const SmartNotificationsPage = () => {
+    useEffect(() => {
+        setTitle('Уведомления')
+        storage.auth.get()
+    }, [])
+
     return (
         <Layout
             title={'Уведомления'}
             actions={
-                <Button to={paths.NotificationNewPage}>
+                <Button to={paths.SmartNotificationNewPage}>
                     Добавить новое уведомление
                 </Button>
             }

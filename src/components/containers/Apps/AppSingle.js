@@ -7,9 +7,10 @@ import AppForm from "./AppForm";
 import Actions from "../../ui/Actions/Actions";
 import {deleteConfirm} from "../../../helpers/swal";
 import {Prompt, useHistory} from "react-router-dom";
-import paths from "../../paths";
 import Loader from "../../ui/Loader/Loader";
 import {appDefaultValues, appPacking, appUnpacking, appValidate} from "./appData";
+import RoleFunc from "../Role/RoleFunc";
+import inArray from "../../../helpers/inArray";
 
 
 const AppSingle = ({id}) => {
@@ -36,7 +37,7 @@ const AppSingle = ({id}) => {
             storage.app.edit(
                 appPacking(data, app),
                 data.icon[0],
-                () => history.push(paths.AppsPage)
+                () => history.goBack()
             )
         }
     }
@@ -49,7 +50,7 @@ const AppSingle = ({id}) => {
         deleteConfirm(() => {
             setShouldCheckDirty(false)
             storage.app.del(app.id)
-            history.push(paths.AppsPage)
+            history.goBack()
         })
     }
 
@@ -63,22 +64,40 @@ const AppSingle = ({id}) => {
             <Actions
                 align={'center'}
                 items={[
-                    <Button
-                        type={ButtonTypes.STROKE}
-                        size={ButtonSizes.BIG}
-                        buttonType={'button'}
-                        onClick={del}
-                    >
-                        Удалить
-                    </Button>,
-                    <Button
-                        type={ButtonTypes.FILL}
-                        size={ButtonSizes.BIG}
-                        buttonType={'button'}
-                        onClick={submit}
-                    >
-                        Сохранить
-                    </Button>
+                    <RoleFunc callback={rights => {
+                        if (app) {
+                            return app.type === 'grey'
+                                ? inArray(rights, 'grey_rw') && inArray(rights, 'apps_del')
+                                : inArray(rights, 'white_rw') && inArray(rights, 'apps_del')
+                        }
+                        return false
+                    }}>
+                        <Button
+                            type={ButtonTypes.STROKE}
+                            size={ButtonSizes.BIG}
+                            buttonType={'button'}
+                            onClick={del}
+                        >
+                            Удалить
+                        </Button>
+                    </RoleFunc>,
+                    <RoleFunc callback={rights => {
+                        if (app) {
+                            return app.type === 'grey'
+                                ? inArray(rights, 'grey_rw')
+                                : inArray(rights, 'white_rw')
+                        }
+                        return false
+                    }}>
+                        <Button
+                            type={ButtonTypes.FILL}
+                            size={ButtonSizes.BIG}
+                            buttonType={'button'}
+                            onClick={submit}
+                        >
+                            Сохранить
+                        </Button>
+                    </RoleFunc>
                 ]}
             />
         </Loader>

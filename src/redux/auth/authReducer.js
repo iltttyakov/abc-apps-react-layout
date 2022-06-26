@@ -36,11 +36,20 @@ export default function authReducer(state = initialState, action) {
 
         /** GET **/
         case authActionTypes.get.start:
-            return {...state, getInProgress: true}
+            return {
+                ...state,
+                getInProgress: true
+            }
         case authActionTypes.get.success:
-            return {...state, ...action.payload.res}
+            return {
+                ...state,
+                ...action.payload.res
+            }
         case authActionTypes.get.finish:
-            return {...state, getInProgress: false}
+            return {
+                ...state,
+                getInProgress: false
+            }
         /** END GET **/
 
 

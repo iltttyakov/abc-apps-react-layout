@@ -13,13 +13,13 @@ const themeTypes = {
 
 
 const ThemeSwitch = () => {
+    const login = useSelector(state => state.auth.login)
     const theme = useSelector(state => state.auth.theme)
 
     const themeSwitchHandler = () => {
         const newTheme = theme === themeTypes.night
             ? themeTypes.day
             : themeTypes.night
-
         actions.auth.editTheme(newTheme)
     }
 
@@ -27,8 +27,9 @@ const ThemeSwitch = () => {
         document.body.className = theme
     }, [theme])
 
-    return (
-        <div className={cls.box}>
+
+    return login
+        ? <div className={cls.box}>
             <Icons className={cls.icon} size={20} name={'sun'}/>
             <Toggle
                 className={cls.toggle}
@@ -37,7 +38,7 @@ const ThemeSwitch = () => {
             />
             <Icons className={cls.icon} size={20} name={'moon'}/>
         </div>
-    );
+        : null
 };
 
 export default ThemeSwitch;

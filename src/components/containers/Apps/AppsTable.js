@@ -14,6 +14,8 @@ import CheckIcon from "../../ui/CheckIcon/CheckIcon";
 import MoreButton from "../../ui/MoreButton/MoreButton";
 import CopyClick from "../../ui/CopyClick/CopyClick";
 import Role from "../Role/Role";
+import RoleFunc from "../Role/RoleFunc";
+import inArray from "../../../helpers/inArray";
 
 
 const columns = [
@@ -22,7 +24,12 @@ const columns = [
         name: 'name',
         label: 'Название',
         sortable: true,
-        scheme: item => <AppName name={item['name']} icon={item['icon']} linkStore={item['link_store']}/>
+        scheme: item => <AppName
+            name={item['name']}
+            icon={item['icon']}
+            linkStore={item['link_store']}
+            style={{maxWidth: 120}}
+        />
     },
     {
         width: 6,
@@ -103,10 +110,18 @@ const columns = [
         scheme: item => <CheckIcon check={item.mode === 'true'}/>,
     },
     {
+        align: 'right',
         name: 'controls',
-        scheme: item => <Role accessTo={item.type === 'grey' ? 'grey_rw' : 'white_rw'}>
-            <MoreButton url={urls.AppSinglePage(item.id)}/>
-        </Role>,
+        scheme: item =>
+            <RoleFunc callback={rights => {
+                if (item.type === 'серое') {
+                    return inArray(rights, 'grey_r') || inArray(rights, 'grey_rw')
+                } else {
+                    return inArray(rights, 'white_r') || inArray(rights, 'white_rw')
+                }
+            }}>
+                <MoreButton url={urls.AppSinglePage(item.id)}/>
+            </RoleFunc>,
     }
 ]
 
@@ -119,6 +134,7 @@ const AppsTable = () => {
     const form = useForm({
         defaultValues: {
             search_status: ['опубликовано', 'на модерации'],
+            search_type: 'серое',
             length: 50,
             list: 1,
         },
@@ -127,6 +143,7 @@ const AppsTable = () => {
     const filterTable = (resetPagination = true) => {
         if (resetPagination) form.setValue('list', 1)
         const filterParams = clearFilterParams(form.getValues())
+
         if (filterParams['search_status'] === '-') delete filterParams['search_status']
 
         storage.app.table(filterParams)
@@ -135,6 +152,7 @@ const AppsTable = () => {
     const searchStatusChangeHandler = (e) => {
         if (e.target.value === '-') {
             form.setValue('search_status', ['-'])
+            form.setValue('search_type', ['серое', 'белое'])
         } else {
             const currentArray = form.getValues('search_status')
             const newArray = currentArray.filter(function (item) {

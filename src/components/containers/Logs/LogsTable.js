@@ -68,7 +68,7 @@ const LogsTable = () => {
     const form = useForm(
         {
             defaultValues: {
-                page: '1',
+                page: '0',
                 list: 1,
                 length: 50,
             }
@@ -78,8 +78,6 @@ const LogsTable = () => {
     const filterTable = (resetPagination = true) => {
         if (resetPagination) form.setValue('list', 1)
         const filterParams = clearFilterParams(form.getValues())
-
-        console.log(filterParams)
         storage.log.table(filterParams)
     }
     useEffect(filterTable, [])

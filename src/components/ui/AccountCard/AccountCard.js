@@ -6,6 +6,12 @@ import SoftIcon from "../SoftIcon/SoftIcon";
 import AppCard from "../AppCard/AppCard";
 import storage from "../../../redux/rootActions";
 import {ToastContainer, toast} from 'react-toastify';
+import {NavLink} from "react-router-dom";
+import {urls} from "../../paths";
+import {useForm} from "react-hook-form";
+import actions from "../Actions/Actions";
+import {useSelector} from "react-redux";
+import Role from "../../containers/Role/Role";
 
 
 export const accStatuses = {
@@ -23,13 +29,7 @@ export const whiteStatuses = {
 
 const AccountCard = (
     {
-        icon = null,
-        backgroundColor = 'grey',
-        date = null,
-        card,
-
         id,
-        max_id,
         vpage,
 
         soft,
@@ -44,10 +44,18 @@ const AccountCard = (
         isHiddenPage,
     }
 ) => {
-    let [footerIsOpen, setFooterIsOpen] = useState(false)
+    let [footerIsOpen, setFooterIsOpen] = useState(!!note)
     let [isHide, setIsHide] = useState(false)
 
+    const editNoteInProcess = useSelector(state => state.board.editAccNoteInProcess)
+    const noteForm = useForm({
+        defaultValues: {
+            note: note,
+        }
+    })
+
     const headerCls = [cls.header]
+
     if (vpage === '2') {
         switch (status) {
             case accStatuses.farm:
@@ -77,6 +85,20 @@ const AccountCard = (
             })
     }
 
+    const resetForm = newNote => {
+        noteForm.reset({
+            note: newNote
+        })
+    }
+
+    const onSubmit = data => {
+        storage.board.editAccNote(id, data.note, () => resetForm(data.note))
+    }
+
+    const submit = () => {
+        noteForm.handleSubmit(onSubmit)()
+    }
+
     return (
         <div className={[
             cls.box, className,
@@ -88,7 +110,9 @@ const AccountCard = (
                     <SoftIcon soft={soft} className={cls.accountIcon}/>
                 </div>
                 <h4 className={cls.title}>
-                    {name}
+                    <NavLink className={cls.titleLink} to={urls.AccountsPage(id)} target={'_blank'}>
+                        {name}
+                    </NavLink>
                 </h4>
 
                 <div className={cls.headerRight}>
@@ -112,14 +136,16 @@ const AccountCard = (
                         />
                     </button>
 
-                    <button
-                        className={cls.hideButton}
-                        onClick={() => {
-                            hideCardHandler(id)
-                        }}
-                    >
-                        <Icons className={cls.hideIcon} size={24} name={'close'}/>
-                    </button>
+                    <Role accessTo={isHiddenPage ? 'board_add' : 'board_del'}>
+                        <button
+                            className={cls.hideButton}
+                            onClick={() => {
+                                hideCardHandler(id)
+                            }}
+                        >
+                            <Icons className={cls.hideIcon} size={24} name={'close'}/>
+                        </button>
+                    </Role>
                 </div>
 
             </div>
@@ -143,17 +169,31 @@ const AccountCard = (
                     : null
             }
 
-            {
-                note
-                    ? <ToggleElement isOpen={footerIsOpen}>
-                        <div className={cls.footer}>
-                            <p>
-                                {note}
-                            </p>
-                        </div>
-                    </ToggleElement>
-                    : null
-            }
+            <ToggleElement isOpen={footerIsOpen}>
+                <div className={cls.footer}>
+                    <form className={cls.noteForm} onSubmit={noteForm.handleSubmit(onSubmit)}>
+                        <input
+                            type={'text'}
+                            className={cls.noteField}
+                            name={'note'}
+                            placeholder={'Примечание к аккаунту'}
+                            {...noteForm.register('note')}
+                        />
+                        {
+                            noteForm.formState.isDirty
+                                ? <button
+                                    className={cls.noteFormButton}
+                                    onClick={submit}
+                                    disabled={editNoteInProcess}
+                                    type={'button'}
+                                >
+                                    <Icons className={cls.noteFormIcon} size={20} name={'check'}/>
+                                </button>
+                                : null
+                        }
+                    </form>
+                </div>
+            </ToggleElement>
 
         </div>
     );
