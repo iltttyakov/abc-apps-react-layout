@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import Form, {FieldWidth} from "../../ui/Form/Form";
 import TextInput from "../../ui/inputs/TextInput/TextInput";
 import {useSelector} from "react-redux";
@@ -10,8 +10,10 @@ import accessCheck from "../../../helpers/accessCheck";
 
 const StreamForm = ({form, onSubmit, isOpen = true}) => {
     const userRights = useSelector(state => state.auth.rights)
+    const stream = useSelector(state => state.stream.active)
     const owners = useSelector(state => state.stream.owners)
     const apps = useSelector(state => state.stream.apps)
+    const [appsOptions, setAppsOptions] = useState([])
 
     useEffect(() => {
         if (accessCheck(userRights, 'streams_all') && isOpen) {
@@ -21,6 +23,24 @@ const StreamForm = ({form, onSubmit, isOpen = true}) => {
     useEffect(() => {
         if (isOpen) storage.stream.getApps()
     }, [isOpen])
+
+    useEffect(() => {
+        if (isOpen) {
+            let array = [
+                stream
+                    ? {label: stream['apps_name'], value: stream['app']}
+                    : {},
+                ...apps.map(app => ({label: app.name, value: app.id}))
+            ]
+            array = array.filter((elem, index, self) => {
+                return self.findIndex(
+                    t => (t.label === elem.label && t.id === elem.id)
+                ) === index
+            })
+
+            setAppsOptions(array)
+        }
+    }, [apps, stream, isOpen])
 
     const {handleSubmit, register, formState: {errors}, control, getValues, watch} = form
 
@@ -80,12 +100,7 @@ const StreamForm = ({form, onSubmit, isOpen = true}) => {
                             name={'app'}
                             control={control}
                             multiple={false}
-                            options={[
-                                watch('apps_name') && watch('app')
-                                    ? {label: watch('apps_name'), value: watch('app')}
-                                    : {},
-                                ...apps.map(app => ({label: app.name, value: app.id}))
-                            ]}
+                            options={appsOptions}
                             validation={{
                                 required: true,
                             }}

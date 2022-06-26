@@ -13,6 +13,7 @@ import accessCheck from "../../../helpers/accessCheck";
 
 const AccountForm = ({form, onSubmit, isOpen = true}) => {
     const userRights = useSelector(state => state.auth.rights)
+    const acc = useSelector(state => state.acc.active)
     const domains = useSelector(state => state.acc.domains)
     useEffect(() => {
         if (isOpen) storage.acc.getDomains()
@@ -237,8 +238,8 @@ const AccountForm = ({form, onSubmit, isOpen = true}) => {
                                     multiple={false}
                                     options={[
                                         {label: 'Нет', value: '0'},
-                                        watch('domains_domain') && watch('domain')
-                                            ? {label: watch('domains_domain'), value: watch('domain')}
+                                        acc
+                                            ? {label: acc['domains_domain'], value: acc['domain']}
                                             : {},
                                         ...domains.map(domain => ({label: domain.domain, value: domain.id})),
                                     ]}

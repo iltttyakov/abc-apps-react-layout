@@ -16,16 +16,16 @@ const columns = [
         label: 'Название',
         scheme: item => <AppName name={item['name']} icon={item['icon']} linkStore={item['link_store']}/>
     },
-    {
-        name: 'controls',
-        align: 'right',
-        scheme: item => <Role accessTo={item.type === 'серое' ? 'grey_rw' : 'white_rw'}>
-            <MoreButton onClick={() => {
-                storage.appTenant.modalOpen()
-                storage.appTenant.get(item.id)
-            }}/>
-        </Role>,
-    }
+    // {
+    //     name: 'controls',
+    //     align: 'right',
+    //     scheme: item => <Role accessTo={item.type === 'серое' ? 'grey_rw' : 'white_rw'}>
+    //         <MoreButton onClick={() => {
+    //             storage.appTenant.modalOpen()
+    //             storage.appTenant.get(item.id)
+    //         }}/>
+    //     </Role>,
+    // }
 ]
 
 
