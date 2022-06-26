@@ -64,7 +64,6 @@ const edit = (body, onSuccess = () => null) => {
 
 const getAccs = () => {
     return dispatch => {
-        console.log('getAccs')
         dispatch(createAction(domainActionTypes.getAccs.start))
         api.domain.getAccs()
             .then(response => {
