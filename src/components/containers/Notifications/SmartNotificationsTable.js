@@ -95,13 +95,13 @@ const SmartNotificationsTable = () => {
             width: 14,
             scheme: item => {
                 if (item['heading_status'] === 'Отменен') {
-                    return <StatusTag status={StatusTypes.BAN}>{item['heading_status']}</StatusTag>
+                    return <StatusTag style={{width: 120}} status={StatusTypes.BAN}>{item['heading_status']}</StatusTag>
                 }
                 if (item['heading_status'] === 'смарт (запланирован)') {
-                    return <StatusTag status={StatusTypes.MODERATION}>запланирован</StatusTag>
+                    return <StatusTag style={{width: 120}} status={StatusTypes.MODERATION}>запланирован</StatusTag>
                 }
                 if (item['heading_status'] === 'смарт (отправлен)') {
-                    return <StatusTag status={StatusTypes.READY}>отправлен</StatusTag>
+                    return <StatusTag style={{width: 120}} status={StatusTypes.READY}>отправлен</StatusTag>
                 }
                 return item['heading_status']
             }

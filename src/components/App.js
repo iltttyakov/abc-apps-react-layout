@@ -47,7 +47,11 @@ function App() {
     }, [])
 
     useEffect(() => {
-        if (inArray(user.rights, 'apps_buyer')) {
+        console.log(user.rights)
+
+        if (inArray(user.rights, 'board_rw')) {
+            setHomePage(() => BoardPage)
+        } else if (inArray(user.rights, 'apps_buyer')) {
             setHomePage(() => AppsBuyerPage)
         } else if (inArray(user.rights, 'apps_tenant')) {
             setHomePage(() => AppsTenantPage)

@@ -16,3 +16,9 @@
   letter-spacing: -0.011em;
   color: #0D062D;
 }
+
+:global(.night) {
+  .legend {
+    color: #FFFFFF;
+  }
+}
