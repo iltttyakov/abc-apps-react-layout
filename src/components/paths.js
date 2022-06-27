@@ -8,6 +8,7 @@ export const urls = {
 
 export default {
     HomePage: '/',
+    BoardPage: '/board',
     AppPage: '/apps/:id(\\d+)',
     NewAppPage: '/apps/new',
     AppsPage: '/apps',

@@ -11,7 +11,7 @@ const navList = [
     {
         iconName: 'menu',
         label: 'Доска',
-        link: paths.HomePage,
+        link: paths.BoardPage,
         access: rights => {
             return inArray(rights, 'board_rw')
         }

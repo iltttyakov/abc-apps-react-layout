@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {Route, Switch} from "react-router-dom"
+import {Route, Switch, Redirect} from "react-router-dom"
 
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -34,11 +34,12 @@ import AppsBuyerPage from "./pages/AppsBuyerPage";
 import AppsTenantPage from "./pages/AppsTenantPage";
 import SmartNotificationNewPage from "./pages/SmartNotificationNewPage";
 import inArray from "../helpers/inArray";
+import NotFoundPage from "./pages/NotFoundPage";
 
 
 function App() {
     const user = useSelector(state => state.auth)
-    const [homePage, setHomePage] = useState(() => BoardPage)
+    const [homePage, setHomePage] = useState(paths.BoardPage)
 
     useEffect(() => {
         if (storage.auth.isAuthorized()) {
@@ -47,20 +48,14 @@ function App() {
     }, [])
 
     useEffect(() => {
-        console.log(user.rights)
-
         if (inArray(user.rights, 'board_rw')) {
-            setHomePage(() => BoardPage)
+            setHomePage(paths.BoardPage)
         } else if (inArray(user.rights, 'apps_buyer')) {
-            setHomePage(() => AppsBuyerPage)
+            setHomePage(paths.AppsBuyerPage)
         } else if (inArray(user.rights, 'apps_tenant')) {
-            setHomePage(() => AppsTenantPage)
+            setHomePage(paths.AppsTenantPage)
         }
     }, [user])
-
-    useEffect(() => {
-        console.log('updated at 21:46')
-    }, [])
 
 
     return (
@@ -69,7 +64,8 @@ function App() {
                 {
                     !!user.login
                         ? <>
-                            <Route exact path={paths.HomePage} component={homePage}/>
+
+                            <Route exact path={paths.BoardPage} component={BoardPage}/>
                             <Route exact path={paths.AppsBuyerPage} component={AppsBuyerPage}/>
                             <Route exact path={paths.AppsTenantPage} component={AppsTenantPage}/>
                             <Route exact path={paths.AppPage} component={AppSinglePage}/>
@@ -88,6 +84,10 @@ function App() {
                             <Route exact path={paths.UsersPage} component={UsersPage}/>
                             <Route exact path={paths.DocumentationPage} component={DocumentationPage}/>
                             <Route exact path={paths.ProfilePage} component={ProfilePage}/>
+
+
+                            <Route exact path={'/'} render={() => <Redirect to={homePage}/>}/>
+                            {/*<Route path={''} component={NotFoundPage}/>*/}
                         </>
                         : <Route component={LoginPage}/>
                 }
