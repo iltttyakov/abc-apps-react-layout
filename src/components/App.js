@@ -37,6 +37,24 @@ import inArray from "../helpers/inArray";
 import NotFoundPage from "./pages/NotFoundPage";
 
 
+const appRights = rights => {
+    const store = ['apps_playMarket', 'apps_appStore', 'apps_huawei',]
+    const app = ['grey_r', 'grey_rw', 'white_r', 'white_rw']
+
+    let storeRight = false
+    store.forEach(store => {
+        storeRight = storeRight || inArray(rights, store)
+    })
+
+    let appRight = false
+    app.forEach(app => {
+        appRight = appRight || inArray(rights, app)
+    })
+
+    return storeRight && appRight
+}
+
+
 function App() {
     const user = useSelector(state => state.auth)
     const [homePage, setHomePage] = useState('/')
@@ -55,12 +73,26 @@ function App() {
                 setHomePage(paths.AppsBuyerPage)
             } else if (inArray(user.rights, 'apps_tenant')) {
                 setHomePage(paths.AppsTenantPage)
+            } else if (appRights(user.rights)) {
+                setHomePage(paths.AppsPage)
+            } else if (inArray(user.rights, 'accs_r') || inArray(user.rights, 'accs_rw')) {
+                setHomePage(paths.AccountsPage)
+            } else if (inArray(user.rights, 'streams_own') || inArray(user.rights, 'streams_all')) {
+                setHomePage(paths.StreamsPage)
+            } else if (inArray(user.rights, 'domains')) {
+                setHomePage(paths.DomainsPage)
+            } else if (inArray(user.rights, 'log')) {
+                setHomePage(paths.LogsPage)
+            } else if (inArray(user.rights, 'dev')) {
+                setHomePage(paths.DocumentationPage)
+            } else if (inArray(user.rights, 'notifications_own') || inArray(user.rights, 'notifications_all')) {
+                setHomePage(paths.NotificationsPage)
+            } else if (inArray(user.rights, 'users')) {
+                setHomePage(paths.UsersPage)
             } else {
                 setHomePage(paths.BoardPage)
             }
         }
-
-        console.log(user.rights)
     }, [user])
 
 
