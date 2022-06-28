@@ -21,7 +21,7 @@ const columns = [
     {
         scheme: item => item['is_banned'] === 'false'
             ? null
-            : <StatusTag style={{width: 50}} status={StatusTypes.BAN}>Ban</StatusTag>
+            : <StatusTag style={{width: 50}} status={StatusTypes.BAN}>ban</StatusTag>
     },
     {
         width: 8,
