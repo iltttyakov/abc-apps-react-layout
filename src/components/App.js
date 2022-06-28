@@ -48,14 +48,16 @@ function App() {
     }, [])
 
     useEffect(() => {
-        if (inArray(user.rights, 'board_rw')) {
-            setHomePage(paths.BoardPage)
-        } else if (inArray(user.rights, 'apps_buyer')) {
-            setHomePage(paths.AppsBuyerPage)
-        } else if (inArray(user.rights, 'apps_tenant')) {
-            setHomePage(paths.AppsTenantPage)
-        } else {
-            setHomePage(paths.BoardPage)
+        if (user.rights.length) {
+            if (inArray(user.rights, 'board_rw')) {
+                setHomePage(paths.BoardPage)
+            } else if (inArray(user.rights, 'apps_buyer')) {
+                setHomePage(paths.AppsBuyerPage)
+            } else if (inArray(user.rights, 'apps_tenant')) {
+                setHomePage(paths.AppsTenantPage)
+            } else {
+                setHomePage(paths.BoardPage)
+            }
         }
 
         console.log(user.rights)
@@ -72,6 +74,7 @@ function App() {
                             <Route exact path={paths.BoardPage} component={BoardPage}/>
                             <Route exact path={paths.AppsBuyerPage} component={AppsBuyerPage}/>
                             <Route exact path={paths.AppsTenantPage} component={AppsTenantPage}/>
+
                             <Route exact path={paths.AppPage} component={AppSinglePage}/>
                             <Route exact path={paths.NewAppPage} component={AppNewPage}/>
                             <Route exact path={paths.AppsPage} component={AppsPage}/>
