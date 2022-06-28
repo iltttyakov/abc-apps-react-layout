@@ -19,7 +19,9 @@ const columns = [
         scheme: item => <CopyClick>{item.login}</CopyClick>
     },
     {
-        scheme: item => item['is_banned'] === 'false' ? null : <StatusTag status={StatusTypes.BAN}>Ban</StatusTag>
+        scheme: item => item['is_banned'] === 'false'
+            ? null
+            : <StatusTag style={{width: 50}} status={StatusTypes.BAN}>Ban</StatusTag>
     },
     {
         width: 8,

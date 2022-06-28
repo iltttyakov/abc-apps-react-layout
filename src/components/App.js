@@ -39,7 +39,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
     const user = useSelector(state => state.auth)
-    const [homePage, setHomePage] = useState(paths.BoardPage)
+    const [homePage, setHomePage] = useState('/')
 
     useEffect(() => {
         if (storage.auth.isAuthorized()) {
@@ -54,7 +54,11 @@ function App() {
             setHomePage(paths.AppsBuyerPage)
         } else if (inArray(user.rights, 'apps_tenant')) {
             setHomePage(paths.AppsTenantPage)
+        } else {
+            setHomePage(paths.BoardPage)
         }
+
+        console.log(user.rights)
     }, [user])
 
 
