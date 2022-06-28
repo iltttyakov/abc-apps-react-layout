@@ -69,12 +69,12 @@ function App() {
         if (user.rights.length) {
             if (inArray(user.rights, 'board_rw')) {
                 setHomePage(paths.BoardPage)
+            } else if (appRights(user.rights)) {
+                setHomePage(paths.AppsPage)
             } else if (inArray(user.rights, 'apps_buyer')) {
                 setHomePage(paths.AppsBuyerPage)
             } else if (inArray(user.rights, 'apps_tenant')) {
                 setHomePage(paths.AppsTenantPage)
-            } else if (appRights(user.rights)) {
-                setHomePage(paths.AppsPage)
             } else if (inArray(user.rights, 'accs_r') || inArray(user.rights, 'accs_rw')) {
                 setHomePage(paths.AccountsPage)
             } else if (inArray(user.rights, 'streams_own') || inArray(user.rights, 'streams_all')) {
