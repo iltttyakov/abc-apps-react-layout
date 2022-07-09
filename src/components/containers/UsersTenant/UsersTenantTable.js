@@ -6,6 +6,10 @@ import {useSelector} from "react-redux";
 import {useForm} from "react-hook-form";
 import clearFilterParams from "../../../api/clearFilterParams";
 import Table from "../../ui/Table/Table";
+import FilterPanel from "../../ui/FilterPanel/FilterPanel";
+import Button from "../../ui/Button/Button";
+import actions from "../../../redux/rootActions";
+import Layout from "../../sections/Layout/Layout";
 
 
 const columns = [
@@ -38,7 +42,7 @@ const columns = [
     {
         width: 20,
         label: 'Баланс',
-        name: 'balance',
+        name: 'install_balance',
         sortable: true,
         scheme: item => item.install_balance
     },
@@ -62,12 +66,16 @@ const UsersTenantTable = () => {
         defaultValues: {
             length: 50,
             list: 1,
+            search_is_banned: false,
         },
     })
 
     const filterTable = (resetPagination = true) => {
         if (resetPagination) form.setValue('list', 1)
         const filterParams = clearFilterParams(form.getValues())
+
+        if (filterParams['search_is_banned'] !== 'true') delete filterParams['search_is_banned']
+        
         storage.usersTenant.table(filterParams)
     }
 
@@ -79,14 +87,39 @@ const UsersTenantTable = () => {
 
 
     return (
-        <Table
-            columns={columns}
-            data={table}
-            count={tableFilteredCount}
-            isLoading={tableIsLoading}
-            form={form}
-            onChange={filterTable}
-        />
+        <Layout
+            title={'Пользователи'}
+            actions={
+                <div style={{display: 'flex'}}>
+                    <FilterPanel
+                        name={'search_is_banned'}
+                        options={[
+                            {label: 'Бан', value: 'true'}
+                        ]}
+                        {...form}
+                        onChange={filterTable}
+                        align={'right'}
+                        style={{
+                            margin: 0,
+                            marginRight: 10,
+                            padding: 0,
+                        }}
+                    />
+                    <Button onClick={actions.usersTenant.modalOpen}>
+                        Добавить нового пользователя
+                    </Button>
+                </div>
+            }
+        >
+            <Table
+                columns={columns}
+                data={table}
+                count={tableFilteredCount}
+                isLoading={tableIsLoading}
+                form={form}
+                onChange={filterTable}
+            />
+        </Layout>
     );
 };
 
