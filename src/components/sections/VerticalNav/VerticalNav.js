@@ -50,6 +50,12 @@ const navList = [
         access: rights => inArray(rights, 'apps_tenant')
     },
     {
+        iconName: 'grid',
+        label: 'Приложения',
+        link: paths.AppsManagerPage,
+        access: rights => inArray(rights, 'apps_manager')
+    },
+    {
         iconName: 'user-scan',
         label: 'Аккаунты',
         link: paths.AccountsPage,
@@ -91,6 +97,12 @@ const navList = [
         label: 'Пользователи',
         link: paths.UsersPage,
         access: rights => inArray(rights, 'users')
+    },
+    {
+        iconName: 'two-user',
+        label: 'Пользователи',
+        link: paths.UsersTenantPage,
+        access: rights => inArray(rights, 'users_tenant')
     },
 ]
 

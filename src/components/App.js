@@ -35,6 +35,8 @@ import AppsTenantPage from "./pages/AppsTenantPage";
 import SmartNotificationNewPage from "./pages/SmartNotificationNewPage";
 import inArray from "../helpers/inArray";
 import NotFoundPage from "./pages/NotFoundPage";
+import AppsManagerPage from "./pages/AppsManagerPage";
+import UsersTenantPage from "./pages/UsersTenantPage";
 
 
 const appRights = rights => {
@@ -75,6 +77,8 @@ function App() {
                 setHomePage(paths.AppsBuyerPage)
             } else if (inArray(user.rights, 'apps_tenant')) {
                 setHomePage(paths.AppsTenantPage)
+            } else if (inArray(user.rights, 'apps_manager')) {
+                setHomePage(paths.AppsManagerPage)
             } else if (inArray(user.rights, 'accs_r') || inArray(user.rights, 'accs_rw')) {
                 setHomePage(paths.AccountsPage)
             } else if (inArray(user.rights, 'streams_own') || inArray(user.rights, 'streams_all')) {
@@ -89,6 +93,8 @@ function App() {
                 setHomePage(paths.NotificationsPage)
             } else if (inArray(user.rights, 'users')) {
                 setHomePage(paths.UsersPage)
+            } else if (inArray(user.rights, 'users_tenant')) {
+                setHomePage(paths.UsersTenantPage)
             } else {
                 setHomePage(paths.BoardPage)
             }
@@ -104,8 +110,10 @@ function App() {
                         ? <>
 
                             <Route exact path={paths.BoardPage} component={BoardPage}/>
+
                             <Route exact path={paths.AppsBuyerPage} component={AppsBuyerPage}/>
                             <Route exact path={paths.AppsTenantPage} component={AppsTenantPage}/>
+                            <Route exact path={paths.AppsManagerPage} component={AppsManagerPage}/>
 
                             <Route exact path={paths.AppPage} component={AppSinglePage}/>
                             <Route exact path={paths.NewAppPage} component={AppNewPage}/>
@@ -114,16 +122,20 @@ function App() {
                             <Route exact path={paths.StreamsPage} component={StreamsPage}/>
                             <Route exact path={paths.DomainsPage} component={DomainsPage}/>
                             <Route exact path={paths.LogsPage} component={LogsPage}/>
+
                             <Route exact path={paths.SmartNotificationsPage} component={SmartNotificationsPage}/>
                             <Route exact path={paths.SmartNotificationNewPage} component={SmartNotificationNewPage}/>
                             <Route exact path={paths.NotificationNewPage} component={NotificationNewPage}/>
                             <Route exact path={paths.NotificationSinglePage} component={NotificationSinglePage}/>
                             <Route exact path={paths.NotificationsPage} component={NotificationsPage}/>
+
                             <Route exact path={paths.GroupsPage} component={GroupsPage}/>
+
                             <Route exact path={paths.UsersPage} component={UsersPage}/>
+                            <Route exact path={paths.UsersTenantPage} component={UsersTenantPage}/>
+
                             <Route exact path={paths.DocumentationPage} component={DocumentationPage}/>
                             <Route exact path={paths.ProfilePage} component={ProfilePage}/>
-
 
                             <Route exact path={'/'} render={() => <Redirect to={homePage}/>}/>
                             {/*<Route path={''} component={NotFoundPage}/>*/}

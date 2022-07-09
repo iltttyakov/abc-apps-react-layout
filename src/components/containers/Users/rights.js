@@ -266,6 +266,7 @@ export const roleRights = {
         "board": "board_no",
         "streams": "streams_own",
         "notifications": "notifications_no",
+
         "streams_owner": "1",
         "streams_apps_buyer": false,
         "streams_apps_tenant": "1",

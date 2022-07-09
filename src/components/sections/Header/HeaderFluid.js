@@ -14,11 +14,13 @@ const HeaderFluid = () => {
                     <Logo/>
                 </div>
 
-                <div className={cls.themeSwitch}>
-                    <ThemeSwitch/>
-                </div>
+                <div className={cls.right}>
+                    <div className={cls.themeSwitch}>
+                        <ThemeSwitch/>
+                    </div>
 
-                <UserIcon/>
+                    <UserIcon/>
+                </div>
             </Container>
 
         </header>

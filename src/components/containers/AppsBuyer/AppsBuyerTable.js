@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import {urls} from "../../paths";
 import AppName from "../../ui/AppName/AppName";
 import MoreButton from "../../ui/MoreButton/MoreButton";
 import {useForm} from "react-hook-form";

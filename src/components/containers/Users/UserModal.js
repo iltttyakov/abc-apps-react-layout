@@ -8,6 +8,7 @@ import Actions from "../../ui/Actions/Actions";
 import Button, {ButtonTypes} from "../../ui/Button/Button";
 import Modal, {ModalSizes} from "../../ui/Modal/Modal";
 import {getRights, getRoleFromRights, roleRights, roles, watchingFields} from "./rights";
+import api from "../../../api/api";
 
 
 const defaultValues = {
@@ -150,10 +151,12 @@ const UserModal = () => {
             isLoading={userIsLoading}
             size={ModalSizes.BIG}
         >
+
             <UserForm
                 form={mainForm}
                 roleForm={roleForm}
                 changeRole={changeRole}
+                isOpen={modalIsOpen}
                 onSubmit={onSubmit}
             />
             <Actions

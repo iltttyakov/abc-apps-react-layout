@@ -24,7 +24,7 @@ const TextInput = (
         validation = {},
         disabled = false,
         counter = null,
-        onClick = event => null
+        onClick = event => null,
     }
 ) => {
     const id = makeId(5)
@@ -46,7 +46,7 @@ const TextInput = (
                 onFocus ? cls.focus : null,
                 errors[name] ? cls.errors : null,
                 disabled ? cls.disabled : null,
-                size === TextInputSizes.BIG ? cls.big : null
+                size === TextInputSizes.BIG ? cls.big : null,
             ].join(' ')}
         >
             {

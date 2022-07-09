@@ -1,7 +1,6 @@
 import axios from "axios";
 import methods, {BASE_API_URL} from "./methods";
 import Cookies from 'universal-cookie';
-import {useHistory} from "react-router";
 
 const cookies = new Cookies();
 

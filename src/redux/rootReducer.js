@@ -11,6 +11,9 @@ import notificationReducer from "./notification/notificationReducer";
 import groupReducer from "./group/groupReducer";
 import appBuyerReducer from "./appBuyer/appBuyerReducer";
 import appTenantReducer from "./appTenant/appTenantReducer";
+import appManagerReducer from "./appManager/appManagerReducer";
+import usersTenantReducer from "./usersTenant/usersTenantReducer";
+
 
 const rootReducer = combineReducers({
     auth: authReducer,
@@ -18,11 +21,13 @@ const rootReducer = combineReducers({
     app: appReducer,
     appBuyer: appBuyerReducer,
     appTenant: appTenantReducer,
+    appManager: appManagerReducer,
     acc: accReducer,
     log: logReducer,
     stream: streamReducer,
     domain: domainReducer,
     user: userReducer,
+    usersTenant: usersTenantReducer,
     notification: notificationReducer,
     group: groupReducer
 })

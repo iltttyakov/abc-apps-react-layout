@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Form, {FieldWidth} from "../../ui/Form/Form";
 import TextInput from "../../ui/inputs/TextInput/TextInput";
 import Checkbox from "../../ui/inputs/Checkbox/Checkbox";
@@ -6,10 +6,19 @@ import CheckedTagList from "../../ui/inputs/CheckedTagList/CheckedTagList";
 import RadioButtonList from "../../ui/inputs/RadioButtonList/RadioButtonList";
 import CheckboxList, {CheckboxListDirection, CheckboxListLabelSize} from "../../ui/inputs/CheckboxList/CheckboxList";
 import validatePassword from "../../../helpers/validatePassword";
+import SelectInput from "../../ui/inputs/SelectInput/SelectInput";
+import {useSelector} from "react-redux";
+import rootActions from "../../../redux/rootActions";
 
 
-const UserForm = ({form, onSubmit, roleForm, changeRole}) => {
+const UserForm = ({form, onSubmit, roleForm, changeRole, isOpen = false}) => {
     const {handleSubmit, register, formState: {errors}, control, getValues, setValue, reset, watch} = form
+    const organicAppsAll = useSelector(state => state.user.organicAppsAll)
+    const roles = useSelector(state => state.user.roles)
+
+    useEffect(() => {
+        if (isOpen) rootActions.user.getRoles()
+    }, [isOpen])
 
     return (
         <Form.Box onSubmit={handleSubmit(onSubmit)}>
@@ -66,6 +75,7 @@ const UserForm = ({form, onSubmit, roleForm, changeRole}) => {
                                 {label: 'Помощник', value: 'helper'},
                                 {label: 'Покупатель', value: 'client'},
                                 {label: 'Арендатор', value: 'tenant'},
+                                {label: 'Менеджер', value: 'manager'},
                             ]}
                             onClick={changeRole}
                         />
@@ -73,6 +83,7 @@ const UserForm = ({form, onSubmit, roleForm, changeRole}) => {
                 </Form.Column>
 
                 <Form.Column>
+
                     <Form.Fieldset>
                         <Form.Field width={FieldWidth.FULL}>
                             <RadioButtonList
@@ -105,6 +116,7 @@ const UserForm = ({form, onSubmit, roleForm, changeRole}) => {
                             ]}
                         />
                     </Form.Fieldset>
+
                     <Form.Fieldset>
                         <Form.Field width={FieldWidth.FULL}>
                             <RadioButtonList
@@ -120,6 +132,14 @@ const UserForm = ({form, onSubmit, roleForm, changeRole}) => {
                                 validation={{
                                     required: true
                                 }}
+                            />
+                        </Form.Field>
+                        <Form.Field width={FieldWidth.FULL}>
+                            <Checkbox
+                                register={register}
+                                name={'streams_own_buyer_tenant'}
+                                label={'Только свои, покупателей и арендаторов'}
+                                disabled={watch('streams') !== 'streams_all'}
                             />
                         </Form.Field>
                         <CheckboxList
@@ -140,12 +160,20 @@ const UserForm = ({form, onSubmit, roleForm, changeRole}) => {
                             label={'Только приложения:'}
                             labelSize={CheckboxListLabelSize.SMALL}
                         />
+                        <Form.Field>
+                            <Checkbox
+                                register={register}
+                                name={'streams_default'}
+                                label={'Создание дефолтных потоков'}
+                            />
+                        </Form.Field>
                         <Checkbox
                             register={register}
                             name={'streams_owner'}
                             label={'Можно выбрать владельцем'}
                         />
                     </Form.Fieldset>
+
                 </Form.Column>
 
             </Form.Row>
@@ -328,14 +356,65 @@ const UserForm = ({form, onSubmit, roleForm, changeRole}) => {
                             label={'Другие разделы'}
                             direction={CheckboxListDirection.COLUMN}
                             options={[
-                                {label: 'Пользователи', name: 'users', value: '1'},
-                                {label: 'Документация', name: 'dev', value: '1'},
+                                {label: 'Купленные приложения', name: 'apps_buyer', value: '1'},
+                                {label: 'Приложения менеджера', name: 'apps_manager', value: '1'},
                                 {label: 'Домены', name: 'domains', value: '1'},
                                 {label: 'Логи', name: 'log', value: '1'},
-                                {label: 'Купленные приложения', name: 'apps_buyer', value: '1'},
-                                {label: 'Арендованные приложения', name: 'apps_tenant', value: '1'},
+                                {label: 'Документация', name: 'dev', value: '1'},
+                                {label: 'Пользователи', name: 'users', value: '1'},
+                                {label: 'Редактировать арендаторов', name: 'users_tenant', value: '1'},
                             ]}
                         />
+                    </Form.Fieldset>
+                    <Form.Fieldset title={'Арендованные приложения'}>
+                        <Form.Field>
+                            <Checkbox
+                                register={register}
+                                name={'apps_tenant'}
+                                label={'Арендованные приложения'}
+                                value={'1'}
+                            />
+                        </Form.Field>
+                        <Form.Field width={FieldWidth.FULL}>
+                            <TextInput
+                                register={register}
+                                errors={errors}
+                                name={'install_balance'}
+                                label={'Баланс'}
+                                disabled={true}
+                                inputType={'number'}
+                                placeholder={0}
+                            />
+                        </Form.Field>
+                        <Form.Field width={FieldWidth.FULL}>
+                            <TextInput
+                                register={register}
+                                errors={errors}
+                                name={'install_balance_add'}
+                                label={'Пополнить'}
+                                disabled={!watch('apps_tenant')}
+                                placeholder={'Пополнить баланс'}
+                                inputType={'number'}
+                            />
+                        </Form.Field>
+                        <Form.Field width={FieldWidth.FULL}>
+                            <SelectInput
+                                label={'Приложения'}
+                                name={'organic_apps'}
+                                control={control}
+                                multiple={true}
+                                options={
+                                    Object.keys(organicAppsAll).length
+                                        ? Object.keys(organicAppsAll).map(
+                                            key => ({
+                                                label: organicAppsAll[key], value: key
+                                            })
+                                        )
+                                        : []
+                                }
+                                disabled={!watch('apps_tenant')}
+                            />
+                        </Form.Field>
                     </Form.Fieldset>
                 </Form.Column>
 

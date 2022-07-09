@@ -12,7 +12,11 @@ const initialState = {
     active: null,
     activeIsLoading: false,
 
+    organicAppsAll: {},
+
     editInProcess: false,
+
+    roles: [],
 }
 
 export default function userReducer(state = initialState, action) {
@@ -49,7 +53,8 @@ export default function userReducer(state = initialState, action) {
         case userActionTypes.get.success:
             return {
                 ...state,
-                active: action.payload
+                active: action.payload,
+                organicAppsAll: action.payload['organic_apps_all']
             }
         case userActionTypes.get.finish:
             return {
@@ -114,6 +119,19 @@ export default function userReducer(state = initialState, action) {
                 editInProcess: false
             }
         /** END DEL **/
+
+
+        /** GET ROLES **/
+        case userActionTypes.getRoles.start:
+            return {...state}
+        case userActionTypes.getRoles.success:
+            return {
+                ...state,
+                roles: action.payload
+            }
+        case userActionTypes.getRoles.finish:
+            return {...state}
+        /** END GET ROLES **/
 
 
         default:

@@ -45,7 +45,13 @@ const columns = [
             {label: 'Нейминг', value: 'naming'},
         ],
         scheme: item => <TextOverflow width={180}>
-            <CopyClick>{item.naming ? item.naming : 'organic'}</CopyClick>
+            <CopyClick>
+                {
+                    item.naming
+                        ? item.naming
+                        : item.type
+                }
+            </CopyClick>
         </TextOverflow>,
     },
     {

@@ -18,9 +18,18 @@
   align-items: center;
 }
 
+.right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.balance {
+  margin-right: 105px;
+}
+
 .themeSwitch {
   margin-right: 80px;
-  margin-left: auto;
 }
 
 :global(.night) {

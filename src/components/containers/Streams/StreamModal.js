@@ -30,6 +30,7 @@ const StreamModal = () => {
         return stream
             ? {
                 ...defaultValues,
+                'default': stream.type === 'default',
                 ...stream
             }
             : {

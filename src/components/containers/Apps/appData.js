@@ -40,7 +40,6 @@ export const appUnpacking = app => {
             countries: app.countries ? app.countries.split(',') : '',
             tenants: app.tenants ? app.tenants.split(',') : '',
             fields: [...app.fields, {key: '', val: ''}],
-            // link: app.link_store ? app.link_store : '',
         }
         : appDefaultValues
 }

@@ -80,10 +80,29 @@ const del = id => {
 }
 
 
+const getRoles = () => {
+    return dispatch => {
+        dispatch(createAction(userActionTypes.getRoles.start))
+        api.user.getRoles()
+            .then(response => {
+                dispatch(createAction(userActionTypes.getRoles.success, response.res))
+            })
+            .catch(response => {
+                errorToasty(response.msg)
+                console.log(response)
+            })
+            .finally(() => {
+                dispatch(createAction(userActionTypes.getRoles.finish))
+            })
+    }
+}
+
+
 export default {
     table: body => dispatch(table(body)),
     modalOpen, modalClose,
     get: id => dispatch(get(id)),
     edit: body => dispatch(edit(body)),
     del: id => dispatch(del(id)),
+    getRoles: () => dispatch(getRoles()),
 }

@@ -6,6 +6,7 @@ import SelectInput from "../../ui/inputs/SelectInput/SelectInput";
 import storage from "../../../redux/rootActions";
 import Role from "../Role/Role";
 import accessCheck from "../../../helpers/accessCheck";
+import Checkbox from "../../ui/inputs/Checkbox/Checkbox";
 
 
 const StreamForm = ({form, onSubmit, isOpen = true}) => {
@@ -76,6 +77,20 @@ const StreamForm = ({form, onSubmit, isOpen = true}) => {
                             />
                         </Form.Field>
                     </Role>
+                    {
+                        stream
+                            ? null
+                            : <Role accessTo={'streams_all'}>
+                                <Form.Field>
+                                    <Checkbox
+                                        register={register}
+                                        name={'default'}
+                                        label={'Дефолтный поток'}
+                                        value={'1'}
+                                    />
+                                </Form.Field>
+                            </Role>
+                    }
                 </Form.Column>
                 <Form.Column>
                     <Role accessTo={'streams_all'}>
@@ -88,9 +103,7 @@ const StreamForm = ({form, onSubmit, isOpen = true}) => {
                                 options={owners.map(
                                     owner => ({label: owner.login, value: owner.id})
                                 )}
-                                validation={{
-                                    required: true,
-                                }}
+                                validation={{required: true,}}
                             />
                         </Form.Field>
                     </Role>

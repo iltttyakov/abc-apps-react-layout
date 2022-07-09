@@ -23,6 +23,12 @@ const userActionTypes = {
         finish: 'USER_EDIT_FINISH_ACTION'
     },
 
+    getRoles: {
+        start: 'USER_GET_ROLES_START_ACTION',
+        success: 'USER_GET_ROLES_SUCCESS_ACTION',
+        finish: 'USER_GET_ROLES_FINISH_ACTION',
+    },
+
     del: {
         start: 'USER_DEL_START_ACTION',
         success: 'USER_DEL_SUCCESS_ACTION',

@@ -45,6 +45,14 @@ export default {
         get: 'app_tenant.get',
     },
 
+    appManager: {
+        get: 'app_manager.get',
+        getBuyers: 'app_manager.get_buyers',
+        getTenants: 'app_manager.get_tenants',
+        edit: 'app_manager.edit',
+        table: 'app_manager.table',
+    },
+
     stream: {
         table: 'stream.table',
         getOwners: 'stream.get_owners',
@@ -72,6 +80,13 @@ export default {
         edit: 'user.edit',
         table: 'user.table',
         del: 'user.del',
+        get_roles: 'user.get_roles',
+    },
+
+    userTenant: {
+        get: 'users_tenant.get',
+        edit: 'users_tenant.edit',
+        table: 'users_tenant.table',
     },
 
     notification: {
