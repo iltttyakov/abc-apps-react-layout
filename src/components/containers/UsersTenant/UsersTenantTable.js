@@ -73,7 +73,7 @@ const UsersTenantTable = () => {
     const filterTable = (resetPagination = true) => {
         if (resetPagination) form.setValue('list', 1)
         const filterParams = clearFilterParams(form.getValues())
-        
+
         if (filterParams['search_is_banned'] === 'true') {
             delete filterParams['search_is_banned']
         } else {

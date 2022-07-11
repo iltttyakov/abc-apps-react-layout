@@ -148,7 +148,7 @@ const userPacking = (data, user) => {
     const clearData = Object.filter(data, (value) => !!value && value.length !== 0)
 
     return {
-        id: user['id'],
+        id: user ? user['id'] : '',
         ...clearData
     }
 }
@@ -193,9 +193,9 @@ const UserModal = () => {
 
         mainForm.reset({
             ...defaultValues,
-            user_login: user['login'],
-            user_password: user['password'],
-            is_banned: user['is_banned'] === 'true',
+            user_login: user ? user['login'] : '',
+            user_password: user ? user['password'] : '',
+            is_banned: user ? user['is_banned'] === 'true' : false,
             ...newRoleRights
         })
 
