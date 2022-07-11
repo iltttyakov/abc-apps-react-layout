@@ -84,9 +84,9 @@ export default {
     },
 
     userTenant: {
-        get: 'users_tenant.get',
-        edit: 'users_tenant.edit',
-        table: 'users_tenant.table',
+        get: 'user_tenant.get',
+        edit: 'user_tenant.edit',
+        table: 'user_tenant.table',
     },
 
     notification: {

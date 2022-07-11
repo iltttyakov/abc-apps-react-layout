@@ -26,7 +26,7 @@ const UserForm = ({form, onSubmit, roleForm, changeRole, isOpen = false}) => {
             <Form.Row>
 
                 <Form.Column>
-                    <Form.Fieldset>
+                    <Form.Fieldset style={{paddingBottom: 85}}>
                         <Form.Field width={FieldWidth.FULL}>
                             <TextInput
                                 register={register}
@@ -65,18 +65,12 @@ const UserForm = ({form, onSubmit, roleForm, changeRole, isOpen = false}) => {
                         <CheckedTagList
                             name={'role'}
                             register={roleForm.register}
-                            options={[
-                                {label: 'Админ', value: 'admin'},
-                                {label: 'Разработчик', value: 'dev'},
-                                {label: 'Разработчик iOS', value: 'dev-ios'},
-                                {label: 'Фармер', value: 'farmer'},
-                                {label: 'Заливатор', value: 'uploader'},
-                                {label: 'Байер', value: 'bayer'},
-                                {label: 'Помощник', value: 'helper'},
-                                {label: 'Покупатель', value: 'client'},
-                                {label: 'Арендатор', value: 'tenant'},
-                                {label: 'Менеджер', value: 'manager'},
-                            ]}
+                            options={
+                                roles.map(
+                                    (role, index) => {
+                                        return {label: role.role, value: index}
+                                    })
+                            }
                             onClick={changeRole}
                         />
                     </Form.Fieldset>
@@ -139,6 +133,7 @@ const UserForm = ({form, onSubmit, roleForm, changeRole, isOpen = false}) => {
                                 register={register}
                                 name={'streams_own_buyer_tenant'}
                                 label={'Только свои, покупателей и арендаторов'}
+                                value={'1'}
                                 disabled={watch('streams') !== 'streams_all'}
                             />
                         </Form.Field>
@@ -165,12 +160,14 @@ const UserForm = ({form, onSubmit, roleForm, changeRole, isOpen = false}) => {
                                 register={register}
                                 name={'streams_default'}
                                 label={'Создание дефолтных потоков'}
+                                value={'1'}
                             />
                         </Form.Field>
                         <Checkbox
                             register={register}
                             name={'streams_owner'}
                             label={'Можно выбрать владельцем'}
+                            value={'1'}
                         />
                     </Form.Fieldset>
 
@@ -240,6 +237,7 @@ const UserForm = ({form, onSubmit, roleForm, changeRole, isOpen = false}) => {
                                 register={register}
                                 label={'Поля Покупатель и Арендаторы'}
                                 name={'apps_rw_buyer'}
+                                value={'1'}
                                 disabled={watch('white') === 'white_no' && watch('grey') === 'grey_no'}
                             />
                         </Form.Field>
@@ -342,12 +340,14 @@ const UserForm = ({form, onSubmit, roleForm, changeRole, isOpen = false}) => {
                                 name={'notifications_buyer'}
                                 label={'Интерфейс покупателя'}
                                 disabled={watch('notifications') === 'notifications_no'}
+                                value={'1'}
                             />
                         </Form.Field>
                         <Checkbox
                             register={register}
                             name={'notifications_owner'}
                             label={'Можно выбрать владельцем'}
+                            value={'1'}
                         />
                     </Form.Fieldset>
                     <Form.Fieldset>

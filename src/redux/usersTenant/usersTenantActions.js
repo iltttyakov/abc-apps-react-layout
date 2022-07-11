@@ -10,6 +10,7 @@ const modalOpen = () => dispatch(createAction(usersTenantActionTypes.modal.open)
 const modalClose = () => dispatch(createAction(usersTenantActionTypes.modal.close))
 
 const table = body => {
+    console.log(body)
     return dispatch => {
         dispatch(createAction(usersTenantActionTypes.table.start))
         api.usersTenant.table(body)

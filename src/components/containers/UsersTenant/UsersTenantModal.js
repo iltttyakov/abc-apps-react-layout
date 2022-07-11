@@ -3,7 +3,6 @@ import {useSelector} from "react-redux";
 import {useForm} from "react-hook-form";
 import storage from "../../../redux/rootActions";
 import {unsavedExitConfirm} from "../../../helpers/swal";
-import {getRights} from "../Users/rights";
 import Modal, {ModalSizes} from "../../ui/Modal/Modal";
 import UsersTenantForm from "./UsersTenantForm";
 import Actions from "../../ui/Actions/Actions";

@@ -66,7 +66,7 @@ const UsersTenantTable = () => {
         defaultValues: {
             length: 50,
             list: 1,
-            search_is_banned: false,
+            search_is_banned: null,
         },
     })
 
@@ -74,8 +74,12 @@ const UsersTenantTable = () => {
         if (resetPagination) form.setValue('list', 1)
         const filterParams = clearFilterParams(form.getValues())
 
-        if (filterParams['search_is_banned'] !== 'true') delete filterParams['search_is_banned']
-        
+        if (filterParams['search_is_banned'] === 'true') {
+            delete filterParams['search_is_banned']
+        } else {
+            filterParams['search_is_banned'] = false
+        }
+
         storage.usersTenant.table(filterParams)
     }
 
