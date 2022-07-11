@@ -22,6 +22,7 @@ const columns = [
         scheme: item => <CopyClick>{item.login}</CopyClick>
     },
     {
+        width: 10,
         scheme: item => item['is_banned'] === 'false'
             ? null
             : <StatusTag style={{width: 50}} status={StatusTypes.BAN}>ban</StatusTag>
@@ -73,7 +74,12 @@ const UsersTable = () => {
     const filterTable = (resetPagination = true) => {
         if (resetPagination) form.setValue('list', 1)
         const filterParams = clearFilterParams(form.getValues())
-        filterParams['search_is_banned'] = filterParams['search_is_banned'] === 'true' ? 'true' : 'false'
+
+        if (filterParams['search_is_banned'] === 'true') {
+            delete filterParams['search_is_banned']
+        } else {
+            filterParams['search_is_banned'] = 'false'
+        }
 
         storage.user.table(filterParams)
     }
