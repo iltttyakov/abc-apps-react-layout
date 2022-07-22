@@ -50,6 +50,8 @@ export const notificationUnpacking = (notification, userId) => {
 }
 
 export const notificationPackaging = (data, notification = {}) => {
+    console.log(data)
+
     const clearData = {
         ...notification,
         ...data,

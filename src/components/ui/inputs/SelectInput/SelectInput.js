@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import cls from './SelectInput.module.scss'
 import {Controller} from "react-hook-form";
 import Select from 'react-select';

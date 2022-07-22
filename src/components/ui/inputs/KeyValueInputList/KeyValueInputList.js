@@ -12,6 +12,7 @@ const KeyValueInputList = (
         control,
         name,
         disabled = false,
+        onChange = event => null,
     }
 ) => {
     const {fields, append, prepend, remove, swap, move, insert} = useFieldArray({
@@ -57,6 +58,7 @@ const KeyValueInputList = (
                                 errors={errors}
                                 label={'Ключ'}
                                 disabled={disabled}
+                                onChange={onChange}
                             />
                             <TextInput
                                 className={cls.field}
@@ -65,6 +67,7 @@ const KeyValueInputList = (
                                 errors={errors}
                                 label={'Значение'}
                                 disabled={disabled}
+                                onChange={onChange}
                             />
                             {
                                 disabled

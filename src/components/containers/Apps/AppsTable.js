@@ -20,7 +20,7 @@ import inArray from "../../../helpers/inArray";
 
 const columns = [
     {
-        width: 10,
+        width: 15,
         name: 'name',
         label: 'Название',
         sortable: true,
@@ -28,7 +28,7 @@ const columns = [
             name={item['name']}
             icon={item['icon']}
             linkStore={item['link_store']}
-            style={{maxWidth: 120}}
+            style={{maxWidth: 180}}
         />
     },
     {
@@ -56,7 +56,7 @@ const columns = [
         scheme: item => item.type,
     },
     {
-        width: 11,
+        width: 6,
         name: 'search_store',
         label: 'Store',
         filterable: true,

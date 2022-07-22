@@ -7,7 +7,8 @@ export default {
     auth: {
         get: 'auth.get',
         editTheme: 'auth.edit_theme',
-        editPassword: 'auth.edit_password'
+        editPassword: 'auth.edit_password',
+        getCountries: 'auth.get_countries'
     },
 
     board: {

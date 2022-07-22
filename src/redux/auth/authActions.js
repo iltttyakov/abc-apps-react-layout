@@ -86,6 +86,23 @@ const editPassword = (old_password, new_password) => {
 const shrinkSidebar = () => dispatch(createAction(authActionTypes.shrinkSidebar))
 
 
+const getCountries = () => {
+    return dispatch => {
+        dispatch(createAction(authActionTypes.getCountries.start))
+        api.auth.getCountries()
+            .then(response => {
+                dispatch(createAction(authActionTypes.getCountries.success, response))
+            })
+            .catch(response => {
+                console.log(response)
+            })
+            .finally(() => {
+                dispatch(createAction(authActionTypes.getCountries.finish))
+            })
+    }
+}
+
+
 export default {
     login: ({auth_login, auth_password}) => dispatch(login(auth_login, auth_password)),
     logout: () => dispatch(logout()),
@@ -94,4 +111,5 @@ export default {
     editTheme: theme => dispatch(editTheme(theme)),
     editPassword: (old_password, new_password) => dispatch(editPassword(old_password, new_password)),
     shrinkSidebar,
+    getCountries: () => dispatch(getCountries()),
 }

@@ -7,6 +7,7 @@ import storage from "../../../redux/rootActions";
 import Role from "../Role/Role";
 import RadioButtonList from "../../ui/inputs/RadioButtonList/RadioButtonList";
 import countries from "../../../helpers/countries";
+import CountriesSelect from "../CountriesSelect/CountriesSelect";
 
 
 const AppsManagerForm = ({form, onSubmit, isOpen = false}) => {
@@ -113,12 +114,11 @@ const AppsManagerForm = ({form, onSubmit, isOpen = false}) => {
                         </Form.Field>
 
                         <Form.Field width={FieldWidth.FULL}>
-                            <SelectInput
+                            <CountriesSelect
                                 label={'Открытые страны'}
                                 name={'countries'}
                                 control={control}
                                 multiple={true}
-                                options={countries}
                             />
                         </Form.Field>
                     </Form.Fieldset>

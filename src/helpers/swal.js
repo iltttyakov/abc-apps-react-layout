@@ -15,6 +15,7 @@ export const unsavedExitConfirm = callback => {
         showCancelButton: true,
         confirmButtonText: 'Выйти',
         cancelButtonText: 'Остаться',
+        allowEscapeKey: true,
         reverseButtons: true
     })
         .then((result) => {

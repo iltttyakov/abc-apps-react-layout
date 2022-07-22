@@ -11,11 +11,11 @@ import ImageInput from "../../ui/inputs/ImageInput/ImageInput";
 import DateInput from "../../ui/inputs/DateInput/DateInput";
 import TimeInput from "../../ui/inputs/TimeInput/TimeInput";
 import CheckboxList from "../../ui/inputs/CheckboxList/CheckboxList";
-import RadioButtonList from "../../ui/inputs/RadioButtonList/RadioButtonList";
 import Role from "../Role/Role";
 import {getNotificationIconUrl} from "../../../helpers/getIconUrl";
 import inArray from "../../../helpers/inArray";
 import RoleFunc from "../Role/RoleFunc";
+import CountriesSelect from "../CountriesSelect/CountriesSelect";
 
 
 const NotificationForm = ({form, notification = {}, onSubmit}) => {
@@ -80,12 +80,11 @@ const NotificationForm = ({form, notification = {}, onSubmit}) => {
 
                         <Form.Row>
                             <Form.Field width={FieldWidth.FULL}>
-                                <SelectInput
+                                <CountriesSelect
                                     label={'Список стран'}
                                     name={'countries'}
                                     control={control}
                                     multiple={true}
-                                    options={countries}
                                     disabled={watch('was_sent') !== null && watch('is_generator') === 'false'}
                                 />
                             </Form.Field>

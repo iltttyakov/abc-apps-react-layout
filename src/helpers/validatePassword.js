@@ -1,5 +1,5 @@
 const validatePassword = (str) => {
-    const re = /^(?=.*\d)(?=.*[A-Z])[a-zA-Z0-9!#$%&?]{8,32}$/
+    const re = /^((?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\x21-\x7E]{8,})$/
     return re.test(str)
 }
 

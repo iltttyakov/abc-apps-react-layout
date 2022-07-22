@@ -15,14 +15,19 @@ import KeyValueInputList from "../../ui/inputs/KeyValueInputList/KeyValueInputLi
 import {getIconUrl} from "../../../helpers/getIconUrl";
 import Role from "../Role/Role";
 import accessCheck from "../../../helpers/accessCheck";
+import CountriesSelect from "../CountriesSelect/CountriesSelect";
+import validatePassword from "../../../helpers/validatePassword";
+import validateWithoutSpaces from "../../../helpers/validateWithoutSpaces";
 
 
 const AppForm = ({form, onSubmit, app = null}) => {
     const [allDisabled, setAllDisabled] = useState(false)
+
     const userRights = useSelector(state => state.auth.rights)
     const accs = useSelector(state => state.app.accs)
     const buyers = useSelector(state => state.app.buyers)
     const tenants = useSelector(state => state.app.tenants)
+
     useEffect(() => {
         storage.app.getAccs()
         storage.app.getBuyers()
@@ -58,9 +63,20 @@ const AppForm = ({form, onSubmit, app = null}) => {
 
     const setDomainFromAcc = accId => {
         const acc = accs.find(acc => acc.id === accId)
-        setValue('domain', acc.domain_name)
-        setValue('domain_id', acc.domain_id)
+        if (acc) {
+            setValue('domain', acc.domain_name)
+            setValue('domain_id', acc.domain_id)
+        } else {
+            setValue('domain', '')
+            setValue('domain_id', '')
+        }
     }
+
+    useEffect(() => {
+        const account = getValues('account')
+        setDomainFromAcc(account)
+    }, [accs])
+
 
     const checkDomain = () => {
         const acc = accs.find(acc => acc.id === getValues('account'))
@@ -133,6 +149,11 @@ const AppForm = ({form, onSubmit, app = null}) => {
                                     label={'Пакет'}
                                     placeholder={'com.example.app'}
                                     disabled={allDisabled}
+                                    validation={{
+                                        validate: {
+                                            withoutSpaces: validateWithoutSpaces
+                                        }
+                                    }}
                                 />
                             </Form.Field>
                             <RadioButtonList
@@ -295,12 +316,11 @@ const AppForm = ({form, onSubmit, app = null}) => {
                         </Role>
 
                         <Form.Field width={FieldWidth.w515}>
-                            <SelectInput
+                            <CountriesSelect
                                 label={'Открытые страны'}
                                 name={'countries'}
                                 control={control}
                                 multiple={true}
-                                options={countries}
                                 disabled={allDisabled}
                             />
                         </Form.Field>
@@ -566,6 +586,7 @@ const AppForm = ({form, onSubmit, app = null}) => {
                 control={control}
                 name={'fields'}
                 disabled={allDisabled}
+                onChange={() => form.clearErrors('fields')}
             />
         </Form.Box>
     );

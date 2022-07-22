@@ -24,6 +24,7 @@ const TextInput = (
         validation = {},
         disabled = false,
         counter = null,
+        onChange = event => null,
         onClick = event => null,
     }
 ) => {
@@ -32,10 +33,14 @@ const TextInput = (
     const [characterCounter, setCharacterCounter] = useState(counter)
 
     const changeHandler = e => {
-        if (e.target.value.length > counter) {
-            setCharacterCounter(0)
-        } else {
-            setCharacterCounter(counter - e.target.value.length)
+        onChange(e)
+
+        if (counter) {
+            if (e.target.value.length > counter) {
+                setCharacterCounter(0)
+            } else {
+                setCharacterCounter(counter - e.target.value.length)
+            }
         }
     }
 
@@ -58,7 +63,7 @@ const TextInput = (
                 <input
                     {
                         ...register(name, {
-                            onChange: counter ? changeHandler : () => null,
+                            onChange: changeHandler,
                             ...validation,
                         })
                     }
@@ -96,7 +101,12 @@ const TextInput = (
                         {errors[name]?.type === 'custom' && errors[name].message}
                         {
                             errors[name] && errors[name].type === 'validate'
-                            && `Пароль должен содержать от 8 до 32 символов без пробелов и русских букв, а также содержать цифру, заглавную и строчную букву`}
+                            && `Пароль должен содержать от 8 до 32 символов без пробелов и русских букв, а также содержать цифру, заглавную и строчную букву`
+                        }
+                        {
+                            errors[name] && errors[name].type === 'withoutSpaces'
+                            && `Поле не должно содержать пробелы`
+                        }
                     </span>
                     : null
             }

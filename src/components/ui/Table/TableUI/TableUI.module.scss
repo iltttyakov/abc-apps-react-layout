@@ -68,6 +68,8 @@
 }
 
 .row {
+  transition: all .1s ease;
+
   .cell:first-of-type {
     padding-left: 16px;
   }
@@ -77,12 +79,18 @@
   }
 
   &.failed {
-    background-color: #F4CCCC ;
+    background-color: #F4CCCC;
   }
 }
 
 .body {
   position: relative;
+
+  .row {
+    &:hover {
+      background-color: #F2F2F2;
+    }
+  }
 }
 
 .loader {

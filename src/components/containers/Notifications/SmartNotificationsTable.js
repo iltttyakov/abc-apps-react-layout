@@ -114,6 +114,11 @@ const SmartNotificationsTable = () => {
             scheme: item => <CopyClick>{item['heading_date']}</CopyClick>
         },
         {
+            width: 14,
+            label: 'Группа',
+            scheme: item => <CopyClick>{item['group']}</CopyClick>
+        },
+        {
             width: 23,
             sortable: true,
             label: 'Текст',

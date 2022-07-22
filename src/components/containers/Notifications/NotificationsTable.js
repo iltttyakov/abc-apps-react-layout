@@ -1,6 +1,4 @@
 import React, {useEffect} from 'react';
-
-import TabPanel from "../../ui/TabPanel/TabPanel";
 import {useForm} from "react-hook-form";
 import StatusTag, {StatusTypes} from "../../ui/StatusTag/StatusTag";
 import Table from "../../ui/Table/Table";
@@ -12,7 +10,6 @@ import MoreButton from "../../ui/MoreButton/MoreButton";
 import storage from "../../../redux/rootActions";
 import {urls} from "../../paths";
 import Checkbox from "../../ui/inputs/Checkbox/Checkbox";
-import PageActions from "../../ui/PageActions/PageActions";
 import Button, {ButtonTypes} from "../../ui/Button/Button";
 import FilterPanel from "../../ui/FilterPanel/FilterPanel";
 
@@ -130,10 +127,20 @@ const NotificationsTable = () => {
             scheme: item => <CopyClick>{item['heading_date']}</CopyClick>
         },
         {
-            width: 23,
+            width: 14,
+            label: 'Группа',
+            scheme: item => <CopyClick>{item['group']}</CopyClick>
+        },
+        {
+            width: 10,
             label: 'Текст',
             name: 'text',
-            scheme: item => <CopyClick>{item.text}</CopyClick>
+            scheme: item => <span style={{
+                display: 'block',
+                maxWidth: 400,
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+            }}><CopyClick>{item.text}</CopyClick></span>
         },
         {
             width: 13,

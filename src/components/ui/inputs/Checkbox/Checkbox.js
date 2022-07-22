@@ -17,7 +17,15 @@ const Checkbox = (
     const id = makeId(5)
 
     return (
-        <>
+        <div
+            style={style}
+            className={
+                [
+                    cls.box,
+                    disabled ? cls.disabled : null,
+                ].join(' ')
+            }
+        >
             <input
                 className={cls.field}
                 type={'checkbox'}
@@ -34,7 +42,7 @@ const Checkbox = (
                     disabled ? cls.disabled : null,
                 ].join(' ')}
                 htmlFor={id}
-                style={style}
+                // style={style}
             >
                 {
                     label
@@ -42,7 +50,7 @@ const Checkbox = (
                         : null
                 }
             </label>
-        </>
+        </div>
     );
 };
 

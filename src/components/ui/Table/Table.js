@@ -81,7 +81,9 @@ const Table = (
                 </Role>
             )
 
-            return <TableUI.Row key={i} failed={item.failed}>{cells}</TableUI.Row>
+            return <TableUI.Row key={i} failed={item.failed}>
+                {cells}
+            </TableUI.Row>
         })
         : <TableUI.NotFound/>
 

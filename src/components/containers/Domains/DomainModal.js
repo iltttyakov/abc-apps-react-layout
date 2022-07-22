@@ -7,6 +7,7 @@ import Modal from "../../ui/Modal/Modal";
 import DomainForm from "./DomainForm";
 import Actions from "../../ui/Actions/Actions";
 import Button, {ButtonTypes} from "../../ui/Button/Button";
+import HotkeyWatcher from "../../ui/HotkeyWatcher/HotkeyWatcher";
 
 
 const defaultValues = {
@@ -73,6 +74,7 @@ const DomainModal = () => {
             onClose={cancel}
             isLoading={domainIsLoading}
         >
+            {/*<HotkeyWatcher/>*/}
             <DomainForm
                 form={form}
                 onSubmit={onSubmit}

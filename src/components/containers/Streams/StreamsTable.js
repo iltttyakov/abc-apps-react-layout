@@ -25,8 +25,8 @@ const columns = [
         scheme: item => <AppName
             name={item['apps_name']}
             icon={item['apps_icon']}
-            to={urls.AppSinglePage(item.id)}
-        />,
+            to={urls.AppSinglePage(item.app)}
+        />
     },
     {
         width: 5,

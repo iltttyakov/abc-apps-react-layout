@@ -45,11 +45,15 @@ export const appUnpacking = app => {
 }
 
 export const appPacking = (data, app = {}) => {
-    data['fields'] = data.fields.map(field => {
-        if (field.key !== '' && field.val !== '') {
-            return {key: field.key, value: field.val}
-        }
-    })
+    data['fields'] = data.fields
+        .map(field => {
+            if (field.key !== '' && field.val !== '') {
+                return {key: field.key, value: field.val}
+            } else {
+                return null
+            }
+        })
+        .filter(Boolean)
     data['link'] = data['link'] ? data['link'] : ''
 
     return {
@@ -63,8 +67,11 @@ export const appValidate = (data, form) => {
 
     data['fields'].forEach(field => {
         if (field.key === '' && field.val === '') {
-
-        } else if (field.key === '' || field.val === '') {
+        } else if (
+            (field.key === '' && field.val !== '')
+            ||
+            (field.key !== '' && field.val === '')
+        ) {
             hasErrors = true
             form.setError('fields', {
                 type: 'custom',

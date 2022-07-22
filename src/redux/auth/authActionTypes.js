@@ -25,6 +25,12 @@ const authActionTypes = {
         toggle: 'AUTH_THEME_TOGGLE_ACTION'
     },
 
-    shrinkSidebar: 'AUTH_SHRINK_SIDEBAR_ACTION'
+    shrinkSidebar: 'AUTH_SHRINK_SIDEBAR_ACTION',
+
+    getCountries: {
+        start: 'AUTH_GET_COUNTRIES_START_ACTION',
+        success: 'AUTH_GET_COUNTRIES_SUCCESS_ACTION',
+        finish: 'AUTH_GET_COUNTRIES_FINISH_ACTION'
+    },
 }
 export default authActionTypes

@@ -26,9 +26,12 @@ const NotificationSingle = ({id}) => {
     const [shouldCheckDirty, setShouldCheckDirty] = useState(true)
     const form = useForm({defaultValues: notificationDefaultValues})
 
-    useEffect(() => storage.notification.get(id), [])
+    useEffect(() => {
+        storage.notification.get(id)
+    }, [])
     useEffect(() => {
         form.reset(notificationUnpacking(notification, userId))
+        console.log(notification)
     }, [notification])
 
     useEffect(() => {

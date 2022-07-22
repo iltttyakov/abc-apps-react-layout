@@ -3,6 +3,7 @@ import Form, {FieldWidth} from "../../ui/Form/Form";
 import TextInput from "../../ui/inputs/TextInput/TextInput";
 import SelectInput from "../../ui/inputs/SelectInput/SelectInput";
 import countries from "../../../helpers/countries";
+import CountriesSelect from "../CountriesSelect/CountriesSelect";
 
 
 const AppsTenantForm = ({form}) => {
@@ -26,12 +27,11 @@ const AppsTenantForm = ({form}) => {
             </Form.Field>
 
             <Form.Field width={FieldWidth.FULL} style={{marginRight: 0}}>
-                <SelectInput
+                <CountriesSelect
                     label={'Открытые страны'}
                     name={'countries'}
                     control={control}
                     multiple={true}
-                    options={countries}
                     disabled={true}
                 />
             </Form.Field>

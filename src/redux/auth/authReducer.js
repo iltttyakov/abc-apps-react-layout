@@ -12,6 +12,8 @@ const initialState = {
     passwordEditInProcess: false,
 
     sidebarShrink: false,
+
+    countries: []
 }
 
 
@@ -73,6 +75,16 @@ export default function authReducer(state = initialState, action) {
         case authActionTypes.editPassword.finish:
             return {...state, passwordEditInProcess: false}
         /** END EDIT PASSWORD **/
+
+
+        /** GET COUNTRIES **/
+        case authActionTypes.getCountries.start:
+            return {...state}
+        case authActionTypes.getCountries.success:
+            return {...state, countries: action.payload.res}
+        case authActionTypes.getCountries.finish:
+            return {...state}
+        /** END GET COUNTRIES **/
 
 
         default:
